@@ -337,7 +337,7 @@ wxBitmap* BitmapCache::load_svg(const std::string &bitmap_name, unsigned target_
         replaces["\"#DBDBDB\""] = "\"#4A4A51\"";
     }
     if (!new_color.empty())
-        replaces["\"#00AE42\""] = "\"" + new_color + "\"";
+        replaces["\"#8A00D4\""] = "\"" + new_color + "\"";
 
      NSVGimage *image = nullptr;
     if (strstr(bitmap_name.c_str(), "printer_thumbnail") == NULL) {

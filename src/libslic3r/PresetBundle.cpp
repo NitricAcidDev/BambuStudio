@@ -1979,7 +1979,7 @@ void PresetBundle::load_selections(AppConfig &config, const PresetPreferences& p
     if (config.has("presets", "filament_colors")) {
         boost::algorithm::split(filament_colors, config.get("presets", "filament_colors"), boost::algorithm::is_any_of(","));
     }
-    filament_colors.resize(filament_presets.size(), "#00AE42");
+    filament_colors.resize(filament_presets.size(), "#8A00D4");
     project_config.option<ConfigOptionStrings>("filament_colour")->values = filament_colors;
 
     std::vector<std::string> multi_filament_colors;

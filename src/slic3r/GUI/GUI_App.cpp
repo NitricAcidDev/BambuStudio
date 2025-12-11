@@ -3480,7 +3480,7 @@ bool GUI_App::dark_mode()
 
 const wxColour GUI_App::get_label_default_clr_system()
 {
-    return dark_mode() ? wxColour(115, 220, 103) : wxColour(26, 132, 57);
+    return dark_mode() ? wxColour(195, 115, 220) : wxColour(139, 0, 212);
 }
 
 const wxColour GUI_App::get_label_default_clr_modified()

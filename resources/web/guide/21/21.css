@@ -7,7 +7,7 @@
 .BlockBanner
 {
 	padding: 0px;
-	border-bottom:#00AE42 1px solid;
+	border-bottom:#8A00D4 1px solid;
 	width: 100%;
 	display: flex;
 	justify-content:space-between;
@@ -28,7 +28,7 @@
 .BlockBanner  a
 {
 	display: inline-block;
-	background-color:#00AE42;
+	background-color:#8A00D4;
 	line-height: 40px;
 	height: 40px;
 	padding: 0px 24px;

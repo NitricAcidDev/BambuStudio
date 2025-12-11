@@ -257,7 +257,7 @@ namespace Slic3r { namespace GUI {
      helio_links_sizer->Add(helio_tou_link, 0, wxLEFT, FromDIP(40));
 
 
-     StateColor btn_bg_green = StateColor(std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered), std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+     StateColor btn_bg_green = StateColor(std::pair<wxColour, int>(wxColour(168, 81, 220), StateColor::Hovered), std::pair<wxColour, int>(wxColour(138, 0, 212), StateColor::Normal));
 
      page3_content_sizer->Add(enable_pat_title, 0, wxTOP, FromDIP(2));
      page3_content_sizer->Add(0, 0, 0, wxTOP, FromDIP(14));
@@ -1429,11 +1429,11 @@ HelioPatNotEnoughDialog::HelioPatNotEnoughDialog(wxWindow* parent /*= nullptr*/)
     text->Wrap(FromDIP(450));
 
     auto helio_wiki_link = new LinkLabel(this, _L("Click for more details"), wxGetApp().app_config->get("language") =="zh_CN"? "https://wiki.helioadditive.com/zh/home" : "https://wiki.helioadditive.com/en/home");
-    helio_wiki_link->SeLinkLabelFColour(wxColour(0, 174, 66));
+    helio_wiki_link->SeLinkLabelFColour(wxColour(138, 0, 212));
     helio_wiki_link->Bind(wxEVT_ENTER_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_HAND); });
     helio_wiki_link->Bind(wxEVT_LEAVE_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_ARROW); });
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(107, 11, 168), StateColor::Pressed), std::pair<wxColour, int>(wxColour(168, 81, 220), StateColor::Hovered),
         std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
 
 

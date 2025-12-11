@@ -113,11 +113,11 @@ HistoryWindow::HistoryWindow(wxWindow* parent, const std::vector<PACalibResult>&
     scroll_window->SetSizer(scroll_sizer);
 
     Button *   mew_btn = new Button(scroll_window, _L("New"));
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-                            std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(107, 11, 168), StateColor::Pressed), std::pair<wxColour, int>(wxColour(168, 81, 220), StateColor::Hovered),
+                            std::pair<wxColour, int>(wxColour(138, 0, 212), StateColor::Normal));
     mew_btn->SetBackgroundColour(*wxWHITE);
     mew_btn->SetBackgroundColor(btn_bg_green);
-    mew_btn->SetBorderColor(wxColour(0, 174, 66));
+    mew_btn->SetBorderColor(wxColour(138, 0, 212));
     mew_btn->SetTextColor(wxColour("#FFFFFE"));
     mew_btn->SetMinSize(wxSize(FromDIP(100), FromDIP(24)));
     mew_btn->SetMaxSize(wxSize(FromDIP(100), FromDIP(24)));
@@ -128,7 +128,7 @@ HistoryWindow::HistoryWindow(wxWindow* parent, const std::vector<PACalibResult>&
     scroll_sizer->AddSpacer(FromDIP(15));
 
     m_extruder_switch_btn = new SwitchButton(scroll_window);
-    m_extruder_switch_btn->SetBackgroundColour(wxColour(0, 174, 66));
+    m_extruder_switch_btn->SetBackgroundColour(wxColour(138, 0, 212));
     m_extruder_switch_btn->SetMinSize(wxSize(FromDIP(120), FromDIP(24)));
     m_extruder_switch_btn->SetMaxSize(wxSize(FromDIP(120), FromDIP(24)));
     m_extruder_switch_btn->SetLabels(_L("Left Nozzle"), _L("Right Nozzle"));
@@ -439,12 +439,12 @@ void HistoryWindow::sync_history_data() {
             });
 
         auto edit_button = new Button(m_history_data_panel, _L("Edit"));
-        StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-            std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-            std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+        StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(107, 11, 168), StateColor::Pressed),
+            std::pair<wxColour, int>(wxColour(168, 81, 220), StateColor::Hovered),
+            std::pair<wxColour, int>(wxColour(138, 0, 212), StateColor::Normal));
         edit_button->SetBackgroundColour(*wxWHITE);
         edit_button->SetBackgroundColor(btn_bg_green);
-        edit_button->SetBorderColor(wxColour(0, 174, 66));
+        edit_button->SetBorderColor(wxColour(138, 0, 212));
         edit_button->SetTextColor(wxColour("#FFFFFE"));
         edit_button->SetMinSize(wxSize(-1, FromDIP(24)));
         edit_button->SetCornerRadius(FromDIP(12));
@@ -636,12 +636,12 @@ EditCalibrationHistoryDialog::EditCalibrationHistoryDialog(wxWindow             
 
     auto btn_sizer = new wxBoxSizer(wxHORIZONTAL);
     Button* save_btn = new Button(top_panel, _L("Save"));
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(107, 11, 168), StateColor::Pressed),
+        std::pair<wxColour, int>(wxColour(168, 81, 220), StateColor::Hovered),
+        std::pair<wxColour, int>(wxColour(138, 0, 212), StateColor::Normal));
     save_btn->SetBackgroundColour(*wxWHITE);
     save_btn->SetBackgroundColor(btn_bg_green);
-    save_btn->SetBorderColor(wxColour(0, 174, 66));
+    save_btn->SetBorderColor(wxColour(138, 0, 212));
     save_btn->SetTextColor(wxColour("#FFFFFE"));
     save_btn->SetMinSize(wxSize(-1, FromDIP(24)));
     save_btn->SetCornerRadius(FromDIP(12));
@@ -933,11 +933,11 @@ NewCalibrationHistoryDialog::NewCalibrationHistoryDialog(wxWindow *parent, const
 
     auto       btn_sizer = new wxBoxSizer(wxHORIZONTAL);
     Button *   ok_btn  = new Button(top_panel, _L("Ok"));
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-                            std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(107, 11, 168), StateColor::Pressed), std::pair<wxColour, int>(wxColour(168, 81, 220), StateColor::Hovered),
+                            std::pair<wxColour, int>(wxColour(138, 0, 212), StateColor::Normal));
     ok_btn->SetBackgroundColour(*wxWHITE);
     ok_btn->SetBackgroundColor(btn_bg_green);
-    ok_btn->SetBorderColor(wxColour(0, 174, 66));
+    ok_btn->SetBorderColor(wxColour(138, 0, 212));
     ok_btn->SetTextColor(wxColour("#FFFFFE"));
     ok_btn->SetMinSize(wxSize(-1, FromDIP(24)));
     ok_btn->SetCornerRadius(FromDIP(12));

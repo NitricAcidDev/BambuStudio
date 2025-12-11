@@ -1875,7 +1875,7 @@ void PrintConfigDef::init_fff_params()
     def->tooltip = L("Only used as a visual help on UI");
     def->gui_type = ConfigOptionDef::GUIType::color;
     def->mode = comDevelop;
-    def->set_default_value(new ConfigOptionStrings{ "#00AE42" });
+    def->set_default_value(new ConfigOptionStrings{ "#8A00D4" });
 
 
     def = this->add("filament_multi_colour", coStrings);

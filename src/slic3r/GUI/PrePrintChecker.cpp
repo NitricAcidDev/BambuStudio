@@ -299,7 +299,7 @@ static Label* s_create_btn_label(PrinterMsgPanel* panel, const wxString& btn_nam
     font.SetUnderlined(true);
     btn->SetFont(font);
     btn->SetBackgroundColour(*wxWHITE);
-    btn->SetForegroundColour(wxColour("#00AE42"));
+    btn->SetForegroundColour(wxColour("#8A00D4"));
 
     btn->Bind(wxEVT_ENTER_WINDOW, [panel](auto &e) { panel->SetCursor(wxCURSOR_HAND); });
     btn->Bind(wxEVT_LEAVE_WINDOW, [panel](auto &e) { panel->SetCursor(wxCURSOR_ARROW); });

@@ -84,8 +84,8 @@ PurgeModeDialog::PurgeModeDialog(wxWindow *parent) : DPIDialog(parent, wxID_ANY,
     btn_sizer->AddStretchSpacer();
 
     StateColor ok_btn_bg(
-        std::pair<wxColour, int>(wxColour("#1B8844"), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour("#3DCB73"), StateColor::Hovered),
+        std::pair<wxColour, int>(wxColour("#6B0BA8"), StateColor::Pressed),
+        std::pair<wxColour, int>(wxColour("#A851DC"), StateColor::Hovered),
         std::pair<wxColour, int>(wxColour("#8A00D4"), StateColor::Normal)
     );
     StateColor ok_btn_text(

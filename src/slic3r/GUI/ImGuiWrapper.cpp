@@ -2509,18 +2509,18 @@ void ImGuiWrapper::pop_common_window_style() {
 
 void ImGuiWrapper::push_confirm_button_style() {
     if (m_is_dark_mode) {
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f / 255.f, 174.f / 255.f, 66.f / 255.f, 1.f));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.f / 255.f, 174.f / 255.f, 66.f / 255.f, 1.f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(61.f / 255.f, 203.f / 255.f, 115.f / 255.f, 1.f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(27.f / 255.f, 136.f / 255.f, 68.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(138.f / 255.f, 0.f / 255.f, 212.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(138.f / 255.f, 0.f / 255.f, 212.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(168.f / 255.f, 81.f / 255.f, 220.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(107.f / 255.f, 11.f / 255.f, 168.f / 255.f, 1.f));
         ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(1.f, 1.f, 1.f, 0.88f));
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 1.f, 1.f, 0.88f));
     }
     else {
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f / 255.f, 174.f / 255.f, 66.f / 255.f, 1.f));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.f / 255.f, 174.f / 255.f, 66.f / 255.f, 1.f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(61.f / 255.f, 203.f / 255.f, 115.f / 255.f, 1.f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(27.f / 255.f, 136.f / 255.f, 68.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(138.f / 255.f, 0.f / 255.f, 212.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(138.f / 255.f, 0.f / 255.f, 212.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(168.f / 255.f, 81.f / 255.f, 220.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(107.f / 255.f, 11.f / 255.f, 168.f / 255.f, 1.f));
         ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(1.f, 1.f, 1.f, 1.f));
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 1.f, 1.f, 1.f));
     }

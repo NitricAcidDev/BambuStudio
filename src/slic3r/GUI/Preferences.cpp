@@ -701,17 +701,16 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
     combo_title->Wrap(-1);
     m_sizer_combox->Add(combo_title, 0, wxALIGN_CENTER | wxALL, 3);
 
-    auto combobox = new ::BitmapComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, DESIGN_LARGE_COMBOBOX_SIZE, 0, nullptr, wxCB_READONLY);
+    auto combobox = new ::ComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, DESIGN_LARGE_COMBOBOX_SIZE, 0, nullptr, wxCB_READONLY);
+    m_combobox_list[m_combobox_list.size()] = combobox;
+    combobox->SetFont(::Label::Body_13);
+    combobox->GetDropDown().SetFont(::Label::Body_13);
 
     std::vector<wxString> theme_labels = {_L("Bambu Green"), _L("Space Purple"), _L("Ocean Blue"), _L("Candy Red")};
     std::vector<std::string> theme_values = {"bambu_green", "space_purple", "ocean_blue", "candy_red"};
-    std::vector<wxColour> theme_colors = {wxColour(0,174,66), wxColour(139,0,174), wxColour(0,139,174), wxColour(174,0,139)};
 
-    wxSize bitmap_size(16, 16);
-    for(size_t i = 0; i < theme_labels.size(); ++i){
-        wxBitmap bmp = create_filament_bitmap({theme_colors[i]}, bitmap_size, false);
-        combobox->Append(theme_labels[i], bmp);
-    }
+    for(auto label : theme_labels)
+        combobox->Append(label);
 
     auto old_value = app_config->get(param);
     size_t idx = 0;

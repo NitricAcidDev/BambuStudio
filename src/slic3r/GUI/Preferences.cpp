@@ -11,6 +11,8 @@
 #include "ReleaseNote.hpp"
 #include "OG_CustomCtrl.hpp"
 #include "wx/graphics.h"
+#include "BitmapComboBox.hpp"
+#include "FilamentBitmapUtils.hpp"
 
 #include <wx/listimpl.cpp>
 #include <map>
@@ -687,6 +689,47 @@ wxBoxSizer* PreferencesDialog::create_item_darkmode_checkbox(wxString title, wxW
     return m_sizer_checkbox;
 }
 
+wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWindow *parent, wxString tooltip, std::string param)
+{
+    wxBoxSizer *m_sizer_combox = new wxBoxSizer(wxHORIZONTAL);
+    m_sizer_combox->Add(0, 0, 0, wxEXPAND | wxLEFT, 23);
+
+    auto combo_title = new wxStaticText(parent, wxID_ANY, title, wxDefaultPosition, DESIGN_TITLE_SIZE, 0);
+    combo_title->SetForegroundColour(DESIGN_GRAY900_COLOR);
+    combo_title->SetFont(::Label::Body_13);
+    combo_title->SetToolTip(tooltip);
+    combo_title->Wrap(-1);
+    m_sizer_combox->Add(combo_title, 0, wxALIGN_CENTER | wxALL, 3);
+
+    auto combobox = new ::BitmapComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, DESIGN_LARGE_COMBOBOX_SIZE, 0, nullptr, wxCB_READONLY);
+
+    std::vector<wxString> theme_labels = {_L("Bambu Green"), _L("Space Purple"), _L("Ocean Blue"), _L("Candy Red")};
+    std::vector<std::string> theme_values = {"bambu_green", "space_purple", "ocean_blue", "candy_red"};
+    std::vector<wxColour> theme_colors = {wxColour(0,174,66), wxColour(139,0,174), wxColour(0,139,174), wxColour(174,0,139)};
+
+    wxSize bitmap_size(16, 16);
+    for(size_t i = 0; i < theme_labels.size(); ++i){
+        wxBitmap bmp = create_filament_bitmap({theme_colors[i]}, bitmap_size, false);
+        combobox->Append(theme_labels[i], bmp);
+    }
+
+    auto old_value = app_config->get(param);
+    size_t idx = 0;
+    auto it = std::find(theme_values.begin(), theme_values.end(), old_value);
+    if(it != theme_values.end()) idx = std::distance(theme_values.begin(), it);
+    combobox->SetSelection(idx);
+
+    combobox->Bind(wxEVT_COMBOBOX, [this, param, theme_values](wxCommandEvent &e) {
+        app_config->set(param, theme_values[e.GetSelection()]);
+        app_config->save();
+        e.Skip();
+    });
+
+    m_sizer_combox->Add(combobox, 0, wxALIGN_CENTER, 0);
+
+    return m_sizer_combox;
+}
+
 void PreferencesDialog::set_dark_mode()
 {
 #ifdef __WINDOWS__
@@ -1305,8 +1348,9 @@ wxWindow* PreferencesDialog::create_general_page()
 
     //dark mode
 #ifdef _WIN32
-    auto title_darkmode = create_item_title(_L("Dark Mode"), page, _L("Dark Mode"));
+    auto title_appearance = create_item_title(_L("Appearance"), page, _L("Appearance"));
     auto item_darkmode = create_item_darkmode_checkbox(_L("Enable dark mode"), page,_L("Enable dark mode"), 50, "dark_color_mode");
+    auto item_theme = create_item_theme_combobox(_L("Theme"), page, _L("Theme"), "theme_color");
 #endif
 
 #if 0
@@ -1399,8 +1443,9 @@ wxWindow* PreferencesDialog::create_general_page()
     sizer_page->Add(item_auto_stop_liveview, 0, wxEXPAND, FromDIP(3));
 
 #ifdef _WIN32
-    sizer_page->Add(title_darkmode, 0, wxTOP | wxEXPAND, FromDIP(20));
+    sizer_page->Add(title_appearance, 0, wxTOP | wxEXPAND, FromDIP(20));
     sizer_page->Add(item_darkmode, 0, wxEXPAND, FromDIP(3));
+    sizer_page->Add(item_theme, 0, wxEXPAND, FromDIP(3));
 #endif
 
 #if 0

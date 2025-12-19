@@ -11,8 +11,6 @@
 #include "ReleaseNote.hpp"
 #include "OG_CustomCtrl.hpp"
 #include "wx/graphics.h"
-#include "BitmapComboBox.hpp"
-#include "FilamentBitmapUtils.hpp"
 
 #include <wx/listimpl.cpp>
 #include <map>

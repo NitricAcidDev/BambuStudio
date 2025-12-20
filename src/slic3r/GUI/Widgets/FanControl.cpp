@@ -7,6 +7,7 @@
 
 #include <wx/simplebook.h>
 #include <wx/dcgraph.h>
+#include <wx/app.h>
 
 namespace Slic3r { namespace GUI {
 

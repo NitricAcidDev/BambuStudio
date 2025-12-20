@@ -36,7 +36,7 @@ AxisCtrlButton::AxisCtrlButton(wxWindow *parent, ScalableBitmap &icon, long stly
     , gap(GAP_SIZE)
     , last_pos(UNDEFINED)
     , current_pos(UNDEFINED) // don't change init value
-    , text_color(std::make_pair(0x6B6B6B, (int) StateColor::Disabled), std::make_pair(*wxBLACK, (int) StateColor::Normal))
+    , text_color(std::pair<wxColour, int>(wxColour(0x6B6B6B), (int) StateColor::Disabled), std::pair<wxColour, int>(*wxBLACK, (int) StateColor::Normal))
 	, state_handler(this)
 {
     m_icon = icon;

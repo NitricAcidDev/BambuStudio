@@ -434,8 +434,8 @@ void TempInput::render(wxDC &dc)
     if (warning_mode) {
         border_color = wxColour(255, 111, 0);
     } else {
-        border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Focused),
-                                  std::make_pair(0x00AE42, (int) StateColor::Hovered), std::make_pair(*wxWHITE, (int) StateColor::Normal));
+        border_color = StateColor(std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Disabled), std::pair<wxColour, int>(wxColour(0x00AE42), (int) StateColor::Focused),
+                                  std::pair<wxColour, int>(wxColour(0x00AE42), (int) StateColor::Hovered), std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
     }
 
     dc.SetBrush(*wxTRANSPARENT_BRUSH);

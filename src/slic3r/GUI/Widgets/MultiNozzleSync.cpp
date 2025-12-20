@@ -3,6 +3,7 @@
 #include "../DeviceCore/DevManager.h"
 #include "libslic3r/PresetBundle.hpp"
 #include <wx/sizer.h>
+#include <wx/app.h>
 
 
 namespace Slic3r::GUI{

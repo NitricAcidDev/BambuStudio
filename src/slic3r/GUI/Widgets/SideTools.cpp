@@ -8,7 +8,7 @@
 #include "../wxExtensions.hpp"
 #include "../I18N.hpp"
 #include "../GUI.hpp"
-#include "Theme.hpp"
+#include "../Theme.hpp"
 
 namespace Slic3r { namespace GUI {
 	SideToolsPanel::SideToolsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size)
@@ -535,7 +535,7 @@ void SideTools::show_status(int status)
     else if ((status & (int)MonitorStatus::MONITOR_CONNECTING) != 0) {
         m_hyperlink->Hide();
         m_connection_info->SetLabel(_L("Connecting..."));
-        auto theme = GUI::get_app()->get_theme_colors();
+        auto theme = wxGetApp().get_theme_colors();
         m_connection_info->SetBackgroundColor(theme.button_green.normal);
         m_connection_info->SetBorderColor(theme.button_green.normal);
         m_connection_info->Show();

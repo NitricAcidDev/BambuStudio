@@ -6,6 +6,7 @@
 #include "../Utils/MacDarkMode.hpp"
 #include "../Utils/WxFontUtils.hpp"
 #include "../GUI_App.hpp"
+#include "../Theme.hpp"
 #ifdef __APPLE__
 #include "libslic3r/MacUtils.hpp"
 #endif
@@ -25,9 +26,8 @@ SwitchButton::SwitchButton(wxWindow* parent, wxWindowID id)
     , text_color(std::pair{0xfffffe, (int) StateColor::Checked}, std::pair{0x6B6B6B, (int) StateColor::Normal})
 	, track_color(0xD9D9D9)
 {
-    auto theme = GUI::get_app()->get_theme_colors();
+    auto theme = wxGetApp().get_theme_colors();
     thumb_color = StateColor(std::pair{theme.button_green.normal, (int) StateColor::Checked}, std::pair{0xD9D9D9, (int) StateColor::Normal});
-{
 	SetBackgroundColour(StaticBox::GetParentBackgroundColor(parent));
 	Bind(wxEVT_TOGGLEBUTTON, [this](auto& e) { update(); e.Skip(); });
 	SetFont(Label::Body_12);
@@ -738,21 +738,21 @@ MultiSwitchButton::MultiSwitchButton(wxWindow *parent, wxWindowID id, const wxPo
     : StaticBox(parent, id, pos, size, style)
     , sel(-1)
 {
-    auto theme = GUI::get_app()->get_theme_colors();
+    auto theme = wxGetApp().get_theme_colors();
     m_bg_color = StateColor(
         std::make_pair(0xE8E8E8, (int) StateColor::NotChecked),
         std::make_pair(theme.button_green.normal, (int) StateColor::Normal));
     m_bg_color_grayed = StateColor(
         std::make_pair(0xE8E8E8, (int) StateColor::NotChecked),
         std::make_pair(theme.button_green.hovered, (int) StateColor::Normal));
-    , m_text_color(StateColor(
+    m_text_color = StateColor(
         std::make_pair(0x6B6B6B, (int) StateColor::NotChecked),
-        std::make_pair(0xFFFFFE, (int) StateColor::Normal)))
-    , m_text_color_grayed(StateColor(
+        std::make_pair(0xFFFFFE, (int) StateColor::Normal));
+    m_text_color_grayed = StateColor(
         std::make_pair(0x999999, (int) StateColor::NotChecked),
-        std::make_pair(0x99DFB2, (int) StateColor::Normal)))
-    , m_button_radius(10.0)
-    , m_button_padding(10, 6)
+        std::make_pair(0x99DFB2, (int) StateColor::Normal));
+    m_button_radius = 10.0;
+    m_button_padding = wxSize(10, 6);
 {
     SetCornerRadius(m_button_radius);
     SetBorderWidth(0);

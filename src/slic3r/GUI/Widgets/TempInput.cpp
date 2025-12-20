@@ -5,7 +5,7 @@
 #include <wx/dcgraph.h>
 #include "../GUI.hpp"
 #include "../GUI_App.hpp"
-#include "Theme.hpp"
+#include "../Theme.hpp"
 
 wxDEFINE_EVENT(wxCUSTOMEVT_SET_TEMP_FINISH, wxCommandEvent);
 
@@ -26,7 +26,7 @@ TempInput::TempInput()
 {
     hover  = false;
     radius = 0;
-    auto theme = GUI::get_app()->get_theme_colors();
+    auto theme = wxGetApp().get_theme_colors();
     border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(theme.button_green.hovered, (int) StateColor::Focused), std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
                  std::make_pair(*wxWHITE, (int) StateColor::Normal));
     background_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));

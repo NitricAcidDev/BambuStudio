@@ -1,7 +1,7 @@
 #include "SideButton.hpp"
 #include "Label.hpp"
-#include "GUI_App.hpp"
-#include "Theme.hpp"
+#include "../GUI_App.hpp"
+#include "../Theme.hpp"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
@@ -28,7 +28,7 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     icon_offset = 0;
     text_orientation = HO_Left;
 
-    auto theme = GUI::get_app()->get_theme_colors();
+    auto theme = wxGetApp().get_theme_colors();
     border_color = StateColor(
         std::make_pair(theme.button_green.disabled, (int)StateColor::Disabled),
         std::make_pair(theme.button_green.pressed, (int)StateColor::Pressed),

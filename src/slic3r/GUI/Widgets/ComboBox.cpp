@@ -1,7 +1,7 @@
 #include "ComboBox.hpp"
 #include "Label.hpp"
-#include "GUI_App.hpp"
-#include "Theme.hpp"
+#include "../GUI_App.hpp"
+#include "../Theme.hpp"
 
 #include <wx/dcgraph.h>
 
@@ -53,7 +53,7 @@ ComboBox::ComboBox(wxWindow *parent,
     if (style & wxCB_READONLY) {
         GetTextCtrl()->Hide();
         TextInput::SetFont(Label::Body_14);
-        auto theme = GUI::get_app()->get_theme_colors();
+        auto theme = wxGetApp().get_theme_colors();
         TextInput::SetBorderColor(StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled),
             std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
             std::make_pair(0xDBDBDB, (int) StateColor::Normal)));

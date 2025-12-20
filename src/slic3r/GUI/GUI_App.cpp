@@ -3526,6 +3526,15 @@ void GUI_App::update_label_colours_from_appconfig()
     }
 }
 
+ThemeColors GUI_App::get_theme_colors()
+{
+    std::string theme_name = "Bambu Green"; // Default
+    if (app_config && app_config->has("theme")) {
+        theme_name = app_config->get("theme");
+    }
+    return Theme::get_theme_colors(theme_name);
+}
+
 void GUI_App::update_publish_status()
 {
     mainframe->m_webview->ResetWholePage();

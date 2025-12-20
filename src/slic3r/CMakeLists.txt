@@ -210,6 +210,8 @@ set(SLIC3R_GUI_SOURCES
     GUI/GUI_Preview.hpp
     GUI/GUI_App.cpp
     GUI/GUI_App.hpp
+    GUI/Theme.cpp
+    GUI/Theme.hpp
     GUI/GUI_Utils.cpp
     GUI/GUI_Utils.hpp
     GUI/I18N.cpp

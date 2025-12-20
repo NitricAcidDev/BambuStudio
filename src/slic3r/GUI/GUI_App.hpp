@@ -20,6 +20,7 @@
 #include "slic3r/GUI/UnsavedChangesDialog.hpp"
 #include "../Utils/PrintHost.hpp"
 #include "slic3r/GUI/GLEnums.hpp"
+#include "slic3r/GUI/Theme.hpp"
 
 #include <wx/app.h>
 #include <wx/colour.h>
@@ -436,6 +437,7 @@ public:
     const wxColour& get_highlight_default_clr() { return m_color_highlight_default; }
     const wxColour& get_color_hovered_btn_label() { return m_color_hovered_btn_label; }
     const wxColour& get_color_selected_btn_bg() { return m_color_selected_btn_bg; }
+    ThemeColors get_theme_colors();
     void            force_colors_update();
 #ifdef _MSW_DARK_MODE
     void            force_menu_update();

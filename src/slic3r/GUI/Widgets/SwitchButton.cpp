@@ -24,7 +24,9 @@ SwitchButton::SwitchButton(wxWindow* parent, wxWindowID id)
 	, m_off(this, "toggle_off", 16)
     , text_color(std::pair{0xfffffe, (int) StateColor::Checked}, std::pair{0x6B6B6B, (int) StateColor::Normal})
 	, track_color(0xD9D9D9)
-    , thumb_color(std::pair{0x00AE42, (int) StateColor::Checked}, std::pair{0xD9D9D9, (int) StateColor::Normal})
+{
+    auto theme = GUI::get_app()->get_theme_colors();
+    thumb_color = StateColor(std::pair{theme.button_green.normal, (int) StateColor::Checked}, std::pair{0xD9D9D9, (int) StateColor::Normal});
 {
 	SetBackgroundColour(StaticBox::GetParentBackgroundColor(parent));
 	Bind(wxEVT_TOGGLEBUTTON, [this](auto& e) { update(); e.Skip(); });
@@ -735,12 +737,14 @@ void ExpandButtonHolder::doRender(wxDC& dc)
 MultiSwitchButton::MultiSwitchButton(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style)
     : StaticBox(parent, id, pos, size, style)
     , sel(-1)
-    , m_bg_color(StateColor(
+{
+    auto theme = GUI::get_app()->get_theme_colors();
+    m_bg_color = StateColor(
         std::make_pair(0xE8E8E8, (int) StateColor::NotChecked),
-        std::make_pair(0x00AE42, (int) StateColor::Normal)))
-    , m_bg_color_grayed(StateColor(
+        std::make_pair(theme.button_green.normal, (int) StateColor::Normal));
+    m_bg_color_grayed = StateColor(
         std::make_pair(0xE8E8E8, (int) StateColor::NotChecked),
-        std::make_pair(0x6DC48D, (int) StateColor::Normal)))
+        std::make_pair(theme.button_green.hovered, (int) StateColor::Normal));
     , m_text_color(StateColor(
         std::make_pair(0x6B6B6B, (int) StateColor::NotChecked),
         std::make_pair(0xFFFFFE, (int) StateColor::Normal)))

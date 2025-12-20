@@ -6,11 +6,19 @@
 
 namespace Slic3r { namespace GUI {
 
+struct ButtonGreen {
+    wxColour disabled;
+    wxColour pressed;
+    wxColour hovered;
+    wxColour normal;
+};
+
 struct ThemeColors {
     wxColour primary;      // Main accent color
     wxColour secondary;    // Secondary color
     wxColour background;   // Background
     wxColour foreground;   // Text
+    ButtonGreen button_green;
     // Add more as needed
 };
 

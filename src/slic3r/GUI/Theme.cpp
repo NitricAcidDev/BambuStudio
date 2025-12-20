@@ -54,19 +54,30 @@ ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
     wxColour base_background(248, 248, 248); // DESIGN_SELECTOR_NOMORE_COLOR
     wxColour base_foreground(38, 46, 48); // DESIGN_GRAY900_COLOR
 
+    // Base button green colors
+    wxColour base_btn_disabled(194, 194, 194); // Gray
+    wxColour base_btn_pressed(27, 136, 68);
+    wxColour base_btn_hovered(61, 203, 115);
+    wxColour base_btn_normal(0, 177, 66);
+
     double target_hue = 138; // Default green hue
     if (theme_name == "space_purple") {
-        target_hue = 286;
+        target_hue = 286; // Approx for #8B00AE
     } else if (theme_name == "ocean_blue") {
-        target_hue = 192;
+        target_hue = 192; // Approx for #0085AE
     } else if (theme_name == "candy_red") {
-        target_hue = 343;
+        target_hue = 343; // Approx for #AE0031
     }
 
     colors.primary = shift_hue(base_primary, target_hue);
     colors.secondary = shift_hue(base_secondary, target_hue);
     colors.background = base_background; // Don't shift grays
     colors.foreground = base_foreground;
+
+    colors.button_green.disabled = base_btn_disabled; // Keep gray
+    colors.button_green.pressed = shift_hue(base_btn_pressed, target_hue);
+    colors.button_green.hovered = shift_hue(base_btn_hovered, target_hue);
+    colors.button_green.normal = shift_hue(base_btn_normal, target_hue);
 
     return colors;
 }

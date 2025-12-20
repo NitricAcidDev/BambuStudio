@@ -69,6 +69,7 @@
 #include "Plater.hpp"
 #include "GLCanvas3D.hpp"
 #include "EncodedFilament.hpp"
+#include "Theme.hpp"
 
 #include "DeviceCore/DevManager.h"
 
@@ -3524,6 +3525,13 @@ void GUI_App::update_label_colours_from_appconfig()
         if (str != "")
             m_color_label_modified = wxColour(str);
     }
+}
+
+ThemeColors GUI_App::get_theme_colors()
+{
+    std::string theme = app_config->get("theme_color");
+    if (theme.empty()) theme = "bambu_green";
+    return Theme::get_theme_colors(theme);
 }
 
 void GUI_App::update_publish_status()

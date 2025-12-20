@@ -1,6 +1,8 @@
 #include "TextInput.hpp"
 #include "Label.hpp"
 #include "TextCtrl.h"
+#include "GUI_App.hpp"
+#include "Theme.hpp"
 
 #include "slic3r/GUI/I18N.hpp"
 
@@ -28,7 +30,8 @@ TextInput::TextInput()
 {
     radius = 0;
     border_width = 1;
-    border_color = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Hovered),
+    auto theme = GUI::get_app()->get_theme_colors();
+    border_color = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
                               std::make_pair(0xDBDBDB, (int) StateColor::Normal));
     background_color = StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
     SetFont(Label::Body_12);

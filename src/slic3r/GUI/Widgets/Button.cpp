@@ -1,5 +1,7 @@
 #include "Button.hpp"
 #include "Label.hpp"
+#include "GUI_App.hpp"
+#include "Theme.hpp"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
@@ -29,12 +31,7 @@ END_EVENT_TABLE()
 Button::Button()
     : paddingSize(10, 8)
 {
-    background_color = StateColor(
-        std::make_pair(0xF0F0F1, (int) StateColor::Disabled),
-        std::make_pair(0x37EE7C, (int) StateColor::Hovered | StateColor::Checked),
-        std::make_pair(0x00AE42, (int) StateColor::Checked),
-        std::make_pair(*wxLIGHT_GREY, (int) StateColor::Hovered),
-        std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    background_color = GUI::get_app()->get_theme_colors().button_green;
     text_color       = StateColor(
         std::make_pair(*wxLIGHT_GREY, (int) StateColor::Disabled),
         std::make_pair(*wxBLACK, (int) StateColor::Normal));

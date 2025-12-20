@@ -1,5 +1,7 @@
 #include "DropDown.hpp"
 #include "Label.hpp"
+#include "GUI_App.hpp"
+#include "Theme.hpp"
 
 #include <wx/display.h>
 #include <wx/dcbuffer.h>
@@ -38,11 +40,12 @@ DropDown::DropDown(std::vector<Item> &items)
     , border_color(0xDBDBDB)
     , text_color(std::make_pair(0x909090, (int) StateColor::Disabled),
         std::make_pair(0x363636, (int) StateColor::Normal))
-    , selector_border_color(std::make_pair(0x00AE42, (int) StateColor::Hovered),
-        std::make_pair(*wxWHITE, (int) StateColor::Normal))
-    , selector_background_color(std::make_pair(0xEDFAF2, (int) StateColor::Checked),
-        std::make_pair(*wxWHITE, (int) StateColor::Normal))
 {
+    auto theme = GUI::get_app()->get_theme_colors();
+    selector_border_color = StateColor(std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
+        std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    selector_background_color = StateColor(std::make_pair(0xEDFAF2, (int) StateColor::Checked),
+        std::make_pair(*wxWHITE, (int) StateColor::Normal));
 }
 
 DropDown::DropDown(wxWindow *parent, std::vector<Item> &items, long style)

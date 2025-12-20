@@ -11,6 +11,7 @@
 #include "ReleaseNote.hpp"
 #include "OG_CustomCtrl.hpp"
 #include "wx/graphics.h"
+#include "FilamentBitmapUtils.hpp"
 #include "BitmapComboBox.hpp"
 #include "FilamentBitmapUtils.hpp"
 
@@ -708,6 +709,7 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
 
     std::vector<wxString> theme_labels = {_L("Bambu Green"), _L("Space Purple"), _L("Ocean Blue"), _L("Candy Red")};
     std::vector<std::string> theme_values = {"bambu_green", "space_purple", "ocean_blue", "candy_red"};
+    std::vector<wxColour> theme_colors = {wxColour(0,174,66), wxColour(139,0,174), wxColour(0,133,174), wxColour(174,0,49)};
 
     for(auto label : theme_labels)
         combobox->Append(label);
@@ -718,13 +720,24 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
     if(it != theme_values.end()) idx = std::distance(theme_values.begin(), it);
     combobox->SetSelection(idx);
 
-    combobox->Bind(wxEVT_COMBOBOX, [this, param, theme_values](wxCommandEvent &e) {
+    auto color_preview = new wxStaticBitmap(parent, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize(20,20));
+
+    auto update_color = [color_preview, theme_colors](int idx) {
+        wxBitmap bmp = create_filament_bitmap({theme_colors[idx]}, wxSize(20,20), false);
+        color_preview->SetBitmap(bmp);
+    };
+
+    update_color(idx);
+
+    combobox->Bind(wxEVT_COMBOBOX, [this, param, theme_values, update_color](wxCommandEvent &e) {
         app_config->set(param, theme_values[e.GetSelection()]);
         app_config->save();
+        update_color(e.GetSelection());
         e.Skip();
     });
 
     m_sizer_combox->Add(combobox, 0, wxALIGN_CENTER, 0);
+    m_sizer_combox->Add(color_preview, 0, wxALIGN_CENTER | wxLEFT, 5);
 
     return m_sizer_combox;
 }

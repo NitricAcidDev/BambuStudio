@@ -6,6 +6,7 @@
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 #include <wx/tipwin.h>
+#include <wx/app.h>
 #ifdef __APPLE__
 #include "libslic3r/MacUtils.hpp"
 #endif

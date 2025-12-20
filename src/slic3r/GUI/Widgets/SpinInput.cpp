@@ -6,6 +6,7 @@
 #include "../Theme.hpp"
 
 #include <wx/dcgraph.h>
+#include <wx/app.h>
 
 BEGIN_EVENT_TABLE(SpinInput, wxPanel)
 

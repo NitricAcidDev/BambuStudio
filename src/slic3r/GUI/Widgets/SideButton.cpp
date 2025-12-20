@@ -5,6 +5,7 @@
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
+#include <wx/app.h>
 
 BEGIN_EVENT_TABLE(SideButton, wxPanel)
 EVT_LEFT_DOWN(SideButton::mouseDown)
@@ -30,10 +31,10 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
 
     auto theme = wxGetApp().get_theme_colors();
     border_color = StateColor(
-        std::make_pair(theme.button_green.disabled, (int)StateColor::Disabled),
-        std::make_pair(theme.button_green.pressed, (int)StateColor::Pressed),
-        std::make_pair(theme.button_green.hovered, (int)StateColor::Hovered),
-        std::make_pair(theme.button_green.normal, (int)StateColor::Normal));
+        std::pair<wxColour, int>(theme.button_green.disabled, (int)StateColor::Disabled),
+        std::pair<wxColour, int>(theme.button_green.pressed, (int)StateColor::Pressed),
+        std::pair<wxColour, int>(theme.button_green.hovered, (int)StateColor::Hovered),
+        std::pair<wxColour, int>(theme.button_green.normal, (int)StateColor::Normal));
     border_color.setTakeFocusedAsHovered(false);
 
     text_color.append(0xACACAC, StateColor::Disabled);
@@ -42,10 +43,10 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     text_color.append(0xFEFEFE, StateColor::Normal);
 
     background_color = StateColor(
-        std::make_pair(theme.button_green.disabled, (int)StateColor::Disabled),
-        std::make_pair(theme.button_green.pressed, (int)StateColor::Pressed),
-        std::make_pair(theme.button_green.hovered, (int)StateColor::Hovered),
-        std::make_pair(theme.button_green.normal, (int)StateColor::Normal));
+        std::pair<wxColour, int>(theme.button_green.disabled, (int)StateColor::Disabled),
+        std::pair<wxColour, int>(theme.button_green.pressed, (int)StateColor::Pressed),
+        std::pair<wxColour, int>(theme.button_green.hovered, (int)StateColor::Hovered),
+        std::pair<wxColour, int>(theme.button_green.normal, (int)StateColor::Normal));
     background_color.setTakeFocusedAsHovered(false);
 
     SetBottomColour(wxColour("#3B4446"));

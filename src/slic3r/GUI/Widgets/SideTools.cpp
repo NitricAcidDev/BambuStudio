@@ -9,6 +9,7 @@
 #include "../I18N.hpp"
 #include "../GUI.hpp"
 #include "../Theme.hpp"
+#include <wx/app.h>
 
 namespace Slic3r { namespace GUI {
 	SideToolsPanel::SideToolsPanel(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size)

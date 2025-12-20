@@ -8,6 +8,7 @@
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
+#include <wx/app.h>
 #include "../MsgDialog.hpp"
 
 BEGIN_EVENT_TABLE(TextInput, wxPanel)

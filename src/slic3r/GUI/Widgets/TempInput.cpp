@@ -6,6 +6,7 @@
 #include "../GUI.hpp"
 #include "../GUI_App.hpp"
 #include "../Theme.hpp"
+#include <wx/app.h>
 
 wxDEFINE_EVENT(wxCUSTOMEVT_SET_TEMP_FINISH, wxCommandEvent);
 

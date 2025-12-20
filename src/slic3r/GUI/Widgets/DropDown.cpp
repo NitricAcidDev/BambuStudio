@@ -6,6 +6,7 @@
 #include <wx/display.h>
 #include <wx/dcbuffer.h>
 #include <wx/dcgraph.h>
+#include <wx/app.h>
 
 #ifdef __WXGTK__
 #include <gtk/gtk.h>

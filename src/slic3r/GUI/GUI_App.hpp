@@ -397,6 +397,7 @@ public:
     void            init_download_path();
     static unsigned get_colour_approx_luma(const wxColour& colour);
     static bool     dark_mode();
+    wxColour        get_themed_color(const std::string& key);
     const wxColour  get_label_default_clr_system();
     const wxColour  get_label_default_clr_modified();
     void            init_label_colours();

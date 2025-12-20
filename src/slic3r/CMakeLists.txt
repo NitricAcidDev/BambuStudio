@@ -194,6 +194,8 @@ set(SLIC3R_GUI_SOURCES
     GUI/ImageDPIFrame.hpp
     GUI/Preferences.cpp
     GUI/Preferences.hpp
+    GUI/Theme.cpp
+    GUI/Theme.hpp
     GUI/AMSSetting.cpp
     GUI/AMSSetting.hpp
     GUI/AMSMaterialsSetting.cpp

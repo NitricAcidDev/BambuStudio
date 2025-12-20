@@ -3528,11 +3528,17 @@ void GUI_App::update_label_colours_from_appconfig()
 
 ThemeColors GUI_App::get_theme_colors()
 {
-    std::string theme_name = "Bambu Green"; // Default
-    if (app_config && app_config->has("theme")) {
-        theme_name = app_config->get("theme");
+    // Prefer the preferences key used by the dialog (theme_color) but keep
+    // compatibility with the earlier key (theme).
+    std::string theme_id = "bambu_green";
+    if (app_config) {
+        if (app_config->has("theme_color")) {
+            theme_id = app_config->get("theme_color");
+        } else if (app_config->has("theme")) {
+            theme_id = app_config->get("theme");
+        }
     }
-    return Theme::get_theme_colors(theme_name);
+    return Theme::get_theme_colors(theme_id);
 }
 
 void GUI_App::update_publish_status()

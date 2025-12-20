@@ -94,12 +94,19 @@ ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
     wxColour darker_green(0, 100, 0);
     wxColour disabled_green(169, 169, 169);
 
+    // Accept both user-facing names and stored ids (theme_color preference)
+    std::string name = theme_name;
+    if (name == "bambu_green") name = "Bambu Green";
+    else if (name == "space_purple") name = "Space Purple";
+    else if (name == "ocean_blue") name = "Ocean Blue";
+    else if (name == "candy_red") name = "Candy Red";
+
     double hue_shift = 0.0;
-    if (theme_name == "Space Purple") {
+    if (name == "Space Purple") {
         hue_shift = 0.75; // Purple
-    } else if (theme_name == "Ocean Blue") {
+    } else if (name == "Ocean Blue") {
         hue_shift = 0.58; // Blue
-    } else if (theme_name == "Candy Red") {
+    } else if (name == "Candy Red") {
         hue_shift = 0.0; // Red
     } // Bambu Green: 0
 

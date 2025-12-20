@@ -39,7 +39,7 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     text_color.append(0xFEFEFE, StateColor::Hovered);
     text_color.append(0xFEFEFE, StateColor::Normal);
 
-    background_color = wxGetApp().get_theme_colors().button_green;
+    background_color = Slic3r::GUI::wxGetApp().get_theme_colors().button_green;
     background_color.setTakeFocusedAsHovered(false);
 
     SetBottomColour(wxColour("#3B4446"));

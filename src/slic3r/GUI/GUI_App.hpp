@@ -75,6 +75,9 @@ class TaskManager;
 
 namespace GUI{
 
+struct ThemeColors; // forward-declare theme type to avoid include ordering issues
+
+
 class RemovableDriveManager;
 class OtherInstanceMessageHandler;
 class MainFrame;

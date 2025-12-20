@@ -6,6 +6,7 @@
 #include "../Utils/MacDarkMode.hpp"
 #include "../Utils/WxFontUtils.hpp"
 #include "../GUI_App.hpp"
+#include <wx/app.h>
 #ifdef __APPLE__
 #include "libslic3r/MacUtils.hpp"
 #endif

@@ -2,6 +2,7 @@
 #include "Label.hpp"
 #include "../GUI_App.hpp"
 
+#include <wx/app.h>
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 

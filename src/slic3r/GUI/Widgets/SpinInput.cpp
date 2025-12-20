@@ -24,15 +24,15 @@ END_EVENT_TABLE()
  */
 
 SpinInput::SpinInput()
-    : label_color(std::make_pair(0x909090, (int) StateColor::Disabled), std::make_pair(0x6B6B6B, (int) StateColor::Normal))
-    , text_color(std::make_pair(0x909090, (int) StateColor::Disabled), std::make_pair(0x262E30, (int) StateColor::Normal))
+    : label_color(std::pair<wxColour, int>(wxColour(0x909090), (int) StateColor::Disabled), std::pair<wxColour, int>(wxColour(0x6B6B6B), (int) StateColor::Normal))
+    , text_color(std::pair<wxColour, int>(wxColour(0x909090), (int) StateColor::Disabled), std::pair<wxColour, int>(wxColour(0x262E30), (int) StateColor::Normal))
 {
     radius = 0;
     border_width     = 1;
     auto theme = wxGetApp().get_theme_colors();
     border_color     = StateColor(std::pair<wxColour, int>(wxColour(0xDBDBDB), (int) StateColor::Disabled), std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered),
                               std::pair<wxColour, int>(wxColour(0xDBDBDB), (int) StateColor::Normal));
-    background_color = StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    background_color = StateColor(std::pair<wxColour, int>(wxColour(0xF0F0F1), (int) StateColor::Disabled), std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
 }
 
 

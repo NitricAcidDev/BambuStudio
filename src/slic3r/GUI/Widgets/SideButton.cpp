@@ -1,5 +1,6 @@
 #include "SideButton.hpp"
 #include "Label.hpp"
+#include "../GUI_App.hpp"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>

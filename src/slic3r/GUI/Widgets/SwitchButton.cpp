@@ -7,6 +7,7 @@
 #include "../Utils/WxFontUtils.hpp"
 #include "../GUI_App.hpp"
 #include "../Theme.hpp"
+#include <wx/app.h>
 #ifdef __APPLE__
 #include "libslic3r/MacUtils.hpp"
 #endif
@@ -25,7 +26,7 @@ SwitchButton::SwitchButton(wxWindow* parent, wxWindowID id)
 	, m_on(this, "toggle_on", 16)
 	, m_off(this, "toggle_off", 16)
     , text_color(std::pair<wxColour, int>(wxColour(0xfffffe), (int) StateColor::Checked), std::pair<wxColour, int>(wxColour(0x6B6B6B), (int) StateColor::Normal))
-	, track_color(0xD9D9D9)
+    , track_color(0xD9D9D9)
 {
     auto theme = wxGetApp().get_theme_colors();
     thumb_color = StateColor(std::pair<wxColour, int>(theme.button_green.normal, (int) StateColor::Checked), std::pair<wxColour, int>(wxColour(0xD9D9D9), (int) StateColor::Normal));
@@ -738,6 +739,7 @@ void ExpandButtonHolder::doRender(wxDC& dc)
 MultiSwitchButton::MultiSwitchButton(wxWindow *parent, wxWindowID id, const wxPoint &pos, const wxSize &size, long style)
     : StaticBox(parent, id, pos, size, style)
     , sel(-1)
+<<<<<<< HEAD
 {
     auto theme = wxGetApp().get_theme_colors();
     m_bg_color = StateColor(
@@ -747,6 +749,15 @@ MultiSwitchButton::MultiSwitchButton(wxWindow *parent, wxWindowID id, const wxPo
         std::pair<wxColour, int>(wxColour(0xE8E8E8), (int) StateColor::NotChecked),
         std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Normal));
     m_text_color = StateColor(
+=======
+    , m_bg_color(StateColor(
+        std::pair<wxColour, int>(wxColour(0xE8E8E8), (int) StateColor::NotChecked),
+        std::pair<wxColour, int>(wxGetApp().get_theme_colors().button_green.normal, (int) StateColor::Normal)))
+    , m_bg_color_grayed(StateColor(
+        std::make_pair(0xE8E8E8, (int) StateColor::NotChecked),
+        std::make_pair(0x6DC48D, (int) StateColor::Normal)))
+    , m_text_color(StateColor(
+>>>>>>> 510794b88 (Implement theme colors with absolute includes: add Theme.hpp and Theme.cpp to CMake, update Button, SideButton, SwitchButton with theme colors using absolute paths, add get_theme_colors to GUI_App)
         std::make_pair(0x6B6B6B, (int) StateColor::NotChecked),
         std::make_pair(0xFFFFFE, (int) StateColor::Normal));
     m_text_color_grayed = StateColor(

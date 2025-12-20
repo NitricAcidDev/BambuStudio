@@ -13,7 +13,6 @@
 #include <wx/osx/webview_webkit.h>
 #endif
 #include <wx/uri.h>
-#include <wx/app.h>
 #if defined(__WIN32__) || defined(__WXMAC__)
 #include "wx/private/jsscriptwrapper.h"
 #endif

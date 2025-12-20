@@ -1,3 +1,4 @@
+// Theme.hpp - theme color definitions
 #ifndef slic3r_GUI_Theme_hpp_
 #define slic3r_GUI_Theme_hpp_
 
@@ -19,7 +20,6 @@ struct ThemeColors {
     wxColour background;   // Background
     wxColour foreground;   // Text
     ButtonGreen button_green;
-    // Add more as needed
 };
 
 class Theme {

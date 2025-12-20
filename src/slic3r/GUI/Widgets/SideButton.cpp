@@ -2,6 +2,7 @@
 #include "Label.hpp"
 #include "../GUI_App.hpp"
 #include "../Theme.hpp"
+#include <wx/app.h>
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
@@ -31,11 +32,10 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     text_orientation = HO_Left;
 
     auto theme = wxGetApp().get_theme_colors();
-    border_color = StateColor(
-        std::pair<wxColour, int>(theme.button_green.disabled, (int)StateColor::Disabled),
-        std::pair<wxColour, int>(theme.button_green.pressed, (int)StateColor::Pressed),
-        std::pair<wxColour, int>(theme.button_green.hovered, (int)StateColor::Hovered),
-        std::pair<wxColour, int>(theme.button_green.normal, (int)StateColor::Normal));
+    border_color.append(theme.button_green.disabled, StateColor::Disabled);
+    border_color.append(theme.button_green.pressed, StateColor::Pressed);
+    border_color.append(theme.button_green.hovered, StateColor::Hovered);
+    border_color.append(theme.button_green.normal, StateColor::Normal);
     border_color.setTakeFocusedAsHovered(false);
 
     text_color.append(0xACACAC, StateColor::Disabled);
@@ -43,11 +43,10 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     text_color.append(0xFEFEFE, StateColor::Hovered);
     text_color.append(0xFEFEFE, StateColor::Normal);
 
-    background_color = StateColor(
-        std::pair<wxColour, int>(theme.button_green.disabled, (int)StateColor::Disabled),
-        std::pair<wxColour, int>(theme.button_green.pressed, (int)StateColor::Pressed),
-        std::pair<wxColour, int>(theme.button_green.hovered, (int)StateColor::Hovered),
-        std::pair<wxColour, int>(theme.button_green.normal, (int)StateColor::Normal));
+    background_color.append(theme.button_green.disabled, StateColor::Disabled);
+    background_color.append(theme.button_green.pressed, StateColor::Pressed);
+    background_color.append(theme.button_green.hovered, StateColor::Hovered);
+    background_color.append(theme.button_green.normal, StateColor::Normal);
     background_color.setTakeFocusedAsHovered(false);
 
     SetBottomColour(wxColour("#3B4446"));

@@ -2,11 +2,11 @@
 #include "Label.hpp"
 #include "../GUI_App.hpp"
 #include "../Theme.hpp"
+#include <wx/app.h>
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 #include <wx/tipwin.h>
-#include <wx/app.h>
 #ifdef __APPLE__
 #include "libslic3r/MacUtils.hpp"
 #endif
@@ -32,7 +32,13 @@ END_EVENT_TABLE()
 Button::Button()
     : paddingSize(10, 8)
 {
-    background_color = wxGetApp().get_theme_colors().button_green;
+    auto theme = wxGetApp().get_theme_colors();
+    background_color = StateColor(
+        std::pair<wxColour, int>(theme.button_green.disabled, (int) StateColor::Disabled),
+        std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered | StateColor::Checked),
+        std::pair<wxColour, int>(theme.button_green.normal, (int) StateColor::Checked),
+        std::pair<wxColour, int>(*wxLIGHT_GREY, (int) StateColor::Hovered),
+        std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
     text_color       = StateColor(
         std::make_pair(*wxLIGHT_GREY, (int) StateColor::Disabled),
         std::make_pair(*wxBLACK, (int) StateColor::Normal));

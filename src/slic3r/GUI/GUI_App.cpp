@@ -3527,13 +3527,6 @@ void GUI_App::update_label_colours_from_appconfig()
     }
 }
 
-ThemeColors GUI_App::get_theme_colors()
-{
-    std::string theme = app_config->get("theme_color");
-    if (theme.empty()) theme = "bambu_green";
-    return Theme::get_theme_colors(theme);
-}
-
 void GUI_App::update_publish_status()
 {
     mainframe->m_webview->ResetWholePage();
@@ -8010,6 +8003,15 @@ void TryLoadLastMachine::InnerLoad(NetworkAgent *agent, DeviceManager *dev)
     if (is_mqtt_ok && is_list_ok) {
         if ((dev->get_selected_machine() == nullptr) && (dev->get_user_machinelist().size() > 0)) dev->set_selected_machine(agent->get_user_selected_machine());
     }
+}
+
+ThemeColors GUI_App::get_theme_colors()
+{
+    std::string theme_name = "bambu_green"; // default
+    if (app_config) {
+        theme_name = app_config->get("theme");
+    }
+    return Theme::get_theme_colors(theme_name);
 }
 
 } // GUI

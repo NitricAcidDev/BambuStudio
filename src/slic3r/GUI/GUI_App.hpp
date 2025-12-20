@@ -20,6 +20,7 @@
 #include "slic3r/GUI/UnsavedChangesDialog.hpp"
 #include "../Utils/PrintHost.hpp"
 #include "slic3r/GUI/GLEnums.hpp"
+#include "Theme.hpp"
 
 #include <wx/app.h>
 #include <wx/colour.h>

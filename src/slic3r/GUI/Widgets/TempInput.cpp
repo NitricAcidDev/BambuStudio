@@ -5,8 +5,6 @@
 #include <wx/dcgraph.h>
 #include "../GUI.hpp"
 #include "../GUI_App.hpp"
-#include "../Theme.hpp"
-#include <wx/app.h>
 
 wxDEFINE_EVENT(wxCUSTOMEVT_SET_TEMP_FINISH, wxCommandEvent);
 
@@ -22,15 +20,14 @@ END_EVENT_TABLE()
 
 
 TempInput::TempInput()
-    : label_color(std::pair<wxColour, int>(wxColour(0xAC,0xAC,0xAC), (int) StateColor::Disabled),std::pair<wxColour, int>(wxColour(0x323A3C), (int) StateColor::Normal))
-    , text_color(std::pair<wxColour, int>(wxColour(0xAC,0xAC,0xAC), (int) StateColor::Disabled), std::pair<wxColour, int>(wxColour(0x6B6B6B), (int) StateColor::Normal))
+    : label_color(std::make_pair(wxColour(0xAC,0xAC,0xAC), (int) StateColor::Disabled),std::make_pair(0x323A3C, (int) StateColor::Normal))
+    , text_color(std::make_pair(wxColour(0xAC,0xAC,0xAC), (int) StateColor::Disabled), std::make_pair(0x6B6B6B, (int) StateColor::Normal))
 {
     hover  = false;
     radius = 0;
-    auto theme = wxGetApp().get_theme_colors();
-    border_color = StateColor(std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Disabled), std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Focused), std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered),
-                 std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
-    background_color = StateColor(std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Disabled), std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
+    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Focused), std::make_pair(0x00AE42, (int) StateColor::Hovered),
+                 std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    background_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
     SetFont(Label::Body_12);
 }
 
@@ -434,8 +431,8 @@ void TempInput::render(wxDC &dc)
     if (warning_mode) {
         border_color = wxColour(255, 111, 0);
     } else {
-        border_color = StateColor(std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Disabled), std::pair<wxColour, int>(wxColour(0x00AE42), (int) StateColor::Focused),
-                                  std::pair<wxColour, int>(wxColour(0x00AE42), (int) StateColor::Hovered), std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
+        border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Focused),
+                                  std::make_pair(0x00AE42, (int) StateColor::Hovered), std::make_pair(*wxWHITE, (int) StateColor::Normal));
     }
 
     dc.SetBrush(*wxTRANSPARENT_BRUSH);

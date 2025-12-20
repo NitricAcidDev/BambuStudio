@@ -1,10 +1,7 @@
 #include "ComboBox.hpp"
 #include "Label.hpp"
-#include "../GUI_App.hpp"
-#include "../Theme.hpp"
 
 #include <wx/dcgraph.h>
-#include <wx/app.h>
 
 BEGIN_EVENT_TABLE(ComboBox, TextInput)
 
@@ -54,15 +51,14 @@ ComboBox::ComboBox(wxWindow *parent,
     if (style & wxCB_READONLY) {
         GetTextCtrl()->Hide();
         TextInput::SetFont(Label::Body_14);
-        auto theme = wxGetApp().get_theme_colors();
-        TextInput::SetBorderColor(StateColor(std::pair<wxColour, int>(wxColour(0xDBDBDB), (int) StateColor::Disabled),
-            std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered),
-            std::pair<wxColour, int>(wxColour(0xDBDBDB), (int) StateColor::Normal)));
-        TextInput::SetBackgroundColor(StateColor(std::pair<wxColour, int>(wxColour(0xF0F0F1), (int) StateColor::Disabled),
-            std::pair<wxColour, int>(wxColour(0xEDFAF2), (int) StateColor::Focused),
-            std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal)));
-        TextInput::SetLabelColor(StateColor(std::pair<wxColour, int>(wxColour(0x909090), (int) StateColor::Disabled),
-            std::pair<wxColour, int>(wxColour(0x262E30), (int) StateColor::Normal)));
+        TextInput::SetBorderColor(StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled),
+            std::make_pair(0x00AE42, (int) StateColor::Hovered),
+            std::make_pair(0xDBDBDB, (int) StateColor::Normal)));
+        TextInput::SetBackgroundColor(StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled),
+            std::make_pair(0xEDFAF2, (int) StateColor::Focused),
+            std::make_pair(*wxWHITE, (int) StateColor::Normal)));
+        TextInput::SetLabelColor(StateColor(std::make_pair(0x909090, (int) StateColor::Disabled),
+            std::make_pair(0x262E30, (int) StateColor::Normal)));
     }
     if (auto scroll = GetScrollParent(this))
         scroll->Bind(wxEVT_MOVE, &ComboBox::onMove, this);

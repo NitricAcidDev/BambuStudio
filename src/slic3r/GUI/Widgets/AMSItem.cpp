@@ -13,7 +13,6 @@
 
 #include <wx/simplebook.h>
 #include <wx/dcgraph.h>
-#include <wx/app.h>
 
 #include <boost/log/trivial.hpp>
 

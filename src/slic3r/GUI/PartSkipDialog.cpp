@@ -1,6 +1,5 @@
 #include "GUI_Utils.hpp"
 #include "GUI_App.hpp"
-#include "Theme.hpp"
 #include <wx/panel.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
@@ -59,13 +58,9 @@ static StateColor btn_bg_gray(std::pair<wxColour, int>(wxColour(194, 194, 194), 
                               std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Hovered),
                               std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Normal));
 
-StateColor get_btn_bg_green() {
-    auto theme = wxGetApp().get_theme_colors();
-    return StateColor(std::pair<wxColour, int>(theme.button_green.disabled, StateColor::Disabled),
-                      std::pair<wxColour, int>(theme.button_green.pressed, StateColor::Pressed),
-                      std::pair<wxColour, int>(theme.button_green.hovered, StateColor::Hovered),
-                      std::pair<wxColour, int>(theme.button_green.normal, StateColor::Normal));
-}
+static StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
+                               std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+                               std::pair<wxColour, int>(wxColour(0, 177, 66), StateColor::Normal));
 
 PartSkipDialog::PartSkipDialog(wxWindow *parent) : DPIDialog(parent, wxID_ANY, _L("Skip Objects"), wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX)
 {
@@ -256,7 +251,7 @@ PartSkipDialog::PartSkipDialog(wxWindow *parent) : DPIDialog(parent, wxID_ANY, _
     m_book_second_sizer->Add(0, 0, 1, wxEXPAND, 0);
 
     m_second_retry_btn = new Button(m_book_second_panel, _L("Retry"));
-    m_second_retry_btn->SetBackgroundColor(get_btn_bg_green());
+    m_second_retry_btn->SetBackgroundColor(btn_bg_green);
     // m_second_retry_btn->SetBorderColor(wxColour(38, 46, 48));
     m_second_retry_btn->SetTextColor(*wxWHITE);
     m_second_retry_btn->SetFont(Label::Body_14);
@@ -900,7 +895,7 @@ void PartSkipDialog::UpdateApplyButtonStatus()
         m_apply_btn->SetToolTip(_L("The current print job cannot be skipped"));
         m_enable_apply_btn = false;
     } else {
-        m_apply_btn->SetBackgroundColor(get_btn_bg_green());
+        m_apply_btn->SetBackgroundColor(btn_bg_green);
         m_apply_btn->SetToolTip(wxEmptyString);
         m_enable_apply_btn = true;
     }
@@ -997,7 +992,8 @@ PartSkipConfirmDialog::PartSkipConfirmDialog(wxWindow *parent) : DPIDialog(paren
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Pressed), std::pair<wxColour, int>(wxColour(238, 238, 238), StateColor::Hovered),
                             std::pair<wxColour, int>(*wxWHITE, StateColor::Normal));
 
-    StateColor btn_bg_green = get_btn_bg_green();
+    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+                            std::pair<wxColour, int>(wxColour(0, 177, 66), StateColor::Normal));
 
     m_apply_button = new Button(this, _L("Continue"));
     m_apply_button->SetBackgroundColor(btn_bg_green);

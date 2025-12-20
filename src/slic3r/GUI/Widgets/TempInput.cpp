@@ -28,8 +28,8 @@ TempInput::TempInput()
     hover  = false;
     radius = 0;
     auto theme = wxGetApp().get_theme_colors();
-    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(theme.button_green.hovered, (int) StateColor::Focused), std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
-                 std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    border_color = StateColor(std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Disabled), std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Focused), std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered),
+                 std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
     background_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
     SetFont(Label::Body_12);
 }

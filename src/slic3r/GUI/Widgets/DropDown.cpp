@@ -43,8 +43,8 @@ DropDown::DropDown(std::vector<Item> &items)
         std::make_pair(0x363636, (int) StateColor::Normal))
 {
     auto theme = wxGetApp().get_theme_colors();
-    selector_border_color = StateColor(std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
-        std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    selector_border_color = StateColor(std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered),
+        std::pair<wxColour, int>(*wxWHITE, (int) StateColor::Normal));
     selector_background_color = StateColor(std::make_pair(0xEDFAF2, (int) StateColor::Checked),
         std::make_pair(*wxWHITE, (int) StateColor::Normal));
 }

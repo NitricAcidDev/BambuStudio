@@ -6,6 +6,7 @@
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 #include <wx/app.h>
+#include <utility>
 
 BEGIN_EVENT_TABLE(SideButton, wxPanel)
 EVT_LEFT_DOWN(SideButton::mouseDown)

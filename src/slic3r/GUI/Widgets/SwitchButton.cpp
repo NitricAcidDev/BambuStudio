@@ -28,7 +28,7 @@ SwitchButton::SwitchButton(wxWindow* parent, wxWindowID id)
 	, track_color(0xD9D9D9)
 {
     auto theme = wxGetApp().get_theme_colors();
-    thumb_color = StateColor(std::pair<wxColour, int>(theme.button_green.normal, (int) StateColor::Checked), std::pair<wxColour, int>(0xD9D9D9, (int) StateColor::Normal));
+    thumb_color = StateColor(std::pair<wxColour, int>(theme.button_green.normal, (int) StateColor::Checked), std::pair<wxColour, int>(wxColour(0xD9D9D9), (int) StateColor::Normal));
 	SetBackgroundColour(StaticBox::GetParentBackgroundColor(parent));
 	Bind(wxEVT_TOGGLEBUTTON, [this](auto& e) { update(); e.Skip(); });
 	SetFont(Label::Body_12);
@@ -741,10 +741,10 @@ MultiSwitchButton::MultiSwitchButton(wxWindow *parent, wxWindowID id, const wxPo
 {
     auto theme = wxGetApp().get_theme_colors();
     m_bg_color = StateColor(
-        std::pair<wxColour, int>(0xE8E8E8, (int) StateColor::NotChecked),
+        std::pair<wxColour, int>(wxColour(0xE8E8E8), (int) StateColor::NotChecked),
         std::pair<wxColour, int>(theme.button_green.normal, (int) StateColor::Normal));
     m_bg_color_grayed = StateColor(
-        std::pair<wxColour, int>(0xE8E8E8, (int) StateColor::NotChecked),
+        std::pair<wxColour, int>(wxColour(0xE8E8E8), (int) StateColor::NotChecked),
         std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Normal));
     m_text_color = StateColor(
         std::make_pair(0x6B6B6B, (int) StateColor::NotChecked),

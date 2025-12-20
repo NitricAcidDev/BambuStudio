@@ -30,8 +30,8 @@ SpinInput::SpinInput()
     radius = 0;
     border_width     = 1;
     auto theme = wxGetApp().get_theme_colors();
-    border_color     = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(theme.button_green.hovered, (int) StateColor::Hovered),
-                              std::make_pair(0xDBDBDB, (int) StateColor::Normal));
+    border_color     = StateColor(std::pair<wxColour, int>(wxColour(0xDBDBDB), (int) StateColor::Disabled), std::pair<wxColour, int>(theme.button_green.hovered, (int) StateColor::Hovered),
+                              std::pair<wxColour, int>(wxColour(0xDBDBDB), (int) StateColor::Normal));
     background_color = StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
 }
 

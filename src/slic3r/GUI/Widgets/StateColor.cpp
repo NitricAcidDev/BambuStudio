@@ -78,16 +78,6 @@ inline wxColour darkModeColorFor2(wxColour const &color)
     if (iter != gDarkColors.end()) return iter->second;
     return color;
 }
-    
-    // If the color matches the themed dropdown light color, return the dark variant
-    if (color == dropdown_light) {
-        return dropdown_dark;
-    }
-    
-    auto iter = gDarkColors.find(color);
-    if (iter != gDarkColors.end()) return iter->second;
-    return color;
-}
 
 std::map<wxColour, wxColour> revert(std::map<wxColour, wxColour> const & map)
 {

@@ -266,11 +266,6 @@ void DropDown::render(wxDC &dc)
 
     wxColour background_color = StateColor::darkModeColorFor(GetBackgroundColour());
     wxColour border_clr       = border_color.colorForStates(states);
-    if (selected_item >= 0) {
-        // When the dropdown is effectively "checked" (has a selection), mirror item checked styling.
-        background_color = selector_background_color.colorForStates(StateColor::Checked);
-        border_clr       = selector_border_color.colorForStates(StateColor::Hovered);
-    }
 
     dc.SetPen(wxPen(border_clr));
     dc.SetBrush(wxBrush(background_color));

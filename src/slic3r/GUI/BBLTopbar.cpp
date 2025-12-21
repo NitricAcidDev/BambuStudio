@@ -40,7 +40,7 @@ public:
     BBLTopbarArt() : wxAuiDefaultToolBarArt()
     {
         // Set highlight color to themed red accent instead of default green
-        m_highlightColour = Slic3r::GUI::Theme::getThemeColor("button.bg.checked");
+        m_highlightColour = GUI::Theme::getThemeColor("button.bg.checked");
     }
 
     virtual void DrawLabel(wxDC& dc, wxWindow* wnd, const wxAuiToolBarItem& item, const wxRect& rect) wxOVERRIDE;

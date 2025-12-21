@@ -20,7 +20,11 @@ static const wxColour BorderDisableColor  = wxColour("#EEEEEE");
 
 static wxColour GetBorderSelectedColor()
 {
-    return Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return wxColour("#00AE42"); // Default fallback
 }
 
 static const wxColour TextNormalBlackColor = wxColour("#262E30");

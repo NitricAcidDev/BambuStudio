@@ -35,7 +35,11 @@
 // Theme-aware accent color for "Select All" / "Deselect All" links
 static wxColour GetSelectAllOptionColour()
 {
-    return Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return wxColour("#00AE42"); // Default fallback
 }
 
 namespace Slic3r {

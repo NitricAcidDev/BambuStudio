@@ -798,6 +798,15 @@ void CalibrationPresetPage::create_selection_panel(wxWindow* parent)
     m_ams_sync_button = new ScalableButton(parent, wxID_ANY, "ams_fila_sync", wxEmptyString, wxDefaultSize, wxDefaultPosition, wxBU_EXACTFIT | wxNO_BORDER, false, 18);
     m_ams_sync_button->SetBackgroundColour(*wxWHITE);
     m_ams_sync_button->SetToolTip(_L("Synchronize filament list from AMS"));
+    // Add hover effect with themed red accent
+    m_ams_sync_button->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent&) {
+        m_ams_sync_button->SetBackgroundColour(Slic3r::GUI::Theme::accentColor().ChangeLightness(95));
+        m_ams_sync_button->Refresh();
+    });
+    m_ams_sync_button->Bind(wxEVT_LEAVE_WINDOW, [this](wxMouseEvent&) {
+        m_ams_sync_button->SetBackgroundColour(*wxWHITE);
+        m_ams_sync_button->Refresh();
+    });
     filament_for_title_sizer->Add(m_ams_sync_button, 0, wxALIGN_CENTER);
     panel_sizer->Add(filament_for_title_sizer);
     panel_sizer->AddSpacer(FromDIP(6));

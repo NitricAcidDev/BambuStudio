@@ -1,4 +1,5 @@
 #include "Plater.hpp"
+#include "Theme.hpp"
 #include <cstddef>
 #include <algorithm>
 #include <numeric>
@@ -2234,6 +2235,15 @@ Sidebar::Sidebar(Plater *parent)
     ams_btn = new ScalableButton(p->m_panel_filament_title, wxID_ANY, "ams_fila_sync", wxEmptyString, wxDefaultSize, wxDefaultPosition,
                                                  wxBU_EXACTFIT | wxNO_BORDER, false, 18);
     ams_btn->SetToolTip(_L("Synchronize filament list from AMS"));
+    // Add hover effect with themed red accent
+    ams_btn->Bind(wxEVT_ENTER_WINDOW, [ams_btn](wxMouseEvent&) {
+        ams_btn->SetBackgroundColour(GUI::Theme::accentColor().ChangeLightness(95));
+        ams_btn->Refresh();
+    });
+    ams_btn->Bind(wxEVT_LEAVE_WINDOW, [ams_btn](wxMouseEvent&) {
+        ams_btn->SetBackgroundColour(*wxWHITE);
+        ams_btn->Refresh();
+    });
     ams_btn->Bind(wxEVT_BUTTON, [this, scrolled_sizer](wxCommandEvent &e) {
         sync_ams_list();
     });

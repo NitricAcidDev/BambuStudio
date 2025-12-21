@@ -757,7 +757,7 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
     auto restart_row = new wxBoxSizer(wxHORIZONTAL);
     restart_row->Add(0, 0, 0, wxEXPAND | wxLEFT, 23);
     auto restart_note = new wxStaticText(parent, wxID_ANY, _L("Restart is required for all theme changes to take effect."));
-    restart_note->SetForegroundColour(DESIGN_GRAY700_COLOR);
+    restart_note->SetForegroundColour(DESIGN_GRAY900_COLOR);
     restart_note->SetFont(::Label::Body_11);
     restart_row->Add(restart_note, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 8);
 

@@ -1,16 +1,22 @@
 #include "AxisCtrlButton.hpp"
 #include "Label.hpp"
 #include "libslic3r/libslic3r.h"
+#include "../GUI_App.hpp"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 
+static wxColour ThemeGreen()
+{
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning())
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    return wxColour(0, 174, 66);
+}
+
 StateColor blank_bg(StateColor(std::make_pair(wxColour("#FFFFFF"), (int)StateColor::Normal)));
 static const wxColour BUTTON_BG_COL = wxColour("#EEEEEE");
 static const wxColour BUTTON_IN_BG_COL = wxColour("#CECECE");
-
-static const wxColour bd = wxColour(0, 174, 66);
-static const wxColour text_num_color   = wxColour("#898989");
 static const wxColour BUTTON_PRESS_COL = wxColour(172, 172, 172);
 static const double sqrt2 = std::sqrt(2);
 
@@ -42,7 +48,7 @@ AxisCtrlButton::AxisCtrlButton(wxWindow *parent, ScalableBitmap &icon, long stly
     m_icon = icon;
 	wxWindow::SetBackgroundColour(parent->GetBackgroundColour());
 
-    border_color.append(bd, StateColor::Hovered);
+    border_color.append(ThemeGreen(), StateColor::Hovered);
 
     background_color.append(BUTTON_BG_COL, StateColor::Disabled);
     background_color.append(BUTTON_PRESS_COL, StateColor::Pressed);

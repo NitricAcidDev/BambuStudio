@@ -261,6 +261,8 @@ SideTools::SideTools(wxWindow *parent, wxWindowID id, const wxPoint &pos, const 
     m_side_tools = new SideToolsPanel(this, wxID_ANY);
 
     m_connection_info = new Button(this, wxEmptyString);
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    wxColour theme_green = (app && app->IsMainLoopRunning()) ? app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled) : wxColour(0, 174, 66);
     m_connection_info->SetBackgroundColor(wxColour(255, 111, 0));
     m_connection_info->SetBorderColor(wxColour(255, 111, 0));
     m_connection_info->SetTextColor(*wxWHITE);

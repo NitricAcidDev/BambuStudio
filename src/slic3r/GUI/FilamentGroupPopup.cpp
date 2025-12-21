@@ -16,7 +16,7 @@ static const wxColour BackGroundColor = wxColour("#FFFFFF");
 static wxColour GetThemeGreenColor()
 {
     return wxColour("#00AE42");
-
+}
 
 static bool should_pop_up()
 {

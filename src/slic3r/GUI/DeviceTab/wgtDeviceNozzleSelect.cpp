@@ -15,6 +15,8 @@ static wxColour s_gray_clr("#B0B0B0");
 static wxColour GetThemeGreenColor() { 
     // Use default color - theme will be applied through app refresh
     return wxColour("#00AE42");
+}
+static wxColour s_red_clr("#D01B1B");
 
 static std::vector<int> a_nozzle_seq = {0, 2, 4, 1, 3, 5};
 static std::vector<int> b_nozzle_seq = {1, 3, 5, 0, 2, 4};

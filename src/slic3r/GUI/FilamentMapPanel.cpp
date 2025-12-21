@@ -20,8 +20,10 @@ static const wxColour BorderDisableColor  = wxColour("#EEEEEE");
 
 // Lazy-initialized theme color - computed on first use
 static wxColour GetBorderSelectedColor()
-{// Use default color - theme will be applied through app refresh
+{
+    // Use default color - theme will be applied through app refresh
     return wxColour("#00AE42");
+}
 
 static const wxColour TextNormalBlackColor = wxColour("#262E30");
 static const wxColour TextNormalGreyColor = wxColour("#6B6B6B");

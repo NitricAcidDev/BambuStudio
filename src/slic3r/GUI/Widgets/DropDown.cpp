@@ -262,8 +262,18 @@ void DropDown::render(wxDC &dc)
     int states = state_handler.states();
     if (subDropDown)
         states |= subDropDown->state_handler.states();
-    dc.SetPen(wxPen(border_color.colorForStates(states)));
-    dc.SetBrush(wxBrush(StateColor::darkModeColorFor(GetBackgroundColour())));
+    int selected_item = selectedItem();
+
+    wxColour background_color = StateColor::darkModeColorFor(GetBackgroundColour());
+    wxColour border_clr       = border_color.colorForStates(states);
+    if (selected_item >= 0) {
+        // When the dropdown is effectively "checked" (has a selection), mirror item checked styling.
+        background_color = selector_background_color.colorForStates(StateColor::Checked);
+        border_clr       = selector_border_color.colorForStates(StateColor::Hovered);
+    }
+
+    dc.SetPen(wxPen(border_clr));
+    dc.SetBrush(wxBrush(background_color));
     // if (GetWindowStyle() & wxBORDER_NONE)
     //    dc.SetPen(wxNullPen);
 
@@ -274,7 +284,6 @@ void DropDown::render(wxDC &dc)
     else
         dc.DrawRoundedRectangle(0, 0, size.x, size.y, radius);
 
-    int selected_item = selectedItem();
     int hover_index   = hoverIndex();
 
     // draw hover rectangle

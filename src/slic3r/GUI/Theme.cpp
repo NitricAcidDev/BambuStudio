@@ -299,6 +299,28 @@ void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double &h, do
     if (h < 0.0)
         h += 1.0;
 }
+    wxColour Theme::accentColor() {
+        // Red accent normal
+        return getThemeColor("button.bg.checked");
+    }
+
+    wxColour Theme::accentHovered() {
+        return getThemeColor("button.bg.hovered_checked");
+    }
+
+    wxColour Theme::accentPressed() {
+        // Darker red for pressed state
+        unsigned r = 0xAE, g = 0x00, b = 0x00;
+        float h, s, v;
+        rgb_to_hsv(r, g, b, h, s, v);
+        v *= 0.85f; // Darken
+        hsv_to_rgb(h, s, v, r, g, b);
+        return wxColour(r, g, b);
+    }
+
+    wxColour Theme::accentDark() {
+        return getThemeColor("dropdown.selector_bg.checked.dark");
+    }
 
 wxColour hsv_to_rgb(double h, double s, double v)
 {
@@ -391,9 +413,19 @@ ThemeColors Theme::get_theme_colors(const std::string &theme_name)
         colors.button_blue   = colors.button_green;
         colors.button_purple = colors.button_green;
     } else { // Bambu Green default
-        colors.button_green = make_button(wxColour(0, 174, 66),    // normal
-                                          wxColour(55, 238, 124),   // hovered
-                                          wxColour(27, 136, 68));   // pressed
+        // Use theme-driven red accent colors
+        auto normal = getThemeColor("button.bg.checked");
+        auto hovered = getThemeColor("button.bg.hovered_checked");
+        // Pressed: darker red
+        unsigned r = 0xAE, g = 0x00, b = 0x00;
+        float h, s, v;
+        rgb_to_hsv(r, g, b, h, s, v);
+        v *= 0.7f; // Darker for pressed
+        unsigned rr, gg, bb;
+        hsv_to_rgb(h, s, v, rr, gg, bb);
+        auto pressed = wxColour(rr, gg, bb);
+        
+        colors.button_green = make_button(normal, hovered, pressed);
         colors.button_red    = colors.button_green;
         colors.button_blue   = colors.button_green;
         colors.button_purple = colors.button_green;

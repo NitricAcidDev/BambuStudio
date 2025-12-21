@@ -25,6 +25,12 @@ public:
     static wxColour getThemeColorShifted(const std::string &key, float degrees);
     static void     setThemeColor(const std::string &key, const wxColour &value);
     static bool     hasThemeColor(const std::string &key);
+    
+    // Accent color helpers (for replacing hardcoded greens)
+    static wxColour accentColor();           // Normal accent
+    static wxColour accentHovered();         // Hovered/lighter accent
+    static wxColour accentPressed();         // Pressed/darker accent
+    static wxColour accentDark();            // Dark variant
 };
 
 } // namespace GUI

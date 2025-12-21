@@ -11,7 +11,7 @@ static const wxColour LabelEnableColor = wxColour("#262E30");
 static const wxColour LabelDisableColor = wxColour("#ACACAC");
 static const wxColour GreyColor = wxColour("#6B6B6B");
 // Note: Material filament colors preserved - DO NOT use theme here
-static const wxColour GreenColor = wxColour("#00AE42");
+static const wxColour GreenColor = Slic3r::GUI::Theme::accentColor();
 static const wxColour BackGroundColor = wxColour("#FFFFFF");
 
 

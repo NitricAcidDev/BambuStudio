@@ -158,7 +158,7 @@ void init_defaults()
     // DropDown menu items
     g_theme_colors["dropdown.selector_border.hovered"] = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["dropdown.selector_border.normal"]  = from_hex_rgb(0xFFFFFF);
-    g_theme_colors["dropdown.selector_bg.checked"]     = g_theme_colors["accent.tint.light"];
+    g_theme_colors["dropdown.selector_bg.checked"]     = from_hex_rgb(0xEDFAF2);
     g_theme_colors["dropdown.selector_bg.normal"]      = from_hex_rgb(0xFFFFFF);
     // Tick icon recolor target
     g_theme_colors["dropdown.check.color"]             = shift_to_hue(0x00AE42, H_RED);

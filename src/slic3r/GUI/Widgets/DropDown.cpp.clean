@@ -1,6 +1,5 @@
 #include "DropDown.hpp"
 #include "Label.hpp"
-#include "slic3r/GUI/Theme.hpp"
 
 #include <wx/display.h>
 #include <wx/dcbuffer.h>
@@ -39,10 +38,10 @@ DropDown::DropDown(std::vector<Item> &items)
     , border_color(0xDBDBDB)
     , text_color(std::make_pair(0x909090, (int) StateColor::Disabled),
         std::make_pair(0x363636, (int) StateColor::Normal))
-    , selector_border_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.hovered"), (int) StateColor::Hovered),
-        std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.normal"), (int) StateColor::Normal))
-    , selector_background_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked"), (int) StateColor::Checked),
-        std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.normal"), (int) StateColor::Normal))
+    , selector_border_color(std::make_pair(0x00AE42, (int) StateColor::Hovered),
+        std::make_pair(*wxWHITE, (int) StateColor::Normal))
+    , selector_background_color(std::make_pair(0xEDFAF2, (int) StateColor::Checked),
+        std::make_pair(*wxWHITE, (int) StateColor::Normal))
 {
 }
 
@@ -60,13 +59,7 @@ void DropDown::Create(wxWindow *parent, long style)
     state_handler.attach({&border_color, &text_color, &selector_border_color, &selector_background_color});
     state_handler.update_binds();
     if ((style & DD_NO_CHECK_ICON) == 0)
-    {
-        // Recolor the check icon to match themed accent (red)
-        wxColour c = Slic3r::GUI::Theme::getThemeColor("dropdown.check.color");
-        char buf[8];
-        snprintf(buf, sizeof(buf), "#%02X%02X%02X", c.Red(), c.Green(), c.Blue());
-        check_bitmap = ScalableBitmap(this, "checked", 16, false, false, false, std::vector<std::string>{std::string(buf)});
-    }
+        check_bitmap = ScalableBitmap(this, "checked", 16);
     arrow_bitmap = ScalableBitmap(this, "hms_arrow", 16);
     text_off = style & DD_NO_TEXT;
 

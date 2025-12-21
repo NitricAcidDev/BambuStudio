@@ -14,12 +14,12 @@ static const wxColour TextNormalColor = wxColour("#000000");
 // Use current theme for selected/hovered states to avoid hardcoded green.
 static StateColor MakeThemeStateColor()
 {
-    auto theme = Slic3r::GUI::wxGetApp().get_theme_colors();
+    // Use default green during init; will be updated via theme refresh
     StateColor sc;
     sc.append(wxColour("#CECECE"), StateColor::Normal | StateColor::Enabled);
-    sc.append(theme.button_green.defaultColor(), StateColor::Hovered | StateColor::Enabled);
-    sc.append(theme.button_green.defaultColor(), StateColor::Pressed | StateColor::Enabled);
-    sc.append(theme.button_green.defaultColor(), StateColor::Checked | StateColor::Enabled);
+    sc.append(wxColour("#00AE42"), StateColor::Hovered | StateColor::Enabled);
+    sc.append(wxColour("#00AE42"), StateColor::Pressed | StateColor::Enabled);
+    sc.append(wxColour("#00AE42"), StateColor::Checked | StateColor::Enabled);
     return sc;
 }
 
@@ -126,9 +126,8 @@ void CapsuleButton::UpdateStatus()
 {
     if (m_selected) {
         m_btn->SetBitmap(tag_on_bmp);
-        auto theme = Slic3r::GUI::wxGetApp().get_theme_colors();
         auto sel = s_theme_bg.colorForStates(StateColor::Checked | StateColor::Enabled);
-        m_label->SetForegroundColour(theme.button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
+        m_label->SetForegroundColour(wxColour("#00AE42")); // Theme will be applied later
         m_label->SetBackgroundColour(sel);
         m_btn->SetBackgroundColour(sel);
     } else {

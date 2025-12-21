@@ -31,7 +31,7 @@ END_EVENT_TABLE()
 Button::Button()
     : paddingSize(10, 8)
 {
-    background_color = Slic3r::GUI::wxGetApp().get_theme_colors().button_green;
+    background_color = StateColor(wxColour("#00AE42")); // Theme will be applied later
     text_color       = StateColor(
         std::make_pair(*wxLIGHT_GREY, (int) StateColor::Disabled),
         std::make_pair(*wxBLACK, (int) StateColor::Normal));

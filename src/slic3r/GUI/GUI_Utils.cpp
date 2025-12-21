@@ -546,7 +546,7 @@ void WikiPanel::bind_events()
 
 void WikiPanel::set_hover_state(bool hover)
 {
-    wxColour color = hover ? Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled) : wxColour("#6B6B6B");
+    wxColour color = hover ? wxColour("#00AE42") : wxColour("#6B6B6B"); // Theme will be applied later
     m_wiki_bmp->SetBitmap(hover ? m_wiki_icon_hover->bmp() : m_wiki_icon->bmp());
     m_wiki_label->SetForegroundColour(color);
     m_wiki_label->SetFont(hover ? Label::Body_13.Underlined() : Label::Body_13);

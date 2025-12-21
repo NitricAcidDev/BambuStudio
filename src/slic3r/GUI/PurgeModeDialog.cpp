@@ -90,7 +90,7 @@ PurgeModeDialog::PurgeModeDialog(wxWindow *parent) : DPIDialog(parent, wxID_ANY,
     StateColor ok_btn_bg(
         std::pair<wxColour, int>(wxColour("#1B8844"), StateColor::Pressed),
         std::pair<wxColour, int>(wxColour("#3DCB73"), StateColor::Hovered),
-        std::pair<wxColour, int>(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled), StateColor::Normal)
+        std::pair<wxColour, int>(wxColour("#00AE42"), StateColor::Normal) // Theme will be applied later
     );
     StateColor ok_btn_text(
         std::pair<wxColour, int>(wxColour("#FFFFFE"), StateColor::Normal)
@@ -112,7 +112,7 @@ PurgeModeDialog::PurgeModeDialog(wxWindow *parent) : DPIDialog(parent, wxID_ANY,
     ok_btn->SetCornerRadius(FromDIP(12));
     ok_btn->SetBackgroundColor(ok_btn_bg);
     ok_btn->SetFont(Label::Body_12);
-    ok_btn->SetBorderColor(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
+    ok_btn->SetBorderColor(wxColour("#00AE42")); // Theme will be applied later
     ok_btn->SetTextColor(ok_btn_text);
     ok_btn->SetId(wxID_OK);
 

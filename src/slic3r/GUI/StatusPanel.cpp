@@ -5851,7 +5851,7 @@ void RectTextPanel::OnPaint(wxPaintEvent &event)
     const auto &size = GetSize();
 
     wxPaintDC dc(this);
-    wxColour theme_color = Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    wxColour theme_color = wxColour("#00AE42"); // Theme will be applied later
     dc.SetBrush(wxBrush(theme_color));
     dc.SetPen(wxPen(theme_color));
     dc.DrawRoundedRectangle(size, FromDIP(4));

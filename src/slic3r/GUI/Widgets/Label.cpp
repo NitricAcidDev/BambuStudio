@@ -302,7 +302,7 @@ void Label::SetWindowStyleFlag(long style)
     wxStaticText::SetWindowStyleFlag(style);
     if (style & LB_HYPERLINK) {
         this->m_color = GetForegroundColour();
-        wxColor clr_url = Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+        wxColor clr_url = wxColour("#00AE42"); // Theme will be applied later
         SetFont(this->m_font.Underlined());
         SetForegroundColour(clr_url);
         SetCursor(wxCURSOR_HAND);

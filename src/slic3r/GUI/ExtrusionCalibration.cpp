@@ -14,7 +14,7 @@ static wxColour ExtrusionThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return wxColour(0, 174, 66);
+    return ExtrusionThemeGreen();
 }
 
 static wxColour ExtrusionThemeGreenHovered() {
@@ -209,7 +209,7 @@ void ExtrusionCalibration::create()
     m_btn_bg_green = StateColor(std::pair<wxColour, int>(ExtrusionThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(ExtrusionThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(ExtrusionThemeGreen(), StateColor::Normal));
     m_cali_cancel->SetBackgroundColor(m_btn_bg_green);
-    m_cali_cancel->SetBorderColor(wxColour(0, 174, 66));
+    m_cali_cancel->SetBorderColor(ExtrusionThemeGreen());
     m_cali_cancel->SetTextColor(EXTRUSION_CALIBRATION_GREY200);
     m_cali_cancel->SetMinSize(EXTRUSION_CALIBRATION_BUTTON_SIZE);
     m_cali_cancel->SetCornerRadius(FromDIP(12));

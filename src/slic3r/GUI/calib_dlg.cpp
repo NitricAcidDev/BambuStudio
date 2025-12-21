@@ -10,6 +10,30 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour CalibDlgThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return CalibDlgThemeGreen();
+}
+
+static wxColour CalibDlgThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour CalibDlgThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 wxBoxSizer* create_item_checkbox(wxString title, wxWindow* parent, bool* value, CheckBox*& checkbox)
 {
     wxBoxSizer* m_sizer_checkbox = new wxBoxSizer(wxHORIZONTAL);
@@ -109,7 +133,7 @@ PA_Calibration_Dlg::PA_Calibration_Dlg(wxWindow* parent, wxWindowID id, Plater* 
 
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(23, 129, 63), StateColor::Pressed),
 		std::pair<wxColour, int>(wxColour(48, 221, 112), StateColor::Hovered),
-		std::pair<wxColour, int>(0x00AE42, StateColor::Normal));
+		std::pair<wxColour, int>(CalibDlgThemeGreen(), StateColor::Normal));
 
 	m_btnStart->SetBackgroundColor(btn_bg_green);
 	m_btnStart->SetBorderColor(wxColour(0, 150, 136));
@@ -318,7 +342,7 @@ Temp_Calibration_Dlg::Temp_Calibration_Dlg(wxWindow* parent, wxWindowID id, Plat
     m_btnStart = new Button(this, _L("OK"));
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(23, 129, 63), StateColor::Pressed),
 		std::pair<wxColour, int>(wxColour(48, 221, 112), StateColor::Hovered),
-		std::pair<wxColour, int>(0x00AE42, StateColor::Normal));
+		std::pair<wxColour, int>(CalibDlgThemeGreen(), StateColor::Normal));
 
     m_btnStart->SetBackgroundColor(btn_bg_green);
     m_btnStart->SetBorderColor(wxColour(0, 150, 136));
@@ -495,7 +519,7 @@ MaxVolumetricSpeed_Test_Dlg::MaxVolumetricSpeed_Test_Dlg(wxWindow* parent, wxWin
     m_btnStart = new Button(this, _L("OK"));
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(23, 129, 63), StateColor::Pressed),
 		std::pair<wxColour, int>(wxColour(48, 221, 112), StateColor::Hovered),
-		std::pair<wxColour, int>(0x00AE42, StateColor::Normal));
+		std::pair<wxColour, int>(CalibDlgThemeGreen(), StateColor::Normal));
 
     m_btnStart->SetBackgroundColor(btn_bg_green);
     m_btnStart->SetBorderColor(wxColour(0, 150, 136));
@@ -600,7 +624,7 @@ VFA_Test_Dlg::VFA_Test_Dlg(wxWindow* parent, wxWindowID id, Plater* plater)
     m_btnStart = new Button(this, _L("OK"));
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(23, 129, 63), StateColor::Pressed),
 		std::pair<wxColour, int>(wxColour(48, 221, 112), StateColor::Hovered),
-		std::pair<wxColour, int>(0x00AE42, StateColor::Normal));
+		std::pair<wxColour, int>(CalibDlgThemeGreen(), StateColor::Normal));
 
     m_btnStart->SetBackgroundColor(btn_bg_green);
     m_btnStart->SetBorderColor(wxColour(0, 150, 136));
@@ -706,7 +730,7 @@ Retraction_Test_Dlg::Retraction_Test_Dlg(wxWindow* parent, wxWindowID id, Plater
     m_btnStart = new Button(this, _L("OK"));
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(23, 129, 63), StateColor::Pressed),
 		std::pair<wxColour, int>(wxColour(48, 221, 112), StateColor::Hovered),
-		std::pair<wxColour, int>(0x00AE42, StateColor::Normal));
+		std::pair<wxColour, int>(CalibDlgThemeGreen(), StateColor::Normal));
 
     m_btnStart->SetBackgroundColor(btn_bg_green);
     m_btnStart->SetBorderColor(wxColour(0, 150, 136));

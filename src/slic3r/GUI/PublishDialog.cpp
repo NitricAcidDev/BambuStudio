@@ -15,6 +15,30 @@
 static const wxColour TEXT_LIGHT_GRAY = wxColour(107, 107, 107);
 
 namespace Slic3r {
+
+static wxColour PublishDialogThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return PublishDialogThemeGreen();
+}
+
+static wxColour PublishDialogThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour PublishDialogThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
 namespace GUI {
 
 static wxString PUBLISH_STEP_STRING[STEP_COUNT] = {
@@ -95,7 +119,7 @@ PublishDialog::PublishDialog(Plater *plater)
                           std::pair<wxColour, int>(TEXT_LIGHT_GRAY, StateColor::Normal));
     m_btn_cancel->SetFont(Label::Body_12);
     m_btn_cancel->SetBackgroundColor(btn_bg_green);
-    m_btn_cancel->SetBorderColor(wxColour(0, 174, 66));
+    m_btn_cancel->SetBorderColor(PublishDialogThemeGreen());
     m_btn_cancel->SetTextColor(text_color);
     m_btn_cancel->SetSize(wxSize(FromDIP(60), FromDIP(20)));
     m_btn_cancel->SetMinSize(wxSize(FromDIP(60), FromDIP(20)));

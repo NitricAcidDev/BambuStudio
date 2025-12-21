@@ -3,9 +3,33 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour PlateMoveDialogThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return PlateMoveDialogThemeGreen();
+}
+
+static wxColour PlateMoveDialogThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour PlateMoveDialogThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 const StateColor btn_bg_green_in_plate_swap(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
                         std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-                        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+                        std::pair<wxColour, int>(PlateMoveDialogThemeGreen(), StateColor::Normal));
 const StateColor btn_bg_disable_bg_in_plate_swap(std::pair<wxColour, int>(wxColour(205, 201, 201), StateColor::Pressed),
                                    std::pair<wxColour, int>(wxColour(205, 201, 201), StateColor::Hovered),
                                    std::pair<wxColour, int>(wxColour(205, 201, 201), StateColor::Normal));

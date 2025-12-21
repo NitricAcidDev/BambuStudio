@@ -692,6 +692,9 @@ wxBoxSizer* PreferencesDialog::create_item_darkmode_checkbox(wxString title, wxW
 
 wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWindow *parent, wxString tooltip, std::string param)
 {
+    // Wrap rows in a vertical sizer so we can place a restart note/button under the combobox.
+    wxBoxSizer *root = new wxBoxSizer(wxVERTICAL);
+
     wxBoxSizer *m_sizer_combox = new wxBoxSizer(wxHORIZONTAL);
     m_sizer_combox->Add(0, 0, 0, wxEXPAND | wxLEFT, 23);
 
@@ -748,7 +751,24 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
     m_sizer_combox->Add(combobox, 0, wxALIGN_CENTER, 0);
     m_sizer_combox->Add(color_preview, 0, wxALIGN_CENTER | wxLEFT, 5);
 
-    return m_sizer_combox;
+    root->Add(m_sizer_combox, 0, wxEXPAND, 0);
+
+    // Note + restart button row
+    auto restart_row = new wxBoxSizer(wxHORIZONTAL);
+    restart_row->Add(0, 0, 0, wxEXPAND | wxLEFT, 23);
+    auto restart_note = new wxStaticText(parent, wxID_ANY, _L("Restart is required for all theme changes to take effect."));
+    restart_note->SetForegroundColour(DESIGN_GRAY700_COLOR);
+    restart_note->SetFont(::Label::Body_11);
+    restart_row->Add(restart_note, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 8);
+
+    auto restart_btn = new wxButton(parent, wxID_ANY, _L("Restart Bambu Studio"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
+    restart_btn->Bind(wxEVT_BUTTON, [](wxCommandEvent&){ wxGetApp().ExitMainLoop(); });
+    restart_row->Add(restart_btn, 0, wxALIGN_CENTER_VERTICAL);
+
+    root->AddSpacer(FromDIP(4));
+    root->Add(restart_row, 0, wxALIGN_LEFT | wxTOP, 2);
+
+    return root;
 }
 
 void PreferencesDialog::set_dark_mode()

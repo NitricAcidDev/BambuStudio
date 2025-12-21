@@ -964,7 +964,7 @@ void SwitchButton::UpdateThemeColors()
                           (int)(StateColor::Normal | StateColor::Enabled))
         );
         thumb_color = StateColor(
-            std::make_pair(*wxWHITE, 
+            std::make_pair(theme_colors.button_green.colorForStates(StateColor::Normal | StateColor::Enabled), 
                           (int)(StateColor::Normal | StateColor::Enabled))
         );
         update();

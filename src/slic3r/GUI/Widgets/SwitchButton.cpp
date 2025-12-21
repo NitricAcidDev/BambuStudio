@@ -289,7 +289,7 @@ void SwitchBoard::doRender(wxDC &dc)
 
 	/*right*/
     if (switch_right) {
-        if (is_enable) {dc.SetBrush(wxBrush(wxColour(0, 174, 66)));
+        if (is_enable) {dc.SetBrush(wxBrush(Slic3r::GUI::Theme::getThemeColor("switch_board.segment.enabled")));
         } else {dc.SetBrush(disable_color);}
         dc.DrawRoundedRectangle(GetSize().x / 2, 0, GetSize().x / 2, GetSize().y, 8);
 	}
@@ -365,7 +365,11 @@ CustomToggleButton::CustomToggleButton(wxWindow* parent, const wxString& label, 
     Connect(wxEVT_SIZE, wxSizeEventHandler(CustomToggleButton::OnSize));
     Bind(wxEVT_LEFT_DOWN, &CustomToggleButton::on_left_down, this);
     SetBackgroundColour(*wxWHITE);
+    m_primary_colour   = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.hovered");
+    m_secondary_colour = Slic3r::GUI::Theme::getThemeColor(
+        Slic3r::GUI::wxGetApp().dark_mode() ? "dropdown.selector_bg.checked.dark" : "dropdown.selector_bg.checked");
     Slic3r::GUI::wxGetApp().UpdateDarkUIWin(this);
+    Refresh();
 }
 
 void CustomToggleButton::on_left_down(wxMouseEvent& e)
@@ -420,7 +424,7 @@ void CustomToggleButton::render(wxDC& dc)
     memdc.SelectObject(wxNullBitmap);
     dc.DrawBitmap(bmp, 0, 0);
 #else
-    doRender(dc);
+                  dc.SetBrush(wxBrush(Slic3r::GUI::Theme::getThemeColor("switch_board.bg.enabled")));
 #endif
 }
 
@@ -444,7 +448,7 @@ void CustomToggleButton::doRender(wxDC& dc)
     }
     else {
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
-        dc.SetPen(wxPen(wxColour("#EEEEEE")));
+                  if (is_enable) {dc.SetBrush(wxBrush(Slic3r::GUI::Theme::getThemeColor("switch_board.segment.enabled")));
     }
     
     dc.DrawRoundedRectangle(rect, 5);

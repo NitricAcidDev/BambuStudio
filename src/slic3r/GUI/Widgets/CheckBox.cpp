@@ -1,6 +1,10 @@
 #include "CheckBox.hpp"
 
+#include "../GUI_App.hpp"
+#include "../Theme.hpp"
 #include "../wxExtensions.hpp"
+
+#include <wx/settings.h>
 
 CheckBox::CheckBox(wxWindow *parent, int id)
     : wxBitmapToggleButton(parent, id, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
@@ -66,6 +70,17 @@ void CheckBox::update()
     SetBitmapFocus((m_half_checked ? m_half_focused : GetValue() ? m_on_focused : m_off_focused).bmp());
 #endif
     SetBitmapCurrent((m_half_checked ? m_half_focused : GetValue() ? m_on_focused : m_off_focused).bmp());
+
+    const bool checked_like = m_half_checked || GetValue();
+    const auto bg_checked   = Slic3r::GUI::Theme::getThemeColor(
+        Slic3r::GUI::wxGetApp().dark_mode() ? "dropdown.selector_bg.checked.dark" : "dropdown.selector_bg.checked");
+    const wxColour bg_normal = GetParent() ? GetParent()->GetBackgroundColour() : wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
+    const wxColour target_bg = checked_like ? bg_checked : bg_normal;
+
+    if (target_bg != GetBackgroundColour()) {
+        SetBackgroundColour(target_bg);
+        Refresh();
+    }
 #ifdef __WXOSX__
     wxCommandEvent e(wxEVT_UPDATE_UI);
     updateBitmap(e);

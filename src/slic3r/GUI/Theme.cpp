@@ -129,6 +129,12 @@ void init_defaults()
     // AMSMaterialsSetting - original colors except green -> bright cyan
     g_theme_colors["ams_material.border.focused"] = from_hex_rgb(0xDBDBDB);
     g_theme_colors["ams_material.border.hovered"] = from_hex_rgb(0x00FFFF); // CHANGED: was 0x00AE42, now cyan
+
+    // DropDown menu items - original colors except green -> bright cyan
+    g_theme_colors["dropdown.selector_border.hovered"] = from_hex_rgb(0x00FFFF); // CHANGED: was 0x00AE42, now cyan
+    g_theme_colors["dropdown.selector_border.normal"]  = from_hex_rgb(0xFFFFFF);
+    g_theme_colors["dropdown.selector_bg.checked"]     = from_hex_rgb(0xEDFAF2);
+    g_theme_colors["dropdown.selector_bg.normal"]      = from_hex_rgb(0xFFFFFF);
 }
 
 inline void ensure_init()

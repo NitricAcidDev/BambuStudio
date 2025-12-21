@@ -1,5 +1,6 @@
 #include "DropDown.hpp"
 #include "Label.hpp"
+#include "slic3r/GUI/Theme.hpp"
 
 #include <wx/display.h>
 #include <wx/dcbuffer.h>
@@ -38,10 +39,10 @@ DropDown::DropDown(std::vector<Item> &items)
     , border_color(0xDBDBDB)
     , text_color(std::make_pair(0x909090, (int) StateColor::Disabled),
         std::make_pair(0x363636, (int) StateColor::Normal))
-    , selector_border_color(std::make_pair(0x00AE42, (int) StateColor::Hovered),
-        std::make_pair(*wxWHITE, (int) StateColor::Normal))
-    , selector_background_color(std::make_pair(0xEDFAF2, (int) StateColor::Checked),
-        std::make_pair(*wxWHITE, (int) StateColor::Normal))
+    , selector_border_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.hovered"), (int) StateColor::Hovered),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.normal"), (int) StateColor::Normal))
+    , selector_background_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked"), (int) StateColor::Checked),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.normal"), (int) StateColor::Normal))
 {
 }
 

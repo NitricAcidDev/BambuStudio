@@ -245,7 +245,7 @@ void PurgeModeBtnPanel::OnPaint(wxPaintEvent &event)
         gc->DrawRoundedRectangle(0, 0, rect.width, rect.height, 0);
         wxColour bg_color = m_selected ? BgSelectColor : BgNormalColor;
 
-        wxColour border_color = m_hover || m_selected ? BorderSelectedColor : BorderNormalColor;
+        wxColour border_color = m_hover || m_selected ? GetBorderSelectedColor() : BorderNormalColor;
 
         bg_color     = StateColor::darkModeColorFor(bg_color);
         border_color = StateColor::darkModeColorFor(border_color);

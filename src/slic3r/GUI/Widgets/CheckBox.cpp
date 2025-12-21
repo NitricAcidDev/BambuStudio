@@ -83,14 +83,11 @@ void CheckBox::update()
 #endif
     SetBitmapCurrent((m_half_checked ? m_half_focused : GetValue() ? m_on_focused : m_off_focused).bmp());
 
-    const bool checked_like = m_half_checked || GetValue();
-    const auto bg_checked   = Slic3r::GUI::Theme::getThemeColor(
-        Slic3r::GUI::wxGetApp().dark_mode() ? "dropdown.selector_bg.checked.dark" : "dropdown.selector_bg.checked");
+    // Always use parent background color - no themed highlight on checkbox
     const wxColour bg_normal = GetParent() ? GetParent()->GetBackgroundColour() : wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
-    const wxColour target_bg = checked_like ? bg_checked : bg_normal;
 
-    if (target_bg != GetBackgroundColour()) {
-        SetBackgroundColour(target_bg);
+    if (bg_normal != GetBackgroundColour()) {
+        SetBackgroundColour(bg_normal);
         Refresh();
     }
 #ifdef __WXOSX__

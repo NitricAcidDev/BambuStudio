@@ -11,6 +11,7 @@
 #include "WebViewDialog.hpp"
 #include "PartPlate.hpp"
 #include "ReleaseNote.hpp"
+#include "Theme.hpp"
 
 #include <boost/log/trivial.hpp>
 
@@ -36,6 +37,12 @@ enum CUSTOM_ID
 class BBLTopbarArt : public wxAuiDefaultToolBarArt
 {
 public:
+    BBLTopbarArt() : wxAuiDefaultToolBarArt()
+    {
+        // Set highlight color to themed red accent instead of default green
+        m_highlightColour = Slic3r::GUI::Theme::getThemeColor("button.bg.checked");
+    }
+
     virtual void DrawLabel(wxDC& dc, wxWindow* wnd, const wxAuiToolBarItem& item, const wxRect& rect) wxOVERRIDE;
     virtual void DrawBackground(wxDC& dc, wxWindow* wnd, const wxRect& rect) wxOVERRIDE;
     virtual void DrawButton(wxDC& dc, wxWindow* wnd, const wxAuiToolBarItem& item, const wxRect& rect) wxOVERRIDE;

@@ -30,9 +30,13 @@
 #define STATIC_TEXT_COLOUR wxColour("#363636")
 #define PRINTER_LIST_COLOUR wxColour("#EEEEEE")
 #define FILAMENT_OPTION_COLOUR wxColour("#D9D9D9")
-// Defined at runtime based on theme; see GetThemeSelectColor() below
-// #define SELECT_ALL_OPTION_COLOUR wxColour("#00AE42")
 #define DEFAULT_PROMPT_TEXT_COLOUR wxColour("#ACACAC")
+
+// Theme-aware accent color for "Select All" / "Deselect All" links
+static wxColour GetSelectAllOptionColour()
+{
+    return Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+}
 
 namespace Slic3r {
 namespace GUI {
@@ -2651,13 +2655,13 @@ wxBoxSizer *CreatePrinterPresetDialog::create_presets_template_item(wxWindow *pa
     wxPanel *   filament_btn_panel      = new wxPanel(m_preset_template_panel);
     filament_btn_panel->SetBackgroundColour(FILAMENT_OPTION_COLOUR);
     wxStaticText *filament_sel_all_text = new wxStaticText(filament_btn_panel, wxID_ANY, _L("Select All"), wxDefaultPosition, wxDefaultSize);
-    filament_sel_all_text->SetForegroundColour(SELECT_ALL_OPTION_COLOUR);
+    filament_sel_all_text->SetForegroundColour(GetSelectAllOptionColour());
     filament_sel_all_text->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &e) {
         select_all_preset_template(m_filament_preset);
         e.Skip();
         });
     wxStaticText *filament_desel_all_text = new wxStaticText(filament_btn_panel, wxID_ANY, _L("Deselect All"), wxDefaultPosition, wxDefaultSize);
-    filament_desel_all_text->SetForegroundColour(SELECT_ALL_OPTION_COLOUR);
+    filament_desel_all_text->SetForegroundColour(GetSelectAllOptionColour());
     filament_desel_all_text->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &e) {
         deselect_all_preset_template(m_filament_preset);
         e.Skip();
@@ -2684,13 +2688,13 @@ wxBoxSizer *CreatePrinterPresetDialog::create_presets_template_item(wxWindow *pa
     wxPanel *   process_btn_panel      = new wxPanel(m_preset_template_panel);
     process_btn_panel->SetBackgroundColour(FILAMENT_OPTION_COLOUR);
     wxStaticText *process_sel_all_text = new wxStaticText(process_btn_panel, wxID_ANY, _L("Select All"), wxDefaultPosition, wxDefaultSize);
-    process_sel_all_text->SetForegroundColour(SELECT_ALL_OPTION_COLOUR);
+    process_sel_all_text->SetForegroundColour(GetSelectAllOptionColour());
     process_sel_all_text->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &e) {
         select_all_preset_template(m_process_preset);
         e.Skip();
     });
     wxStaticText *process_desel_all_text = new wxStaticText(process_btn_panel, wxID_ANY, _L("Deselect All"), wxDefaultPosition, wxDefaultSize);
-    process_desel_all_text->SetForegroundColour(SELECT_ALL_OPTION_COLOUR);
+    process_desel_all_text->SetForegroundColour(GetSelectAllOptionColour());
     process_desel_all_text->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &e) {
         deselect_all_preset_template(m_process_preset);
         e.Skip();

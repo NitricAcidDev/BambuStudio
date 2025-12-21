@@ -1,6 +1,7 @@
 #include "FilamentMapPanel.hpp"
 #include "Widgets/MultiNozzleSync.hpp"
 #include "GUI_App.hpp"
+#include "Theme.hpp"
 #include <wx/dcbuffer.h>
 #include "wx/graphics.h"
 
@@ -10,8 +11,9 @@ static const wxColour BgNormalColor  = wxColour("#FFFFFF");
 static const wxColour BgSelectColor  = wxColour("#EBF9F0");
 static const wxColour BgDisableColor = wxColour("#CECECE");
 
+// BorderSelectedColor now uses theme - will be retrieved dynamically in usage
 static const wxColour BorderNormalColor   = wxColour("#CECECE");
-static const wxColour BorderSelectedColor = wxColour("#00AE42");
+// static const wxColour BorderSelectedColor = Slic3r::GUI::Theme::getThemeColor("button.bg.checked");
 static const wxColour BorderDisableColor  = wxColour("#EEEEEE");
 
 static const wxColour TextNormalBlackColor = wxColour("#262E30");
@@ -508,7 +510,7 @@ void FilamentMapBtnPanel::OnPaint(wxPaintEvent &event)
         gc->DrawRoundedRectangle(0, 0, rect.width, rect.height, 0);
         wxColour bg_color = m_selected ? BgSelectColor : BgNormalColor;
 
-        wxColour border_color = m_hover || m_selected ? BorderSelectedColor : BorderNormalColor;
+        wxColour border_color = m_hover || m_selected ? Slic3r::GUI::Theme::getThemeColor("button.bg.checked") : BorderNormalColor;
 
         bg_color     = StateColor::darkModeColorFor(bg_color);
         border_color = StateColor::darkModeColorFor(border_color);

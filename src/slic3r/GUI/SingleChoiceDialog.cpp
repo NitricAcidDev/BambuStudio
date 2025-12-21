@@ -5,6 +5,30 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour SingleChoiceThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return wxColour(0, 174, 66);
+}
+
+static wxColour SingleChoiceThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour SingleChoiceThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 SingleChoiceDialog::SingleChoiceDialog(const wxString &message, const wxString &caption, const wxArrayString &choices, int initialSelection, wxWindow *parent)
     : DPIDialog(parent ? parent : static_cast<wxWindow *>(wxGetApp().mainframe), wxID_ANY, caption, wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX)
 {
@@ -26,8 +50,8 @@ SingleChoiceDialog::SingleChoiceDialog(const wxString &message, const wxString &
 
     wxBoxSizer *bSizer_button = new wxBoxSizer(wxHORIZONTAL);
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-                            std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
+    StateColor btn_bg_green(std::pair<wxColour, int>(SingleChoiceThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(SingleChoiceThemeGreenHovered(), StateColor::Hovered),
+                            std::pair<wxColour, int>(SingleChoiceThemeGreen(), StateColor::Normal));
 
     m_button_ok = new Button(this, _L("OK"));
     m_button_ok->SetBackgroundColor(btn_bg_green);

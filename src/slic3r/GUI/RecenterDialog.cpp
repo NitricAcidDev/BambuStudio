@@ -5,6 +5,22 @@
 #include <wx/dcmemory.h>
 #include <slic3r/GUI/Widgets/Label.hpp>
 
+static wxColour RecenterThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return wxColour(0, 174, 66);
+}
+
+static wxColour RecenterThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
 #define BORDER FromDIP(25)
 #define DRAW_PANEL_SIZE wxSize(FromDIP(475), FromDIP(100))
 
@@ -34,10 +50,10 @@ RecenterDialog::RecenterDialog(wxWindow* parent, wxWindowID id, const wxString& 
     m_button_confirm->SetFont(Label::Body_14);
     m_button_confirm->SetMinSize(wxSize(-1, FromDIP(24)));
     m_button_confirm->SetCornerRadius(FromDIP(12));
-    StateColor confirm_btn_bg(std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+    StateColor confirm_btn_bg(std::pair<wxColour, int>(RecenterThemeGreenHovered(), StateColor::Hovered),
+        std::pair<wxColour, int>(RecenterThemeGreen(), StateColor::Normal));
     m_button_confirm->SetBackgroundColor(confirm_btn_bg);
-    m_button_confirm->SetBorderColor(wxColour(0, 174, 66));
+    m_button_confirm->SetBorderColor(RecenterThemeGreen());
     m_button_confirm->SetTextColor(*wxWHITE);
 
     m_button_close = new Button(this, _L("Close"));

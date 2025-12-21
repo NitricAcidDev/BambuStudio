@@ -16,6 +16,10 @@ namespace {
 std::unordered_map<std::string, wxColour> g_theme_colors;
 std::once_flag g_init_flag;
 
+// Forward declarations for HSV helpers used by init_defaults
+void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, float &v);
+void hsv_to_rgb(float h, float s, float v, unsigned &r, unsigned &g, unsigned &b);
+
 inline wxColour from_hex_rgb(int hex)
 {
     unsigned r = (hex >> 16) & 0xFFu;
@@ -26,52 +30,66 @@ inline wxColour from_hex_rgb(int hex)
 
 void init_defaults()
 {
-    // SwitchButton - original colors except green -> bright cyan for visibility
+    // Helper to shift hue while preserving S/V from a hex RGB
+    auto shift_to_hue = [](int hex, float target_deg) {
+        unsigned r = (hex >> 16) & 0xFFu;
+        unsigned g = (hex >> 8) & 0xFFu;
+        unsigned b = (hex) & 0xFFu;
+        float h, s, v; rgb_to_hsv(r, g, b, h, s, v);
+        h = std::fmod(target_deg, 360.f); if (h < 0.f) h += 360.f;
+        unsigned rr, gg, bb; hsv_to_rgb(h, s, v, rr, gg, bb);
+        return wxColour(rr, gg, bb);
+    };
+
+    // Target hue: red for accent (0 degrees)
+    constexpr float H_RED = 0.f;
+
+    // SwitchButton - keep neutrals; shift original green accents to red
     g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);
     g_theme_colors["switch.text.normal"]    = from_hex_rgb(0x6B6B6B);
     g_theme_colors["switch.track"]          = from_hex_rgb(0xD9D9D9);
-    g_theme_colors["switch.thumb.checked"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42 green, now cyan with same S/V
+    g_theme_colors["switch.thumb.checked"]  = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["switch.thumb.normal"]   = from_hex_rgb(0xD9D9D9);
 
-    // SwitchBoard - original colors except green -> bright cyan
+    // SwitchBoard
     g_theme_colors["switch_board.bg.enabled"]      = from_hex_rgb(0xEEEEEE);
     g_theme_colors["switch_board.bg.disabled"]     = from_hex_rgb(0xCECECE);
-    g_theme_colors["switch_board.segment.enabled"] = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["switch_board.segment.enabled"] = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["switch_board.text.selected"]   = from_hex_rgb(0xFFFFFF);
     g_theme_colors["switch_board.text.unselected"] = from_hex_rgb(0x333333);
 
-    // MultiSwitchButton - original colors except green -> bright cyan
+    // MultiSwitchButton
     g_theme_colors["multi_switch.bg.not_checked"]         = from_hex_rgb(0xE8E8E8);
-    g_theme_colors["multi_switch.bg.normal"]              = from_hex_rgb(0x00AEAE); // was 0x00AE42
-    g_theme_colors["multi_switch.bg_grayed.normal"]       = from_hex_rgb(0x6DC4C4); // was 0x6DC48D, hue shifted
+    g_theme_colors["multi_switch.bg.normal"]              = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["multi_switch.bg_grayed.normal"]       = shift_to_hue(0x6DC48D, H_RED);
     g_theme_colors["multi_switch.text.not_checked"]       = from_hex_rgb(0x6B6B6B);
     g_theme_colors["multi_switch.text.normal"]            = from_hex_rgb(0xFFFFFE);
     g_theme_colors["multi_switch.text_grayed.not_checked"] = from_hex_rgb(0x999999);
-    g_theme_colors["multi_switch.text_grayed.normal"]      = from_hex_rgb(0x99DFDF); // was 0x99DFB2, hue shifted
+    g_theme_colors["multi_switch.text_grayed.normal"]      = shift_to_hue(0x99DFB2, H_RED);
 
-    // ComboBox - original colors except green -> bright cyan
+    // ComboBox
     g_theme_colors["combobox.border.disabled"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["combobox.border.hovered"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["combobox.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["combobox.border.normal"]   = from_hex_rgb(0xDBDBDB);
 
     g_theme_colors["combobox.bg.disabled"] = from_hex_rgb(0xF0F0F1);
-    g_theme_colors["combobox.bg.focused"]  = from_hex_rgb(0xEDFAF2);
+    g_theme_colors["combobox.bg.focused"]  = shift_to_hue(0xEDFAF2, H_RED);
     g_theme_colors["combobox.bg.normal"]   = from_hex_rgb(0xFFFFFF);
 
     g_theme_colors["combobox.label.disabled"] = from_hex_rgb(0x909090);
     g_theme_colors["combobox.label.normal"]   = from_hex_rgb(0x262E30);
 
-    // Button - original colors except green -> bright cyan
-    g_theme_colors["button.bg.disabled"]  = from_hex_rgb(0xF0F0F1);
-    g_theme_colors["button.bg.hovered_checked"] = from_hex_rgb(0x37EEEE); // was 0x37EE7C, hue shifted
-    g_theme_colors["button.bg.checked"]   = from_hex_rgb(0x00AEAE); // was 0x00AE42
-    g_theme_colors["button.bg.hovered"]   = from_hex_rgb(0xD3D3D3);
-    g_theme_colors["button.bg.normal"]    = from_hex_rgb(0xFFFFFF);
-    g_theme_colors["button.text.disabled"] = from_hex_rgb(0xD3D3D3);
-    g_theme_colors["button.text.normal"]   = from_hex_rgb(0x000000);
+    // Button
+    g_theme_colors["button.bg.disabled"]        = from_hex_rgb(0xF0F0F1);
+    g_theme_colors["button.bg.hovered_checked"] = shift_to_hue(0x37EE7C, H_RED);
+    g_theme_colors["button.bg.checked"]         = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["button.bg.hovered"]         = from_hex_rgb(0xD3D3D3);
+    g_theme_colors["button.bg.normal"]          = from_hex_rgb(0xFFFFFF);
+    g_theme_colors["button.text.disabled"]      = from_hex_rgb(0xD3D3D3);
+    g_theme_colors["button.text.normal"]        = from_hex_rgb(0x000000);
 
-    // AxisCtrlButton - original colors except green -> bright cyan
-    g_theme_colors["axis_ctrl.border.hovered"] = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    // AxisCtrlButton
+    g_theme_colors["axis_ctrl.border.hovered"] = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["axis_ctrl.bg.disabled"]   = from_hex_rgb(0xEEEEEE);
     g_theme_colors["axis_ctrl.bg.pressed"]    = from_hex_rgb(0xACACAC);
     g_theme_colors["axis_ctrl.bg.hovered"]    = from_hex_rgb(0xEEEEEE);
@@ -79,77 +97,84 @@ void init_defaults()
     g_theme_colors["axis_ctrl.text.disabled"] = from_hex_rgb(0x6B6B6B);
     g_theme_colors["axis_ctrl.text.normal"]   = from_hex_rgb(0x000000);
 
-    // SideButton - original colors except green -> bright cyan
-    g_theme_colors["side_button.border.pressed"] = from_hex_rgb(0x178181); // was 0x17813F dark green, now dark cyan
-    g_theme_colors["side_button.border.hovered"] = from_hex_rgb(0x30DDDD); // was 0x30DD70 bright green, now bright cyan
-    g_theme_colors["side_button.border.normal"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42 medium green, now medium cyan
-    g_theme_colors["side_button.bg.pressed"]     = from_hex_rgb(0x178181); // was 0x17813F
-    g_theme_colors["side_button.bg.hovered"]     = from_hex_rgb(0x30DDDD); // was 0x30DD70
-    g_theme_colors["side_button.bg.normal"]      = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    // SideButton
+    g_theme_colors["side_button.border.pressed"] = shift_to_hue(0x17813F, H_RED);
+    g_theme_colors["side_button.border.hovered"] = shift_to_hue(0x30DD70, H_RED);
+    g_theme_colors["side_button.border.normal"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["side_button.bg.pressed"]     = shift_to_hue(0x17813F, H_RED);
+    g_theme_colors["side_button.bg.hovered"]     = shift_to_hue(0x30DD70, H_RED);
+    g_theme_colors["side_button.bg.normal"]      = shift_to_hue(0x00AE42, H_RED);
 
-    // ProgressBar & MultiNozzleSync - original colors except green -> bright cyan
+    // ProgressBar & MultiNozzleSync
     g_theme_colors["progress.button.disabled"] = from_hex_rgb(0x909090);
-    g_theme_colors["progress.button.pressed"]  = from_hex_rgb(0x1B8888); // was 0x1B8844, hue shifted
-    g_theme_colors["progress.button.hovered"]  = from_hex_rgb(0x3DCBCB); // was 0x3DCB73, hue shifted
-    g_theme_colors["progress.button.normal"]   = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["progress.button.pressed"]  = shift_to_hue(0x1B8844, H_RED);
+    g_theme_colors["progress.button.hovered"]  = shift_to_hue(0x3DCB73, H_RED);
+    g_theme_colors["progress.button.normal"]   = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["progress.text.normal"]     = from_hex_rgb(0xFFFFFE);
 
-    // TextInput - original colors except green -> bright cyan
+    // TextInput
     g_theme_colors["textinput.label.disabled"] = from_hex_rgb(0x909090);
     g_theme_colors["textinput.label.normal"]   = from_hex_rgb(0x6B6B6B);
     g_theme_colors["textinput.text.disabled"]  = from_hex_rgb(0x909090);
     g_theme_colors["textinput.text.normal"]    = from_hex_rgb(0x262E30);
     g_theme_colors["textinput.border.disabled"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["textinput.border.hovered"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["textinput.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["textinput.border.normal"]   = from_hex_rgb(0xDBDBDB);
     g_theme_colors["textinput.bg.disabled"]     = from_hex_rgb(0xF0F0F1);
     g_theme_colors["textinput.bg.normal"]       = from_hex_rgb(0xFFFFFF);
 
-    // SpinInput - original colors except green -> bright cyan
+    // SpinInput
     g_theme_colors["spininput.label.disabled"] = from_hex_rgb(0x909090);
     g_theme_colors["spininput.label.normal"]   = from_hex_rgb(0x6B6B6B);
     g_theme_colors["spininput.text.disabled"]  = from_hex_rgb(0x909090);
     g_theme_colors["spininput.text.normal"]    = from_hex_rgb(0x262E30);
     g_theme_colors["spininput.border.disabled"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["spininput.border.hovered"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["spininput.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["spininput.border.normal"]   = from_hex_rgb(0xDBDBDB);
     g_theme_colors["spininput.bg.disabled"]     = from_hex_rgb(0xF0F0F1);
     g_theme_colors["spininput.bg.normal"]       = from_hex_rgb(0xFFFFFF);
 
-    // TempInput - original colors except green -> bright cyan
+    // TempInput
     g_theme_colors["tempinput.label.disabled"] = from_hex_rgb(0xACACAC);
     g_theme_colors["tempinput.label.normal"]   = from_hex_rgb(0x323A3C);
     g_theme_colors["tempinput.text.disabled"]  = from_hex_rgb(0xACACAC);
     g_theme_colors["tempinput.text.normal"]    = from_hex_rgb(0x6B6B6B);
     g_theme_colors["tempinput.border.disabled"] = from_hex_rgb(0xFFFFFF);
-    g_theme_colors["tempinput.border.focused"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42
-    g_theme_colors["tempinput.border.hovered"]  = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["tempinput.border.focused"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["tempinput.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["tempinput.border.normal"]   = from_hex_rgb(0xFFFFFF);
     g_theme_colors["tempinput.bg.disabled"]     = from_hex_rgb(0xFFFFFF);
     g_theme_colors["tempinput.bg.normal"]       = from_hex_rgb(0xFFFFFF);
 
-    // AMSMaterialsSetting - original colors except green -> bright cyan
+    // AMSMaterialsSetting
     g_theme_colors["ams_material.border.focused"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["ams_material.border.hovered"] = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["ams_material.border.hovered"] = shift_to_hue(0x00AE42, H_RED);
 
-    // DropDown menu items - original colors except green -> bright cyan
-    g_theme_colors["dropdown.selector_border.hovered"] = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    // DropDown menu items
+    g_theme_colors["dropdown.selector_border.hovered"] = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["dropdown.selector_border.normal"]  = from_hex_rgb(0xFFFFFF);
-    g_theme_colors["dropdown.selector_bg.checked"]     = from_hex_rgb(0xEDFAF2);
+    g_theme_colors["dropdown.selector_bg.checked"]     = shift_to_hue(0xEDFAF2, H_RED);
     g_theme_colors["dropdown.selector_bg.normal"]      = from_hex_rgb(0xFFFFFF);
+    // Tick icon recolor target
+    g_theme_colors["dropdown.check.color"]             = shift_to_hue(0x00AE42, H_RED);
 
-    // TabCtrl - tab underline and button text colors
-    g_theme_colors["tab.underline.active"] = from_hex_rgb(0x00AEAE); // was 0x00AE42 green, now cyan
-    g_theme_colors["tab.text.checked"]     = from_hex_rgb(0xFFFFFF); // active/selected tab text
-    g_theme_colors["tab.text.normal"]      = from_hex_rgb(0x6B6B6C); // inactive tab text
+    // TabCtrl
+    g_theme_colors["tab.underline.active"] = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["tab.text.checked"]     = from_hex_rgb(0xFFFFFF);
+    g_theme_colors["tab.text.normal"]      = from_hex_rgb(0x6B6B6C);
 
-    // Dropdown pressed item color (for normal dropdowns, not just selector)
-    g_theme_colors["dropdown.item_bg.pressed"] = from_hex_rgb(0xEDFAF2); // light cyan background for pressed item
+    // Dropdown pressed item color
+    g_theme_colors["dropdown.item_bg.pressed"] = shift_to_hue(0xEDFAF2, H_RED);
 
     // Bitmap generation and similar features
-    g_theme_colors["feature.text.hovered"]        = from_hex_rgb(0x00AEAE); // was 0x00AE42
-    g_theme_colors["feature.underline.hovered"]   = from_hex_rgb(0x00AEAE); // was 0x00AE42
-    g_theme_colors["feature.text.normal"]         = from_hex_rgb(0x0084C6); // blue feature text
+    g_theme_colors["feature.text.hovered"]        = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["feature.underline.hovered"]   = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["feature.text.normal"]         = from_hex_rgb(0x0084C6);
+
+    // Additional keys for sidebar/panel selection and info text
+    g_theme_colors["panel.selection.border"]      = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["panel.selection.bg"]          = shift_to_hue(0xEDFAF2, H_RED);
+    g_theme_colors["info.text.accent"]            = shift_to_hue(0x00AE42, H_RED);
 }
 
 inline void ensure_init()

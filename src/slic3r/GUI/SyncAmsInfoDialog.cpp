@@ -10,6 +10,7 @@
 #include "PartPlate.hpp"
 #include "I18N.hpp"
 #include "MainFrame.hpp"
+#include "Theme.hpp"
 #include "Widgets/Button.hpp"
 #include "Widgets/TextInput.hpp"
 #include "Notebook.hpp"
@@ -2017,7 +2018,7 @@ void SyncAmsInfoDialog::Enable_Auto_Refill(bool enable)
 {
     if (!m_ams_backup_tip) { return; }
     if (enable) {
-        m_ams_backup_tip->SetForegroundColour(wxColour("#00AE42"));
+        m_ams_backup_tip->SetForegroundColour(Slic3r::GUI::Theme::getThemeColor("feature.text.hovered"));
     } else {
         m_ams_backup_tip->SetForegroundColour(wxColour(0x90, 0x90, 0x90));
     }

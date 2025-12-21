@@ -11,6 +11,8 @@
 #endif
 
 #include <set>
+#include <vector>
+#include <cstdio>
 
 wxDEFINE_EVENT(EVT_DISMISS, wxCommandEvent);
 
@@ -59,8 +61,13 @@ void DropDown::Create(wxWindow *parent, long style)
     SetBackgroundColour(*wxWHITE);
     state_handler.attach({&border_color, &text_color, &selector_border_color, &selector_background_color});
     state_handler.update_binds();
-    if ((style & DD_NO_CHECK_ICON) == 0)
-        check_bitmap = ScalableBitmap(this, "checked", 16);
+    if ((style & DD_NO_CHECK_ICON) == 0) {
+        // Recolor the check icon to match themed accent (red) while preserving S/V
+        wxColour c = Slic3r::GUI::Theme::getThemeColor("dropdown.check.color");
+        char buf[8];
+        snprintf(buf, sizeof(buf), "#%02X%02X%02X", c.Red(), c.Green(), c.Blue());
+        check_bitmap = ScalableBitmap(this, "checked", 16, false, false, false, std::vector<std::string>{std::string(buf)});
+    }
     arrow_bitmap = ScalableBitmap(this, "hms_arrow", 16);
     text_off = style & DD_NO_TEXT;
 

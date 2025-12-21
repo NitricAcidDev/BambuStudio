@@ -1,6 +1,6 @@
 #include "SwitchButton.hpp"
 #include "Label.hpp"
-#include "Theme.hpp"
+#include "../Theme.hpp"
 #include "StaticBox.hpp"
 
 #include "../wxExtensions.hpp"

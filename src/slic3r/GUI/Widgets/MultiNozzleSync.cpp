@@ -1,5 +1,6 @@
 #include "MultiNozzleSync.hpp"
 #include "../GUI_App.hpp"
+#include "../Theme.hpp"
 #include "../DeviceCore/DevManager.h"
 #include "libslic3r/PresetBundle.hpp"
 #include <wx/sizer.h>
@@ -114,8 +115,8 @@ ManualNozzleCountDialog::ManualNozzleCountDialog(wxWindow *parent, NozzleVolumeT
     content_sizer->Add(nozzle_icon, 0, wxALL | wxALIGN_CENTER_VERTICAL, FromDIP(15));
     content_sizer->Add(choice_sizer, 0, wxALIGN_CENTRE_VERTICAL);
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(144, 144, 144), StateColor::Disabled), std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                            std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered), std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+    StateColor btn_bg_green(std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.disabled"), StateColor::Disabled), std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.pressed"), StateColor::Pressed),
+                            std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.hovered"), StateColor::Hovered), std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.normal"), StateColor::Normal));
 
     m_confirm_btn = new Button(this, _L("Confirm"));
     m_confirm_btn->SetBackgroundColor(btn_bg_green);

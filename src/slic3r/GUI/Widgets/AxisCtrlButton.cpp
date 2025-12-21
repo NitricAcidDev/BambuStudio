@@ -1,17 +1,14 @@
 #include "AxisCtrlButton.hpp"
 #include "Label.hpp"
+#include "../Theme.hpp"
 #include "libslic3r/libslic3r.h"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 
 StateColor blank_bg(StateColor(std::make_pair(wxColour("#FFFFFF"), (int)StateColor::Normal)));
-static const wxColour BUTTON_BG_COL = wxColour("#EEEEEE");
 static const wxColour BUTTON_IN_BG_COL = wxColour("#CECECE");
-
-static const wxColour bd = wxColour(0, 174, 66);
 static const wxColour text_num_color   = wxColour("#898989");
-static const wxColour BUTTON_PRESS_COL = wxColour(172, 172, 172);
 static const double sqrt2 = std::sqrt(2);
 
 BEGIN_EVENT_TABLE(AxisCtrlButton, wxPanel)
@@ -36,18 +33,18 @@ AxisCtrlButton::AxisCtrlButton(wxWindow *parent, ScalableBitmap &icon, long stly
     , gap(GAP_SIZE)
     , last_pos(UNDEFINED)
     , current_pos(UNDEFINED) // don't change init value
-    , text_color(std::make_pair(0x6B6B6B, (int) StateColor::Disabled), std::make_pair(*wxBLACK, (int) StateColor::Normal))
-	, state_handler(this)
+    , text_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.text.disabled"), (int) StateColor::Disabled), std::make_pair(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.text.normal"), (int) StateColor::Normal))
+	state_handler(this)
 {
     m_icon = icon;
 	wxWindow::SetBackgroundColour(parent->GetBackgroundColour());
 
-    border_color.append(bd, StateColor::Hovered);
+    border_color.append(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.border.hovered"), StateColor::Hovered);
 
-    background_color.append(BUTTON_BG_COL, StateColor::Disabled);
-    background_color.append(BUTTON_PRESS_COL, StateColor::Pressed);
-    background_color.append(BUTTON_BG_COL, StateColor::Hovered);
-    background_color.append(BUTTON_BG_COL, StateColor::Normal);
+    background_color.append(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.bg.disabled"), StateColor::Disabled);
+    background_color.append(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.bg.pressed"), StateColor::Pressed);
+    background_color.append(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.bg.hovered"), StateColor::Hovered);
+    background_color.append(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.bg.normal"), StateColor::Normal);
     background_color.append(BUTTON_BG_COL, StateColor::Enabled);
 
     inner_background_color.append(BUTTON_IN_BG_COL, StateColor::Disabled);

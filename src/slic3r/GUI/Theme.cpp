@@ -60,6 +60,37 @@ void init_defaults()
 
     g_theme_colors["combobox.label.disabled"] = from_hex_rgb(0x909090);
     g_theme_colors["combobox.label.normal"]   = from_hex_rgb(0x262E30);
+
+    // Button
+    g_theme_colors["button.bg.disabled"]  = from_hex_rgb(0xF0F0F1);
+    g_theme_colors["button.bg.hovered_checked"] = from_hex_rgb(0x37EE7C);
+    g_theme_colors["button.bg.checked"]   = from_hex_rgb(0x00AE42);
+    g_theme_colors["button.bg.hovered"]   = from_hex_rgb(0xD3D3D3); // wxLIGHT_GREY
+    g_theme_colors["button.bg.normal"]    = from_hex_rgb(0xFFFFFF);
+    g_theme_colors["button.text.disabled"] = from_hex_rgb(0xD3D3D3);
+    g_theme_colors["button.text.normal"]   = from_hex_rgb(0x000000);
+
+    // AxisCtrlButton
+    g_theme_colors["axis_ctrl.border.hovered"] = from_hex_rgb(0x00AE42);
+    g_theme_colors["axis_ctrl.bg.disabled"]   = from_hex_rgb(0xEEEEEE);
+    g_theme_colors["axis_ctrl.bg.pressed"]    = from_hex_rgb(0xACACAC);
+    g_theme_colors["axis_ctrl.bg.hovered"]    = from_hex_rgb(0xEEEEEE);
+    g_theme_colors["axis_ctrl.bg.normal"]     = from_hex_rgb(0xEEEEEE);
+    g_theme_colors["axis_ctrl.text.disabled"] = from_hex_rgb(0x6B6B6B);
+    g_theme_colors["axis_ctrl.text.normal"]   = from_hex_rgb(0x000000);
+
+    // SideButton
+    g_theme_colors["side_button.border.pressed"] = from_hex_rgb(0x17813F);
+    g_theme_colors["side_button.border.hovered"] = from_hex_rgb(0x30DD70);
+    g_theme_colors["side_button.bg.pressed"]    = from_hex_rgb(0x17813F);
+    g_theme_colors["side_button.bg.hovered"]    = from_hex_rgb(0x30DD70);
+
+    // ProgressBar & MultiNozzleSync button colors
+    g_theme_colors["progress.button.disabled"] = from_hex_rgb(0x909090);
+    g_theme_colors["progress.button.pressed"]  = from_hex_rgb(0x1B8844);
+    g_theme_colors["progress.button.hovered"]  = from_hex_rgb(0x3DCB73);
+    g_theme_colors["progress.button.normal"]   = from_hex_rgb(0x00AE42);
+    g_theme_colors["progress.text.normal"]     = from_hex_rgb(0xFFFFFE);
 }
 
 inline void ensure_init()

@@ -3,6 +3,7 @@
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
 #include "Label.hpp"
+#include "../Theme.hpp"
 
 
 
@@ -44,8 +45,8 @@ void ProgressBar::create(wxWindow *parent, wxWindowID id, const wxPoint &pos,  w
 
      auto m_progress_bk = new StaticBox(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
      m_progress_bk->SetBackgroundColour(wxColour(238, 130, 238));
-     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-                             std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+     StateColor btn_bg_green(std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.pressed"), StateColor::Pressed), std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.hovered"), StateColor::Hovered),
+                             std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.normal"), StateColor::Normal));
 
      wxBoxSizer *m_sizer_progress= new wxBoxSizer(wxHORIZONTAL);
 

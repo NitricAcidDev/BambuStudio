@@ -46,8 +46,8 @@ void init_defaults()
 
     // Accent light tint: properly saturated light color that can be hue-shifted for any theme color
     // Uses a light tint with good saturation so hue shift produces visible colored backgrounds
-    // Original: 0xB5E6B0 (light green, properly saturated)
-    g_theme_colors["accent.tint.light"] = shift_to_hue(0xB5E6B0, H_RED);
+    // Original: 0xC8E6C9 (Material Design light green, properly saturated but very light for overlay effect)
+    g_theme_colors["accent.tint.light"] = shift_to_hue(0xC8E6C9, H_RED);
 
     // SwitchButton - keep neutrals; shift original green accents to red
     g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);

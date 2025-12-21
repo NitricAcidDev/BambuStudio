@@ -736,6 +736,7 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
 
         // Refresh theme without restart
         wxGetApp().force_colors_update();
+        wxGetApp().update_ui_from_settings();
         if (wxGetApp().mainframe) {
             wxGetApp().mainframe->update_side_button_style();
             wxGetApp().mainframe->Refresh();

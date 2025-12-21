@@ -94,10 +94,11 @@ static StateColor make_button(const wxColour& normal,
 {
     StateColor sc;
     sc.append(disabled, StateColor::Disabled);
-    sc.append(hovered, StateColor::Hovered | StateColor::Checked);
-    sc.append(normal, StateColor::Checked | StateColor::Enabled);
+    sc.append(normal, StateColor::Normal | StateColor::Enabled);
+    sc.append(hovered, StateColor::Hovered | StateColor::Enabled);
     sc.append(pressed, StateColor::Pressed | StateColor::Enabled);
-    sc.append(wxColour(255, 255, 255), StateColor::Normal | StateColor::Enabled);
+    // Checked state follows normal to avoid gray unpressed arrows.
+    sc.append(normal, StateColor::Checked | StateColor::Enabled);
     return sc;
 }
 

@@ -10,10 +10,21 @@ static const wxColour BgNormalColor  = wxColour("#FFFFFF");
 static const wxColour BgSelectColor  = wxColour("#EBF9F0");
 
 static const wxColour TextNormalColor = wxColour("#000000");
-static const wxColour TextSelectColor = wxColour("#00AE42");
 
-static const wxColour BorderNormalColor   = wxColour("#CECECE");
-static const wxColour BorderSelectColor = wxColour("#00AE42");
+// Use current theme for selected/hovered states to avoid hardcoded green.
+static StateColor MakeThemeStateColor()
+{
+    auto theme = Slic3r::GUI::wxGetApp().get_theme_colors();
+    StateColor sc;
+    sc.append(wxColour("#CECECE"), StateColor::Normal | StateColor::Enabled);
+    sc.append(theme.button_green.defaultColor(), StateColor::Hovered | StateColor::Enabled);
+    sc.append(theme.button_green.defaultColor(), StateColor::Pressed | StateColor::Enabled);
+    sc.append(theme.button_green.defaultColor(), StateColor::Checked | StateColor::Enabled);
+    return sc;
+}
+
+static StateColor s_theme_border = MakeThemeStateColor();
+static StateColor s_theme_bg = MakeThemeStateColor();
 
 CapsuleButton::CapsuleButton(wxWindow *parent, wxWindowID id, const wxString &label, bool selected) : wxPanel(parent, id)
 {
@@ -69,8 +80,11 @@ void CapsuleButton::OnPaint(wxPaintEvent &event)
         wxRect rect = GetClientRect();
         gc->SetBrush(wxTransparentColour);
         gc->DrawRoundedRectangle(0, 0, rect.width, rect.height, 0);
-        wxColour bg_color     = m_selected ? BgSelectColor : BgNormalColor;
-        wxColour border_color = m_hovered || m_selected ? BorderSelectColor : BorderNormalColor;
+        wxColour bg_color     = m_selected ? s_theme_bg.colorForStates(StateColor::Checked | StateColor::Enabled)
+                                           : s_theme_bg.colorForStates(StateColor::Normal | StateColor::Enabled);
+        wxColour border_color = (m_hovered || m_selected)
+                                    ? s_theme_border.colorForStates(StateColor::Checked | StateColor::Enabled)
+                                    : s_theme_border.colorForStates(StateColor::Normal | StateColor::Enabled);
         bg_color = StateColor::darkModeColorFor(bg_color);
         border_color = StateColor::darkModeColorFor(border_color);
         gc->SetBrush(wxBrush(bg_color));
@@ -112,9 +126,11 @@ void CapsuleButton::UpdateStatus()
 {
     if (m_selected) {
         m_btn->SetBitmap(tag_on_bmp);
-        m_label->SetForegroundColour(TextSelectColor);
-        m_label->SetBackgroundColour(BgSelectColor);
-        m_btn->SetBackgroundColour(BgSelectColor);
+        auto theme = Slic3r::GUI::wxGetApp().get_theme_colors();
+        auto sel = s_theme_bg.colorForStates(StateColor::Checked | StateColor::Enabled);
+        m_label->SetForegroundColour(theme.button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
+        m_label->SetBackgroundColour(sel);
+        m_btn->SetBackgroundColour(sel);
     } else {
         m_btn->SetBitmap(tag_off_bmp);
         m_label->SetForegroundColour(TextNormalColor);

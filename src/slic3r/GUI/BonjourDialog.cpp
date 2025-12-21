@@ -1,6 +1,7 @@
 #include "slic3r/Utils/Bonjour.hpp"   // On Windows, boost needs to be included before wxWidgets headers
 
 #include "BonjourDialog.hpp"
+#include "Theme.hpp"
 
 #include <set>
 #include <mutex>

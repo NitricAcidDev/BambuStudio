@@ -1,4 +1,5 @@
 #include "SelectMachine.hpp"
+#include "Theme.hpp"
 #include "I18N.hpp"
 
 #include "libslic3r/Utils.hpp"

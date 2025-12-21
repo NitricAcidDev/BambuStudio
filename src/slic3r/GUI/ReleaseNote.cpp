@@ -1,4 +1,5 @@
 #include "ReleaseNote.hpp"
+#include "Theme.hpp"
 #include "I18N.hpp"
 #include "GCodeViewer.hpp"
 

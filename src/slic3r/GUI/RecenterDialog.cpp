@@ -1,4 +1,5 @@
 #include "RecenterDialog.hpp"
+#include "Theme.hpp"
 #include "GUI_App.hpp"
 #include <slic3r/GUI/I18N.hpp>
 #include <wx/dcgraph.h>

@@ -1,4 +1,5 @@
 #include "CreatePresetsDialog.hpp"
+#include "Theme.hpp"
 #include <vector>
 #include <set>
 #include <unordered_map>

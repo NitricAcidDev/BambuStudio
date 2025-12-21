@@ -1,4 +1,5 @@
 #include "StepMeshDialog.hpp"
+#include "Theme.hpp"
 
 #include <thread>
 #include <wx/event.h>

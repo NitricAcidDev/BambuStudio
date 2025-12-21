@@ -7,6 +7,7 @@
 #include "libslic3r/PresetBundle.hpp"
 #include "libslic3r/Preset.hpp"
 #include "ParamsPanel.hpp"
+#include "Theme.hpp"
 #include "Tab.hpp"
 #include "format.hpp"
 #include "MainFrame.hpp"

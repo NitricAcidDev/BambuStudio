@@ -12,7 +12,6 @@ static const wxColour LabelEnableColor = wxColour("#262E30");
 static const wxColour LabelDisableColor = wxColour("#ACACAC");
 static const wxColour GreyColor = wxColour("#6B6B6B");
 // Note: Material filament colors preserved - DO NOT use theme here
-static inline wxColour GreenColor() { return Slic3r::GUI::Theme::accentColor(); }
 static const wxColour BackGroundColor = wxColour("#FFFFFF");
 
 
@@ -184,7 +183,7 @@ FilamentGroupPopup::FilamentGroupPopup(wxWindow *parent) : PopupWindow(parent, w
         auto* video_sizer = new wxBoxSizer(wxHORIZONTAL);
         video_link = new wxStaticText(this, wxID_ANY, _L("Video tutorial"));
         video_link->SetBackgroundColour(BackGroundColor);
-        video_link->SetForegroundColour(GreenColor());
+        video_link->SetForegroundColour(Slic3r::GUI::Theme::accentColor());
         video_link->SetFont(Label::Body_12.Underlined());
         video_link->SetCursor(wxCursor(wxCURSOR_HAND));
         video_link->Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent&)
@@ -200,7 +199,7 @@ FilamentGroupPopup::FilamentGroupPopup(wxWindow *parent) : PopupWindow(parent, w
         auto* wiki_sizer = new wxBoxSizer(wxHORIZONTAL);
         wiki_link = new wxStaticText(this, wxID_ANY, _L("Learn more"));
         wiki_link->SetBackgroundColour(BackGroundColor);
-        wiki_link->SetForegroundColour(GreenColor());
+        wiki_link->SetForegroundColour(Slic3r::GUI::Theme::accentColor());
         wiki_link->SetFont(Label::Body_12.Underlined());
         wiki_link->SetCursor(wxCursor(wxCURSOR_HAND));
         wiki_link->Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent&) { open_filament_group_wiki(); });

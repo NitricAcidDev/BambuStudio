@@ -20,7 +20,6 @@
 namespace Slic3r {
 namespace GUI {
 
-static inline wxColour TEXT_NORMAL_CLR() { return Slic3r::GUI::Theme::accentColor(); }
 static const wxColour TEXT_FAILED_CLR = wxColour(255, 111, 0);
 
 static const std::unordered_map<wxString, wxString> ACCESSORY_DISPLAY_STR = {
@@ -1280,8 +1279,8 @@ void MachineInfoPanel::show_status(int status, std::string upgrade_status_str)
             m_staticText_upgrading_info->SetLabel(_L("Updating"));
         }
 
-        m_staticText_upgrading_info->SetForegroundColour(TEXT_NORMAL_CLR());
-        m_staticText_upgrading_percent->SetForegroundColour(TEXT_NORMAL_CLR());
+        m_staticText_upgrading_info->SetForegroundColour(Slic3r::GUI::Theme::accentColor());
+        m_staticText_upgrading_percent->SetForegroundColour(Slic3r::GUI::Theme::accentColor());
         m_staticText_upgrading_percent->Show();
     } else if (status == (int) DevFirmwareUpgradeState::UpgradingFinished) {
         if (upgrade_status_str == "UPGRADE_FAIL") {
@@ -1297,8 +1296,8 @@ void MachineInfoPanel::show_status(int status, std::string upgrade_status_str)
             m_staticText_upgrading_info->Show();
             for (size_t i = 0; i < m_upgrading_sizer->GetItemCount(); i++) { m_upgrading_sizer->Show(true); }
             m_button_upgrade_firmware->Disable();
-            m_staticText_upgrading_info->SetForegroundColour(TEXT_NORMAL_CLR());
-            m_staticText_upgrading_percent->SetForegroundColour(TEXT_NORMAL_CLR());
+            m_staticText_upgrading_info->SetForegroundColour(Slic3r::GUI::Theme::accentColor());
+            m_staticText_upgrading_percent->SetForegroundColour(Slic3r::GUI::Theme::accentColor());
             m_staticText_upgrading_percent->Show();
             m_upgrade_retry_img->Hide();
         }

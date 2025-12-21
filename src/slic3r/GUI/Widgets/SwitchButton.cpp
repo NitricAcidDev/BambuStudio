@@ -970,5 +970,3 @@ void SwitchButton::UpdateThemeColors()
         update();
     }
 }
-
-}

@@ -2,6 +2,7 @@
 #include "Label.hpp"
 #include "Button.hpp"
 #include "TextCtrl.h"
+#include "../Theme.hpp"
 
 #include <wx/dcgraph.h>
 
@@ -21,14 +22,14 @@ END_EVENT_TABLE()
  */
 
 SpinInput::SpinInput()
-    : label_color(std::make_pair(0x909090, (int) StateColor::Disabled), std::make_pair(0x6B6B6B, (int) StateColor::Normal))
-    , text_color(std::make_pair(0x909090, (int) StateColor::Disabled), std::make_pair(0x262E30, (int) StateColor::Normal))
+    : label_color(std::make_pair(Theme::getThemeColor("spininput.label.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("spininput.label.normal"), (int) StateColor::Normal))
+    , text_color(std::make_pair(Theme::getThemeColor("spininput.text.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("spininput.text.normal"), (int) StateColor::Normal))
 {
     radius = 0;
     border_width     = 1;
-    border_color     = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Hovered),
-                              std::make_pair(0xDBDBDB, (int) StateColor::Normal));
-    background_color = StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    border_color     = StateColor(std::make_pair(Theme::getThemeColor("spininput.border.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("spininput.border.hovered"), (int) StateColor::Hovered),
+                              std::make_pair(Theme::getThemeColor("spininput.border.normal"), (int) StateColor::Normal));
+    background_color = StateColor(std::make_pair(Theme::getThemeColor("spininput.bg.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("spininput.bg.normal"), (int) StateColor::Normal));
 }
 
 

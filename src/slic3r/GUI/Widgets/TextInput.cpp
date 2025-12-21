@@ -1,6 +1,7 @@
 #include "TextInput.hpp"
 #include "Label.hpp"
 #include "TextCtrl.h"
+#include "../Theme.hpp"
 
 #include "slic3r/GUI/I18N.hpp"
 
@@ -21,16 +22,16 @@ END_EVENT_TABLE()
  */
 
 TextInput::TextInput()
-    : label_color(std::make_pair(0x909090, (int) StateColor::Disabled),
-                 std::make_pair(0x6B6B6B, (int) StateColor::Normal))
-    , text_color(std::make_pair(0x909090, (int) StateColor::Disabled),
-                 std::make_pair(0x262E30, (int) StateColor::Normal))
+    : label_color(std::make_pair(Theme::getThemeColor("textinput.label.disabled"), (int) StateColor::Disabled),
+                 std::make_pair(Theme::getThemeColor("textinput.label.normal"), (int) StateColor::Normal))
+    , text_color(std::make_pair(Theme::getThemeColor("textinput.text.disabled"), (int) StateColor::Disabled),
+                 std::make_pair(Theme::getThemeColor("textinput.text.normal"), (int) StateColor::Normal))
 {
     radius = 0;
     border_width = 1;
-    border_color = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Hovered),
-                              std::make_pair(0xDBDBDB, (int) StateColor::Normal));
-    background_color = StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    border_color = StateColor(std::make_pair(Theme::getThemeColor("textinput.border.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("textinput.border.hovered"), (int) StateColor::Hovered),
+                              std::make_pair(Theme::getThemeColor("textinput.border.normal"), (int) StateColor::Normal));
+    background_color = StateColor(std::make_pair(Theme::getThemeColor("textinput.bg.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("textinput.bg.normal"), (int) StateColor::Normal));
     SetFont(Label::Body_12);
 }
 

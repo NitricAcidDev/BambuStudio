@@ -162,8 +162,8 @@ void AMSMaterialsSetting::create_panel_normal(wxWindow* parent)
 
     // make the style the same with disable m_input_k_val, FIXME
     m_readonly_filament = new TextInput(parent, wxEmptyString, "", "", wxDefaultPosition, AMS_MATERIALS_SETTING_COMBOX_WIDTH, wxTE_CENTRE | wxTE_PROCESS_ENTER);
-    m_readonly_filament->SetBorderColor(StateColor(std::make_pair(0xDBDBDB, (int)StateColor::Focused), std::make_pair(0x00AE42, (int)StateColor::Hovered),
-        std::make_pair(0xDBDBDB, (int)StateColor::Normal)));
+    m_readonly_filament->SetBorderColor(StateColor(std::make_pair(Theme::getThemeColor("ams_material.border.focused"), (int)StateColor::Focused), std::make_pair(Theme::getThemeColor("ams_material.border.hovered"), (int)StateColor::Hovered),
+        std::make_pair(Theme::getThemeColor("ams_material.border.focused"), (int)StateColor::Normal)));
     m_readonly_filament->SetFont(::Label::Body_14);
     m_readonly_filament->SetLabelColor(AMS_MATERIALS_SETTING_GREY800);
     m_readonly_filament->GetTextCtrl()->Bind(wxEVT_SET_FOCUS, [](auto& e) {});

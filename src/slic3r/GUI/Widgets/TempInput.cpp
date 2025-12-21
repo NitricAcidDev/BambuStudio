@@ -2,6 +2,7 @@
 #include "Label.hpp"
 #include "PopupWindow.hpp"
 #include "../I18N.hpp"
+#include "../Theme.hpp"
 #include <wx/dcgraph.h>
 #include "../GUI.hpp"
 #include "../GUI_App.hpp"
@@ -20,14 +21,14 @@ END_EVENT_TABLE()
 
 
 TempInput::TempInput()
-    : label_color(std::make_pair(wxColour(0xAC,0xAC,0xAC), (int) StateColor::Disabled),std::make_pair(0x323A3C, (int) StateColor::Normal))
-    , text_color(std::make_pair(wxColour(0xAC,0xAC,0xAC), (int) StateColor::Disabled), std::make_pair(0x6B6B6B, (int) StateColor::Normal))
+    : label_color(std::make_pair(Theme::getThemeColor("tempinput.label.disabled"), (int) StateColor::Disabled),std::make_pair(Theme::getThemeColor("tempinput.label.normal"), (int) StateColor::Normal))
+    , text_color(std::make_pair(Theme::getThemeColor("tempinput.text.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("tempinput.text.normal"), (int) StateColor::Normal))
 {
     hover  = false;
     radius = 0;
-    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Focused), std::make_pair(0x00AE42, (int) StateColor::Hovered),
-                 std::make_pair(*wxWHITE, (int) StateColor::Normal));
-    background_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    border_color = StateColor(std::make_pair(Theme::getThemeColor("tempinput.border.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("tempinput.border.focused"), (int) StateColor::Focused), std::make_pair(Theme::getThemeColor("tempinput.border.hovered"), (int) StateColor::Hovered),
+                 std::make_pair(Theme::getThemeColor("tempinput.border.normal"), (int) StateColor::Normal));
+    background_color = StateColor(std::make_pair(Theme::getThemeColor("tempinput.bg.disabled"), (int) StateColor::Disabled), std::make_pair(Theme::getThemeColor("tempinput.bg.normal"), (int) StateColor::Normal));
     SetFont(Label::Body_12);
 }
 

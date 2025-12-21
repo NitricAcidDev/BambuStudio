@@ -6,8 +6,6 @@
 #include <slic3r/GUI/Widgets/CheckBox.hpp>
 #include <slic3r/GUI/Widgets/TabCtrl.hpp>
 
-namespace Slic3r {
-namespace GUI {
 
 UserPresetsDialog::UserPresetsDialog(wxWindow *parent)
     : DPIDialog(parent, wxID_ANY, _L("Management user presets"))
@@ -508,8 +506,6 @@ void UserPresetsDialog::delete_checked()
 #include "Tab.hpp"
 #include "MsgDialog.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 static void find_compatible_user_presets(PresetCollection const &collection, std::string printer, std::vector<std::string> &presets)
 {

@@ -45,8 +45,6 @@ namespace {
         }
     }
 }
-namespace Slic3r {
-namespace GUI {
 
 void GLTexture::Compressor::reset()
 {

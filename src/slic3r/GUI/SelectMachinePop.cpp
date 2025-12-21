@@ -37,7 +37,7 @@ static wxColour SelectMachinePopThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return SelectMachinePopThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour SelectMachinePopThemeGreenHovered() {

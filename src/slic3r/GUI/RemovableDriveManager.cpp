@@ -26,7 +26,6 @@
 #include <boost/process.hpp>
 #endif
 
-namespace Slic3r {
 namespace GUI { 
 
 wxDEFINE_EVENT(EVT_REMOVABLE_DRIVE_EJECTED, RemovableDriveEjectEvent);

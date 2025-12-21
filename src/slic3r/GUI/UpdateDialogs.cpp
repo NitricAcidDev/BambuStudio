@@ -21,14 +21,13 @@
 #include "wxExtensions.hpp"
 #include "MainFrame.hpp"
 
-namespace Slic3r {
 
 static wxColour UpdateDialogsThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return UpdateDialogsThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour UpdateDialogsThemeGreenHovered() {
@@ -36,7 +35,7 @@ static wxColour UpdateDialogsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return UpdateDialogsThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour UpdateDialogsThemeGreenPressed() {
@@ -44,9 +43,8 @@ static wxColour UpdateDialogsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return UpdateDialogsThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 
 static const char* URL_CHANGELOG = "%1%";

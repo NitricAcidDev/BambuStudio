@@ -30,8 +30,6 @@
 
 namespace fs = boost::filesystem;
 
-namespace Slic3r {
-namespace GUI {
 
 static const char *CONFIG_KEY_PATH  = "printhost_path";
 static const char *CONFIG_KEY_GROUP = "printhost_group";

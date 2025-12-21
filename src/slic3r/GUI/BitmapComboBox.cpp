@@ -51,8 +51,6 @@ using Slic3r::GUI::format_wxstr;
 // ***  BitmapComboBox  ***
 // ---------------------------------
 
-namespace Slic3r {
-namespace GUI {
 
 /* For PresetComboBox we use bitmaps that are created from images that are already scaled appropriately for Retina
  * (Contrary to the intuition, the `scale` argument for Bitmap's constructor doesn't mean

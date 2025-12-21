@@ -12,7 +12,6 @@
 
 #include <boost/log/trivial.hpp>
 
-namespace Slic3r {
 
 GLShaderProgram::~GLShaderProgram()
 {

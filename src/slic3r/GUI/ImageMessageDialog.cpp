@@ -5,7 +5,6 @@
 #include "GUI_App.hpp"
 #include "MainFrame.hpp"
 
-namespace Slic3r {
 namespace GUI
 {
 

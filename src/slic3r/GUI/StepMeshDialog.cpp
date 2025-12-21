@@ -19,7 +19,7 @@ static wxColour StepMeshThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return StepMeshThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour StepMeshThemeGreenHovered() {
@@ -27,7 +27,7 @@ static wxColour StepMeshThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return StepMeshThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour StepMeshThemeGreenPressed() {
@@ -35,7 +35,7 @@ static wxColour StepMeshThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return StepMeshThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 using namespace Slic3r::GUI;
 

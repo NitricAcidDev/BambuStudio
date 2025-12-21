@@ -37,7 +37,6 @@
 
 #include "slic3r/GUI/Plater.hpp"
 
-namespace Slic3r {
 
 bool SlicingProcessCompletedEvent::critical_error() const
 {

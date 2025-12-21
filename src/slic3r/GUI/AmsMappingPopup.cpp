@@ -35,7 +35,7 @@ static wxColour AmsMappingThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return AmsMappingThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour AmsMappingThemeGreenHovered() {

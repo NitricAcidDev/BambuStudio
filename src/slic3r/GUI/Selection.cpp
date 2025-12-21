@@ -29,8 +29,6 @@
 #include <CGAL/Min_sphere_of_points_d_traits_3.h>
 static const std::array<float, 4> UNIFORM_SCALE_COLOR = { 0.923f, 0.504f, 0.264f, 1.0f };
 
-namespace Slic3r {
-namespace GUI {
 
 Selection::VolumeCache::TransformCache::TransformCache()
     : position(Vec3d::Zero())

@@ -30,11 +30,9 @@
 
 #include "libslic3r/Print.hpp"
 
-namespace Slic3r {
 
 class AppConfig;
 
-namespace GUI {
 
 #if __APPLE__
 IOPMAssertionID assertionID;

@@ -1,7 +1,5 @@
 #include "MultiSendMachineModel.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 MultiSendMachineModel::MultiSendMachineModel()
 {

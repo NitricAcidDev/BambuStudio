@@ -13,7 +13,7 @@ static wxColour ConnectPrinterThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return ConnectPrinterThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour ConnectPrinterThemeGreenHovered() {
@@ -21,7 +21,7 @@ static wxColour ConnectPrinterThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return ConnectPrinterThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour ConnectPrinterThemeGreenPressed() {
@@ -29,7 +29,7 @@ static wxColour ConnectPrinterThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return ConnectPrinterThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 ConnectPrinterDialog::ConnectPrinterDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos, const wxSize &size, long style)
     : DPIDialog(parent, id, _L("ConnectPrinter(LAN)"), pos, size, style)

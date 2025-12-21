@@ -5,7 +5,6 @@
 #include "slic3r/Utils/NetworkAgent.hpp"
 #include <algorithm>
 
-namespace Slic3r {
 
 namespace Scramble {
 static const char B64URL_ALPHABET[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
@@ -114,7 +113,6 @@ std::string scrambleWithKey(const std::string &plaintext, const std::string &key
 std::string descrambleWithKey(const std::string &token, const std::string &key) { return xor_obfuscate(key, base64url_decode(token)); }
 } // Scramble
 
-namespace GUI {
 
     struct TokenResp {
         std::string accessToken;

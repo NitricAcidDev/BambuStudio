@@ -19,8 +19,6 @@
 #include "GUI_Factories.hpp"
 
 
-namespace Slic3r {
-namespace GUI {
 
 static wxColour ThemeGreen()
 {

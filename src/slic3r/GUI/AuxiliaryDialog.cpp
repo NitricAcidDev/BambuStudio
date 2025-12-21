@@ -10,7 +10,6 @@ namespace pt = boost::property_tree;
 typedef pt::ptree JSON;
 
 namespace Slic3r { 
-namespace GUI {
 
 
 AuxiliaryDialog::AuxiliaryDialog(wxWindow * parent)

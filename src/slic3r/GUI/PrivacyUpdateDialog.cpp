@@ -12,7 +12,7 @@ static wxColour PrivacyUpdateThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PrivacyUpdateThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PrivacyUpdateThemeGreenHovered() {
@@ -20,7 +20,7 @@ static wxColour PrivacyUpdateThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PrivacyUpdateThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PrivacyUpdateThemeGreenPressed() {
@@ -28,7 +28,7 @@ static wxColour PrivacyUpdateThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PrivacyUpdateThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 wxDEFINE_EVENT(EVT_PRIVACY_UPDATE_CONFIRM, wxCommandEvent);

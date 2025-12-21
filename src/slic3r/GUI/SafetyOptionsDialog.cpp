@@ -21,7 +21,7 @@ static wxColour SafetyOptionsThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return SafetyOptionsThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour SafetyOptionsThemeGreenHovered() {
@@ -29,7 +29,7 @@ static wxColour SafetyOptionsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return SafetyOptionsThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour SafetyOptionsThemeGreenPressed() {
@@ -37,7 +37,7 @@ static wxColour SafetyOptionsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return SafetyOptionsThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Disabled),

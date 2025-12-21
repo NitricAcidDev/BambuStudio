@@ -31,7 +31,7 @@ static wxColour FilamentPickerThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return FilamentPickerThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour FilamentPickerThemeGreenHovered() {
@@ -39,7 +39,7 @@ static wxColour FilamentPickerThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return FilamentPickerThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour FilamentPickerThemeGreenPressed() {
@@ -47,7 +47,7 @@ static wxColour FilamentPickerThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return FilamentPickerThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 wxColour FilamentPickerDialog::GetSelectedColour() const

@@ -55,8 +55,6 @@
 #define wxLinux_gtk3 false
 #endif //defined(__linux__) && defined(__WXGTK3__)
 
-namespace Slic3r {
-namespace GUI {
 
 
 using Config::Snapshot;

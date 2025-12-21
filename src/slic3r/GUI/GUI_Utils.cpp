@@ -21,8 +21,6 @@
 
 #include "libslic3r/Config.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 #ifdef _WIN32
 wxDEFINE_EVENT(EVT_HID_DEVICE_ATTACHED, HIDDeviceAttachedEvent);

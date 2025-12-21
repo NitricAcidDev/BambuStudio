@@ -33,14 +33,13 @@
 #include "BonjourDialog.hpp"
 #include "MsgDialog.hpp"
 
-namespace Slic3r {
 
 static wxColour PhysicalPrinterThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PhysicalPrinterThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PhysicalPrinterThemeGreenHovered() {
@@ -48,7 +47,7 @@ static wxColour PhysicalPrinterThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PhysicalPrinterThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PhysicalPrinterThemeGreenPressed() {
@@ -56,9 +55,8 @@ static wxColour PhysicalPrinterThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PhysicalPrinterThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 #define BORDER_W FromDIP(10)
 

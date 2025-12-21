@@ -12,7 +12,6 @@
 
 #include <iostream>
 
-namespace Slic3r {
 
 BBLStatusBar::BBLStatusBar(wxWindow *parent, int id)
     : m_self{new wxPanel(parent, id == -1 ? wxID_ANY : id)}

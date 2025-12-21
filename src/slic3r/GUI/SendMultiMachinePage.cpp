@@ -10,14 +10,13 @@
 #include "DeviceCore/DevManager.h"
 #include "DeviceCore/DevStorage.h"
 
-namespace Slic3r {
 
 static wxColour SendMultiMachineThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return SendMultiMachineThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour SendMultiMachineThemeGreenHovered() {
@@ -25,7 +24,7 @@ static wxColour SendMultiMachineThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return SendMultiMachineThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour SendMultiMachineThemeGreenPressed() {
@@ -33,9 +32,8 @@ static wxColour SendMultiMachineThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return SendMultiMachineThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 #define MATERIAL_ITEM_SIZE wxSize(FromDIP(64), FromDIP(34))
 #define MATERIAL_ITEM_REAL_SIZE wxSize(FromDIP(62), FromDIP(32))

@@ -12,7 +12,7 @@ static wxColour FilamentMapThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return FilamentMapThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour FilamentMapThemeGreenHovered() {
@@ -20,7 +20,7 @@ static wxColour FilamentMapThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return FilamentMapThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour FilamentMapThemeGreenPressed() {
@@ -28,7 +28,7 @@ static wxColour FilamentMapThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return FilamentMapThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static bool get_pop_up_remind_flag()

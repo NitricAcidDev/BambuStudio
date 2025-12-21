@@ -17,8 +17,6 @@
 #include <wx/dcgraph.h>
 #include <algorithm>
 
-namespace Slic3r {
-namespace GUI {
 
 BedShape::BedShape(const ConfigOptionPoints& points)
 {

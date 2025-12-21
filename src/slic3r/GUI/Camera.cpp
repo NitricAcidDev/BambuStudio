@@ -9,8 +9,6 @@
 
 #include <GL/glew.h>
 
-namespace Slic3r {
-namespace GUI {
 
 const double Camera::DefaultDistance = 1000.0;
 const double Camera::DefaultZoomToBoxMarginFactor = 1.025;

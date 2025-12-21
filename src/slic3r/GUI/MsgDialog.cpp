@@ -21,14 +21,13 @@
 #include "slic3r/GUI/MainFrame.hpp"
 #include "GUI_App.hpp"
 #define MSG_DLG_MAX_SIZE wxSize(-1, FromDIP(464))//notice:ban setting the maximum width value
-namespace Slic3r {
 
 static wxColour MsgThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return MsgThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour MsgThemeGreenHovered() {
@@ -36,7 +35,7 @@ static wxColour MsgThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return MsgThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour MsgThemeGreenPressed() {
@@ -44,7 +43,7 @@ static wxColour MsgThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return MsgThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static wxColour MsgDialogThemeGreen() {
@@ -52,7 +51,7 @@ static wxColour MsgDialogThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return MsgDialogThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour MsgDialogThemeGreenHovered() {
@@ -60,7 +59,7 @@ static wxColour MsgDialogThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return MsgThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour MsgDialogThemeGreenPressed() {
@@ -68,9 +67,8 @@ static wxColour MsgDialogThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return MsgThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 MsgDialog::MsgDialog(wxWindow *parent, const wxString &title, const wxString &headline, long style, wxBitmap bitmap, const wxString &forward_str)
 	: DPIDialog(parent ? parent : dynamic_cast<wxWindow*>(wxGetApp().mainframe), wxID_ANY, title, wxDefaultPosition, wxSize(360, -1),wxDEFAULT_DIALOG_STYLE)

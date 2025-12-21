@@ -8,8 +8,6 @@
 #include "MainFrame.hpp"
 #include "Monitor.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 #define HMS_NOTIFY_ITEM_TEXT_SIZE wxSize(FromDIP(730), -1)
 #define HMS_NOTIFY_ITEM_SIZE wxSize(-1, FromDIP(80))

@@ -21,8 +21,6 @@
     #include <signal.h>
 #endif // __APPLE__
 
-namespace Slic3r {
-namespace GUI {
 
 int GUI_Run(GUI_InitParams &params)
 {

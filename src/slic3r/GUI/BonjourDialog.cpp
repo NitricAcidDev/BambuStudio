@@ -18,7 +18,6 @@
 #include "slic3r/Utils/Bonjour.hpp"
 #include "Widgets/Button.hpp"
 
-namespace Slic3r {
 
 static wxColour BonjourThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());

@@ -14,8 +14,6 @@
 #include <wx/settings.h>
 #include <wx/glcanvas.h>
 
-namespace Slic3r {
-namespace GUI {
 
 //BBS: GUI refactor: GLToolbar
 wxDEFINE_EVENT(EVT_GLTOOLBAR_OPEN_PROJECT, SimpleEvent);

@@ -73,8 +73,6 @@
 #include <slic3r/GUI/CreatePresetsDialog.hpp>
 
 
-namespace Slic3r {
-namespace GUI {
 
 wxDEFINE_EVENT(EVT_SELECT_TAB, wxCommandEvent);
 wxDEFINE_EVENT(EVT_HTTP_ERROR, wxCommandEvent);

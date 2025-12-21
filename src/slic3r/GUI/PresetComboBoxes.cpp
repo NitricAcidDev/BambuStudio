@@ -55,8 +55,6 @@
 
 using Slic3r::GUI::format_wxstr;
 
-namespace Slic3r {
-namespace GUI {
 
 #define BORDER_W 10
 

@@ -48,8 +48,6 @@ else
 // version of used hints binary file
 CEREAL_CLASS_VERSION(HintsCerealData, HINTS_CEREAL_VERSION);
 
-namespace Slic3r {
-namespace GUI {
 
 const std::string BOLD_MARKER_START = "<b>";
 const std::string BOLD_MARKER_END = "</b>";

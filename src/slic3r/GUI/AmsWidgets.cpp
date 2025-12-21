@@ -13,8 +13,6 @@
 #include "DeviceCore/DevFilaSystem.h"
 
 
-namespace Slic3r {
-namespace GUI {
 
 TrayListModel::TrayListModel() :
     wxDataViewVirtualListModel(0)

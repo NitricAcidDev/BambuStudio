@@ -14,14 +14,13 @@
 
 static const wxColour TEXT_LIGHT_GRAY = wxColour(107, 107, 107);
 
-namespace Slic3r {
 
 static wxColour PublishThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PublishThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PublishThemeGreenHovered() {
@@ -29,7 +28,7 @@ static wxColour PublishThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PublishThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PublishThemeGreenPressed() {
@@ -37,7 +36,7 @@ static wxColour PublishThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PublishThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static wxColour PublishDialogThemeGreen() {
@@ -45,7 +44,7 @@ static wxColour PublishDialogThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PublishDialogThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PublishDialogThemeGreenHovered() {
@@ -53,7 +52,7 @@ static wxColour PublishDialogThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PublishThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PublishDialogThemeGreenPressed() {
@@ -61,9 +60,8 @@ static wxColour PublishDialogThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PublishThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 static wxString PUBLISH_STEP_STRING[STEP_COUNT] = {
     _L("Slice all plate to obtain time and filament estimation"),

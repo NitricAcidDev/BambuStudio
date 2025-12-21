@@ -31,8 +31,6 @@
 
 #include "DeviceCore/DevManager.h"
 
-namespace Slic3r {
-namespace GUI {
 
 #define REFRESH_INTERVAL       1000
 

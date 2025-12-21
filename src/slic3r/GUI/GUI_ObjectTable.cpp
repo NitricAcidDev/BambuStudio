@@ -23,8 +23,6 @@
 
 #define HAS_COL_HEADER  1
 
-namespace Slic3r {
-namespace GUI {
 static const int grid_cell_border_width = 2;
 static const int grid_cell_border_height = 2;
 static const int grid_cell_checkbox_size = 16;

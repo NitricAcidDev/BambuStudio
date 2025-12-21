@@ -12,7 +12,6 @@ using namespace std::literals;
 
 #include <GL/glew.h>
 
-namespace Slic3r {
 
 std::pair<bool, std::string> GLShadersManager::init()
 {

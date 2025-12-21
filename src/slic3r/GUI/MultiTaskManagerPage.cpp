@@ -10,14 +10,13 @@
 
 #include "DeviceCore/DevManager.h"
 
-namespace Slic3r {
 
 static wxColour MultiTaskManagerThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return MultiTaskManagerThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour MultiTaskManagerThemeGreenHovered() {
@@ -25,7 +24,7 @@ static wxColour MultiTaskManagerThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return MultiTaskManagerThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour MultiTaskManagerThemeGreenPressed() {
@@ -33,9 +32,8 @@ static wxColour MultiTaskManagerThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return MultiTaskManagerThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 MultiTaskItem::MultiTaskItem(wxWindow* parent, MachineObject* obj, int type)
     : DeviceItem(parent, obj),

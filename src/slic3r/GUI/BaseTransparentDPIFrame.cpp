@@ -24,7 +24,7 @@ static wxColour BaseTransparentDPIFrThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return BaseTransparentDPIFrThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour BaseTransparentDPIFrThemeGreenHovered() {
@@ -32,7 +32,7 @@ static wxColour BaseTransparentDPIFrThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return BaseTransparentDPIFrThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour BaseTransparentDPIFrThemeGreenPressed() {
@@ -40,7 +40,7 @@ static wxColour BaseTransparentDPIFrThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return BaseTransparentDPIFrThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 using namespace Slic3r::GUI;
 

@@ -94,7 +94,6 @@ std::array<float, 4> adjust_color_for_rendering(const std::array<float, 4> &colo
     return colors;
 }
 
-namespace Slic3r {
 
 static std::map<const TriangleMesh*, std::set<GLVolume*>> g_mesh_volumes_map;
 

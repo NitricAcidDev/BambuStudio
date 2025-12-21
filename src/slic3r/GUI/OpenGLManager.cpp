@@ -114,8 +114,6 @@ static bool version_to_major_minor(const std::string& version, unsigned int& maj
     return true;
 }
 
-namespace Slic3r {
-namespace GUI {
 
 // A safe wrapper around glGetString to report a "N/A" string in case glGetString returns nullptr.
 std::string gl_get_string_safe(GLenum param, const std::string& default_value)

@@ -14,14 +14,13 @@
 #include <boost/asio/ip/address.hpp>
 #include <boost/log/trivial.hpp>
 
-namespace Slic3r {
 
 static wxColour NetworkTestThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return NetworkTestThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour NetworkTestThemeGreenHovered() {
@@ -29,7 +28,7 @@ static wxColour NetworkTestThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return NetworkTestThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour NetworkTestThemeGreenPressed() {
@@ -37,9 +36,8 @@ static wxColour NetworkTestThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return NetworkTestThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 #ifdef __WINDOWS__
 namespace WindowsUtils {

@@ -9,8 +9,6 @@
 
 #include <wx/msgdlg.h>
 
-namespace Slic3r {
-namespace GUI {
 
 void ConfigManipulation::apply(DynamicPrintConfig* config, DynamicPrintConfig* new_config)
 {

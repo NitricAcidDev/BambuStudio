@@ -12,7 +12,6 @@
 
 #include <iostream>
 
-namespace Slic3r {
 
 ProgressStatusBar::ProgressStatusBar(wxWindow *parent, int id)
     : self{new wxStatusBar(parent, id == -1 ? wxID_ANY : id)}

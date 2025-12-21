@@ -1,7 +1,6 @@
 #include "GuiTextShape.hpp"
 #define STB_TRUETYPE_IMPLEMENTATION // force following include to generate implementation
 #include "imgui/imstb_truetype.h" // stbtt_fontinfo
-namespace Slic3r {
     using namespace Emboss;
     namespace GUI {
     ExPolygons GuiTextShape::letter2shapes(wchar_t letter, Point &cursor, FontFileWithCache &font_with_cache, const FontProp &font_prop, fontinfo_opt &font_info_cache)

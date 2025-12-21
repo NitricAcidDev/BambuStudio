@@ -14,7 +14,7 @@ static wxColour ExtrusionThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return ExtrusionThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour ExtrusionThemeGreenHovered() {

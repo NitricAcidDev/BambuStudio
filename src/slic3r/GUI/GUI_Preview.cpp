@@ -37,8 +37,6 @@
 #include "BitmapComboBox.hpp"
 #endif
 
-namespace Slic3r {
-namespace GUI {
 
 BaseView::BaseView()
     : wxPanel()

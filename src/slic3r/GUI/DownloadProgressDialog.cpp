@@ -22,8 +22,6 @@
 
 #define DESIGN_INPUT_SIZE wxSize(FromDIP(100), -1)
 
-namespace Slic3r {
-namespace GUI {
 
 DownloadProgressDialog::DownloadProgressDialog(wxString title, bool post_login)
     : DPIDialog(static_cast<wxWindow *>(wxGetApp().mainframe), wxID_ANY, title, wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX)

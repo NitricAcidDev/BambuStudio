@@ -10,8 +10,6 @@
 
 #include <wx/clipbrd.h>
 
-namespace Slic3r {
-namespace GUI {
 
 AboutDialogLogo::AboutDialogLogo(wxWindow* parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize)

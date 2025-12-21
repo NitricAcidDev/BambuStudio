@@ -11,7 +11,6 @@ namespace pt = boost::property_tree;
 typedef pt::ptree JSON;
 
 namespace Slic3r { 
-namespace GUI {
 
 
 ParamsDialog::ParamsDialog(wxWindow * parent)

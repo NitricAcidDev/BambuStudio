@@ -16,14 +16,13 @@
 
 #include "DeviceTab/wgtDeviceNozzleRackUpdate.h"
 
-namespace Slic3r {
 
 static wxColour UpgradeThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return UpgradeThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour UpgradeThemeGreenHovered() {
@@ -31,7 +30,7 @@ static wxColour UpgradeThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return UpgradeThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour UpgradeThemeGreenPressed() {
@@ -39,9 +38,8 @@ static wxColour UpgradeThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return UpgradeThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 static const wxColour TEXT_NORMAL_CLR = UpgradeThemeGreen();
 static const wxColour TEXT_FAILED_CLR = wxColour(255, 111, 0);

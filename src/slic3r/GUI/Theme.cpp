@@ -4,14 +4,13 @@
 #include <cmath>
 #include <algorithm>
 
-namespace Slic3r {
 
 static wxColour ThemeThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return ThemeThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour ThemeThemeGreenHovered() {
@@ -19,7 +18,7 @@ static wxColour ThemeThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return ThemeThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour ThemeThemeGreenPressed() {
@@ -27,9 +26,8 @@ static wxColour ThemeThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return ThemeThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 // Manual RGB to HSV conversion
 void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double& h, double& s, double& v) {

@@ -18,8 +18,6 @@
 #include <wx/filename.h>
 #include <wx/stattext.h>
 
-namespace Slic3r {
-namespace GUI {
 
 namespace {
 

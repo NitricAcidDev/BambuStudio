@@ -4,8 +4,6 @@
 
 #include "DeviceCore/DevManager.h"
 
-namespace Slic3r {
-namespace GUI {
 
 
 MultiMachinePage::MultiMachinePage(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)

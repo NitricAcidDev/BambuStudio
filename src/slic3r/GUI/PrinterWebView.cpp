@@ -14,8 +14,6 @@
 
 namespace pt = boost::property_tree;
 
-namespace Slic3r {
-namespace GUI {
 
 PrinterWebView::PrinterWebView(wxWindow *parent)
         : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize)

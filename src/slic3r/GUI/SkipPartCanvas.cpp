@@ -16,8 +16,6 @@
 wxDEFINE_EVENT(EVT_ZOOM_PERCENT, wxCommandEvent);
 wxDEFINE_EVENT(EVT_CANVAS_PART, wxCommandEvent);
 
-namespace Slic3r {
-namespace GUI {
 
 SkipPartCanvas::SkipPartCanvas(wxWindow *parent, const wxGLAttributes& dispAttrs)
     : wxGLCanvas(parent, dispAttrs) {

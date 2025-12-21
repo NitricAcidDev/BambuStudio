@@ -21,8 +21,6 @@
 #include "../Utils/MacDarkMode.hpp"
 #endif
 
-namespace Slic3r {
-namespace GUI {
 
 MediaFilePanel::MediaFilePanel(wxWindow * parent)
     : wxPanel(parent, wxID_ANY)

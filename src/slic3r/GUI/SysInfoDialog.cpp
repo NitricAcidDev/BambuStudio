@@ -25,8 +25,6 @@
 	#include <psapi.h>
 #endif /* _WIN32 */
 
-namespace Slic3r {
-namespace GUI {
 
 std::string get_main_info(bool format_as_html)
 {

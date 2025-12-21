@@ -27,7 +27,6 @@
 #include <dbus/dbus.h> /* Pull in all of D-Bus headers. */
 #endif //__linux__
 
-namespace Slic3r {
 
 #ifdef __APPLE__
 	bool unlock_lockfile(const std::string& name, const std::string& path)
@@ -367,7 +366,6 @@ bool instance_check(int argc, char** argv, bool app_config_single_instance)
 }
 
 
-namespace GUI {
 
 wxDEFINE_EVENT(EVT_LOAD_MODEL_OTHER_INSTANCE, LoadFromOtherInstanceEvent);
 wxDEFINE_EVENT(EVT_INSTANCE_GO_TO_FRONT, InstanceGoToFrontEvent);

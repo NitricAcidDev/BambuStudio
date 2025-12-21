@@ -171,14 +171,13 @@ using namespace nlohmann;
 
 static const std::pair<unsigned int, unsigned int> THUMBNAIL_SIZE_3MF = { 512, 512 };
 
-namespace Slic3r {
 
 static wxColour PlaterThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PlaterThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PlaterThemeGreenHovered() {
@@ -186,7 +185,7 @@ static wxColour PlaterThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PlaterThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PlaterThemeGreenPressed() {
@@ -194,9 +193,8 @@ static wxColour PlaterThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PlaterThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 wxDEFINE_EVENT(EVT_SCHEDULE_BACKGROUND_PROCESS,     SimpleEvent);
 wxDEFINE_EVENT(EVT_SLICING_UPDATE,                  SlicingStatusEvent);

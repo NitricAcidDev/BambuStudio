@@ -33,7 +33,7 @@ static wxColour SyncAmsInfoThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return SyncAmsInfoThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour SyncAmsInfoThemeGreenHovered() {
@@ -41,7 +41,7 @@ static wxColour SyncAmsInfoThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return SyncAmsInfoThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour SyncAmsInfoThemeGreenPressed() {
@@ -49,7 +49,7 @@ static wxColour SyncAmsInfoThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return SyncAmsInfoThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 using namespace Slic3r::GUI;
 

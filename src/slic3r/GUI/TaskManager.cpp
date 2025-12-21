@@ -8,7 +8,6 @@
 
 using namespace nlohmann;
 
-namespace Slic3r {
 wxDEFINE_EVENT(EVT_MULTI_SEND_LIMIT, wxCommandEvent);
 
 int TaskManager::MaxSendingAtSameTime = 5;

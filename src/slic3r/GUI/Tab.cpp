@@ -51,11 +51,9 @@
 	#include <commctrl.h>
 #endif // WIN32
 
-namespace Slic3r {
 
 t_config_option_keys deep_diff(const ConfigBase &config_this, const ConfigBase &config_other, bool strict = true);
 
-namespace GUI {
 
 #define DISABLE_UNDO_SYS
 

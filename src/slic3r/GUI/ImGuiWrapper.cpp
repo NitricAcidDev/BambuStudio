@@ -41,8 +41,6 @@
 #include "OpenGLManager.hpp"
 #include "GUI_App.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 static const std::map<const wchar_t, std::string> font_icons = {
     {ImGui::PrintIconMarker       , "cog"                           },

@@ -24,7 +24,6 @@
 
 using boost::optional;
 
-namespace Slic3r {
 
 wxDEFINE_EVENT(wxCUSTOMEVT_JUMP_TO_OPTION, wxCommandEvent);
 wxDEFINE_EVENT(wxCUSTOMEVT_EXIT_SEARCH, wxCommandEvent);

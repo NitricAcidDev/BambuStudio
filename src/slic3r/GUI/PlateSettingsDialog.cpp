@@ -8,7 +8,7 @@ static wxColour PlateSettingsThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PlateSettingsThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PlateSettingsThemeGreenHovered() {
@@ -16,7 +16,7 @@ static wxColour PlateSettingsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PlateSettingsThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PlateSettingsThemeGreenPressed() {
@@ -24,7 +24,7 @@ static wxColour PlateSettingsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PlateSettingsThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 static constexpr int MIN_LAYER_VALUE = 2;
 static constexpr int MAX_LAYER_VALUE = INT_MAX - 1;

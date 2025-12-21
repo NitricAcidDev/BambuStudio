@@ -12,8 +12,6 @@
 #include <algorithm>
 #include <assert.h>
 
-namespace Slic3r {
-namespace GUI {
 
 void ProjectDirtyStateManager::update_from_undo_redo_stack(bool dirty)
 {

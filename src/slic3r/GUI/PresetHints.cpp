@@ -12,7 +12,6 @@
 #include "format.hpp"
 #include "I18N.hpp"
 
-namespace Slic3r {
 
 #define MIN_BUF_LENGTH	4096
 std::string PresetHints::cooling_description(const Preset &preset)

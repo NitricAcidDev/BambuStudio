@@ -10,8 +10,6 @@
 #include "libslic3r/GCode/ThumbnailData.hpp"
 #include "ImGuiWrapper.hpp"
 
-namespace Slic3r {
-namespace GUI {
 IMToolbarItem::~IMToolbarItem()
 {
     GLuint  id = (GLuint)(int64_t)texture_id;

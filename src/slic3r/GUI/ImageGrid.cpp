@@ -27,8 +27,6 @@ EVT_PAINT(Slic3r::GUI::ImageGrid::paintEvent)
 
 END_EVENT_TABLE()
 
-namespace Slic3r {
-namespace GUI {
 
 static constexpr int SHADOW_WIDTH = 3;
 

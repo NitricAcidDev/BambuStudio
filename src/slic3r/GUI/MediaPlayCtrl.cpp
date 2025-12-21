@@ -39,8 +39,6 @@ static std::map<int, std::string> error_messages = {
     {103, L("The player is not loaded, please click \"play\" button to retry.")},
     {-2, L("Plugin library failed to load. Click here to view the solution.")}};
 
-namespace Slic3r {
-namespace GUI {
 
 static int SecondsSinceLastInput();
 

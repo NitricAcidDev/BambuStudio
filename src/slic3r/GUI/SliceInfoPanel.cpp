@@ -6,8 +6,6 @@
 #include "GUI_App.hpp"//for  ICON_SIZE (wxSize(FromDIP(16), FromDIP(16)))
 #include <boost/log/trivial.hpp>
 
-namespace Slic3r {
-namespace GUI {
 
 #define THUMBNAIL_SIZE  (wxSize(FromDIP(60), FromDIP(60)))
 #define PRINT_ICON_SIZE (wxSize(FromDIP(18), FromDIP(18)))

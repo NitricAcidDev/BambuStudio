@@ -1,7 +1,5 @@
 #include "TickCode.hpp"
 
-namespace Slic3r {
-namespace GUI {
 std::string TickCodeInfo::get_color_for_tick(TickCode tick, Type type, const int extruder)
 {
     if (mode == SingleExtruder && type == ColorChange && m_use_default_colors) {

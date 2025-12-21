@@ -7,9 +7,7 @@
 #endif
 #include <imgui/imgui_internal.h>
 
-namespace Slic3r {
 
-namespace GUI {
 
 constexpr double min_delta_area = scale_(scale_(25));  // equal to 25 mm2
 constexpr double miscalculation = scale_(scale_(1));   // equal to 1 mm2

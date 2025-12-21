@@ -18,14 +18,13 @@
 
 #include "DeviceCore/DevManager.h"
 
-namespace Slic3r {
 
 static wxColour BindThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return BindThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour BindThemeGreenHovered() {
@@ -33,7 +32,7 @@ static wxColour BindThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return BindThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour BindThemeGreenPressed() {
@@ -41,7 +40,7 @@ static wxColour BindThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return BindThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static wxColour BindDialogThemeGreen() {
@@ -49,7 +48,7 @@ static wxColour BindDialogThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return BindDialogThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour BindDialogThemeGreenHovered() {
@@ -57,7 +56,7 @@ static wxColour BindDialogThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return BindThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour BindDialogThemeGreenPressed() {
@@ -65,9 +64,8 @@ static wxColour BindDialogThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return BindThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 wxString get_fail_reason(int code)
 {

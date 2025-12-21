@@ -54,7 +54,7 @@ static wxColour StatusThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return StatusThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour StatusThemeGreenHovered() {
@@ -62,7 +62,7 @@ static wxColour StatusThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return StatusThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour StatusThemeGreenPressed() {
@@ -70,7 +70,7 @@ static wxColour StatusThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return StatusThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static wxColour StatusPanelThemeGreen() {
@@ -78,7 +78,7 @@ static wxColour StatusPanelThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return StatusPanelThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour StatusPanelThemeGreenHovered() {
@@ -86,7 +86,7 @@ static wxColour StatusPanelThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return StatusThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour StatusPanelThemeGreenPressed() {
@@ -94,7 +94,7 @@ static wxColour StatusPanelThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return StatusThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 #define TEMP_THRESHOLD_VAL 2
@@ -124,7 +124,7 @@ static wxColour GetThemeButtonHoverCol()
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning())
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
-    return StatusPanelThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static const wxColour BUTTON_HOVER_COL   = StatusPanelThemeGreen();

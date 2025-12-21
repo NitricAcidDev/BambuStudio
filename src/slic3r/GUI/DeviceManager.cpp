@@ -290,7 +290,6 @@ void sanitizeToUtf8(std::string& str) {
     str = std::move(result);
 }
 
-namespace Slic3r {
 
 /* Common Functions */
 void split_string(std::string s, std::vector<std::string>& v) {

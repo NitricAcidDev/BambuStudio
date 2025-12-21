@@ -36,7 +36,7 @@ static wxColour CreatePresetsThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return CreatePresetsThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour CreatePresetsThemeGreenHovered() {
@@ -44,7 +44,7 @@ static wxColour CreatePresetsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return CreatePresetsThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour CreatePresetsThemeGreenPressed() {
@@ -52,7 +52,7 @@ static wxColour CreatePresetsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return CreatePresetsThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 #define PRINTER_LIST_COLOUR wxColour("#EEEEEE")
 #define FILAMENT_OPTION_COLOUR wxColour("#D9D9D9")
@@ -65,9 +65,6 @@ static wxColour GetSelectAllOptionColour()
     // The actual theme color will be applied later via stylesheet/refresh
     return wxColour("#00AE42");
 }
-
-namespace Slic3r {
-namespace GUI {
 
 static const std::vector<std::string> filament_vendors = {"Polymaker", "OVERTURE", "Kexcelled", "HATCHBOX",  "eSUN",       "SUNLU",    "Prusament", "Creality", "Protopasta",
                                                           "Anycubic",  "Basf",     "ELEGOO",    "INLAND",    "FLASHFORGE", "FusRock", "AMOLEN",   "MIKA3D",    "3DXTECH",

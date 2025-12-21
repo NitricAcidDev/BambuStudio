@@ -30,7 +30,7 @@ static wxColour ReleaseNoteThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return ReleaseNoteThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour ReleaseNoteThemeGreenHovered() {
@@ -38,7 +38,7 @@ static wxColour ReleaseNoteThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return ReleaseNoteThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour ReleaseNoteThemeGreenPressed() {
@@ -46,7 +46,7 @@ static wxColour ReleaseNoteThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return ReleaseNoteThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 #include <algorithm>
 #include "Plater.hpp"

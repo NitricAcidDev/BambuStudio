@@ -28,7 +28,7 @@ static wxColour SavePresetThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return SavePresetThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour SavePresetThemeGreenHovered() {
@@ -36,7 +36,7 @@ static wxColour SavePresetThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return SavePresetThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour SavePresetThemeGreenPressed() {
@@ -44,7 +44,7 @@ static wxColour SavePresetThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return SavePresetThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 #define BORDER_W 10

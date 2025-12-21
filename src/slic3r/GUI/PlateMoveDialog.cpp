@@ -8,7 +8,7 @@ static wxColour PlateMoveThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PlateMoveThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PlateMoveThemeGreenHovered() {
@@ -16,7 +16,7 @@ static wxColour PlateMoveThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PlateMoveThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PlateMoveThemeGreenPressed() {
@@ -24,7 +24,7 @@ static wxColour PlateMoveThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PlateMoveThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static wxColour PlateMoveDialogThemeGreen() {
@@ -32,7 +32,7 @@ static wxColour PlateMoveDialogThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PlateMoveDialogThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PlateMoveDialogThemeGreenHovered() {
@@ -40,7 +40,7 @@ static wxColour PlateMoveDialogThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PlateMoveThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PlateMoveDialogThemeGreenPressed() {
@@ -48,7 +48,7 @@ static wxColour PlateMoveDialogThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PlateMoveThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 const StateColor btn_bg_green_in_plate_swap(std::pair<wxColour, int>(PlateMoveThemeGreenPressed(), StateColor::Pressed),

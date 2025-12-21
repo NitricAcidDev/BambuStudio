@@ -11,8 +11,6 @@
 #include "GUI_App.hpp"
 #include "Plater.hpp"
 
-namespace Slic3r {
-namespace GUI {
     ModelMallDialog::ModelMallDialog(Plater* plater /*= nullptr*/)
         :DPIFrame(nullptr, wxID_ANY, _L("3D Models"), wxDefaultPosition, wxDefaultSize, wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER)
     {

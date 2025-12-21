@@ -51,8 +51,6 @@
     #include <charconv>
 #endif
 
-namespace Slic3r {
-namespace GUI {
 
 static const std::string SEND_SYSTEM_INFO_DOMAIN = "bambu-lab.com";
 static const std::string SEND_SYSTEM_INFO_URL = "https://files." + SEND_SYSTEM_INFO_DOMAIN + "/wp-json/v1/ps";

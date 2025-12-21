@@ -164,8 +164,6 @@ struct StaticBambuLib
     static void release();
 };
 
-namespace Slic3r {
-namespace GUI {
 
 class MainFrame;
 

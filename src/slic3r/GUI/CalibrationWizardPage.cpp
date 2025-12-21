@@ -12,7 +12,7 @@ static wxColour CalibrationWizardThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return CalibrationWizardThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour CalibrationWizardThemeGreenHovered() {
@@ -20,7 +20,7 @@ static wxColour CalibrationWizardThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return CalibrationWizardThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour CalibrationWizardThemeGreenPressed() {
@@ -28,7 +28,7 @@ static wxColour CalibrationWizardThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return CalibrationWizardThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 wxDEFINE_EVENT(EVT_CALI_ACTION, wxCommandEvent);

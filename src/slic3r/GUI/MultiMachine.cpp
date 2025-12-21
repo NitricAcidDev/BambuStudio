@@ -4,8 +4,6 @@
 #include "GUI_App.hpp"
 #include "MainFrame.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 
 wxDEFINE_EVENT(EVT_MULTI_CLOUD_TASK_SELECTED, wxCommandEvent);

@@ -14,7 +14,6 @@
 #include <iostream>
 #include <regex>
 
-namespace Slic3r {
 
 wxDEFINE_EVENT(EVT_SHOW_ERROR_INFO, wxCommandEvent);
 

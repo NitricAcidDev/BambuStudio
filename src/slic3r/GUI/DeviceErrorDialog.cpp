@@ -6,7 +6,6 @@
 #include "MainFrame.hpp"
 #include "ReleaseNote.hpp"
 
-namespace Slic3r {
 namespace GUI
 {
 

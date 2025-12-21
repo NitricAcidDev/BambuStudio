@@ -20,7 +20,7 @@ static wxColour PrintOptionsThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return PrintOptionsThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour PrintOptionsThemeGreenHovered() {
@@ -28,7 +28,7 @@ static wxColour PrintOptionsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return PrintOptionsThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour PrintOptionsThemeGreenPressed() {
@@ -36,7 +36,7 @@ static wxColour PrintOptionsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return PrintOptionsThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Disabled),

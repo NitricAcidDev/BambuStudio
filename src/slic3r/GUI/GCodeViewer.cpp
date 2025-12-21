@@ -4,7 +4,6 @@
 #include "slic3r/GUI/OpenGLManager.hpp"
 #include "slic3r/GUI/GUI_App.hpp"
 #include "libslic3r/BoundingBox.hpp"
-namespace Slic3r {
     namespace GUI {
         namespace gcode
         {

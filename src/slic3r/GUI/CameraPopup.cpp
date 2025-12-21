@@ -13,8 +13,6 @@
 #include "DeviceCore/DevManager.h"
 #include "DeviceCore/DevStorage.h"
 
-namespace Slic3r {
-namespace GUI {
 
 wxIMPLEMENT_CLASS(CameraPopup, PopupWindow);
 

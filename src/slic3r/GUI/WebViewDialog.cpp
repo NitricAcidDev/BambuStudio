@@ -25,8 +25,6 @@
 
 namespace pt = boost::property_tree;
 
-namespace Slic3r {
-namespace GUI {
     wxDECLARE_EVENT(EVT_RESPONSE_MESSAGE, wxCommandEvent);
 
     wxDEFINE_EVENT(EVT_RESPONSE_MESSAGE, wxCommandEvent);

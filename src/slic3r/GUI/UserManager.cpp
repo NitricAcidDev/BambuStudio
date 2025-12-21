@@ -9,7 +9,6 @@
 #include "DeviceCore/DevManager.h"
 
 
-namespace Slic3r {
 
 UserManager::UserManager(NetworkAgent* agent)
 {

@@ -53,8 +53,6 @@ static const std::vector<int> _3DCONNEXION_DEVICES =
     0xc652, /* 50770 3Dconnexion universal receiver *TESTED* */
 };
 
-namespace Slic3r {
-namespace GUI {
 
 #if ENABLE_3DCONNEXION_DEVICES_DEBUG_OUTPUT
 template<typename T>

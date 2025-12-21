@@ -12,8 +12,6 @@ static const char* HMS_LOCAL_IMG_PATH = "hms/local_image";
 // the local HMS info
 static unordered_set<string> package_dev_id_types {"094", "239", "093", "22E", "31B"};
 
-namespace Slic3r {
-namespace GUI {
 
 int get_hms_info_version(std::string& version)
 {

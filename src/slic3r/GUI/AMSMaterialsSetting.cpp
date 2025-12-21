@@ -27,7 +27,7 @@ static wxColour AMSMaterialsSettingThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return AMSMaterialsSettingThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour AMSMaterialsSettingThemeGreenHovered() {
@@ -35,7 +35,7 @@ static wxColour AMSMaterialsSettingThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return AMSMaterialsSettingThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour AMSMaterialsSettingThemeGreenPressed() {
@@ -43,7 +43,7 @@ static wxColour AMSMaterialsSettingThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return AMSMaterialsSettingThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 static wxColour AMSMaterialsThemeGreen() {
@@ -51,7 +51,7 @@ static wxColour AMSMaterialsThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return AMSMaterialsThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour AMSMaterialsThemeGreenHovered() {
@@ -59,7 +59,7 @@ static wxColour AMSMaterialsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return AMSMaterialsSettingThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour AMSMaterialsThemeGreenPressed() {
@@ -67,7 +67,7 @@ static wxColour AMSMaterialsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return AMSMaterialsSettingThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
 
 wxDEFINE_EVENT(EVT_SELECTED_COLOR, wxCommandEvent);

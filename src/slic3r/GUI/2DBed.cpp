@@ -7,8 +7,6 @@
 #include "libslic3r/Geometry.hpp"
 #include "libslic3r/ClipperUtils.hpp"
 
-namespace Slic3r {
-namespace GUI {
 
 
 Bed_2D::Bed_2D(wxWindow* parent) : 

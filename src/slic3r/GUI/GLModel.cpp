@@ -14,8 +14,6 @@
 
 #include <GL/glew.h>
 
-namespace Slic3r {
-namespace GUI {
 void GLModel::Geometry::add_vertex(const Vec2f &position)
 {
     assert(format.vertex_layout == EVertexLayout::P2);

@@ -14,7 +14,6 @@
 #include <iostream>
 
 
-namespace Slic3r {
 
 
 BBLStatusBarBind::BBLStatusBarBind(wxWindow *parent, int id)

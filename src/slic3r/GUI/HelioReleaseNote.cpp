@@ -35,7 +35,7 @@ static wxColour HelioReleaseNoteThemeGreen() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return HelioReleaseNoteThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour HelioReleaseNoteThemeGreenHovered() {
@@ -43,7 +43,7 @@ static wxColour HelioReleaseNoteThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return HelioReleaseNoteThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour HelioReleaseNoteThemeGreenPressed() {
@@ -51,7 +51,7 @@ static wxColour HelioReleaseNoteThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return HelioReleaseNoteThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
  HelioStatementDialog::HelioStatementDialog(wxWindow *parent /*= nullptr*/)
     : DPIDialog(static_cast<wxWindow *>(wxGetApp().mainframe), wxID_ANY, _L("Third-Party Extension"), wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX)

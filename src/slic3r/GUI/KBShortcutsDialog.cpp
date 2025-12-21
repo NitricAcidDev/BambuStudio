@@ -11,8 +11,6 @@
 #include "MainFrame.hpp"
 #include <wx/notebook.h>
 
-namespace Slic3r {
-namespace GUI {
 
 wxDEFINE_EVENT(EVT_PREFERENCES_SELECT_TAB, wxCommandEvent);
 

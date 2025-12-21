@@ -12,8 +12,6 @@
 #include <wx/bmpcbox.h>
 #include <wx/dc.h>
 
-namespace Slic3r {
-namespace GUI {
 wxDEFINE_EVENT(wxCUSTOMEVT_LAST_VOLUME_IS_DELETED, wxCommandEvent);
 
 BitmapCache* m_bitmap_cache = nullptr;

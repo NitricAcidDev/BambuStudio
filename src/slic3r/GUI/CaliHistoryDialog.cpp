@@ -12,14 +12,13 @@
 #include "DeviceCore/DevManager.h"
 #include "DeviceCore/DevNozzleRack.h"
 
-namespace Slic3r {
 
 static wxColour CaliHistoryThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
     }
-    return CaliHistoryThemeGreen();
+    return wxColour(0, 174, 66);
 }
 
 static wxColour CaliHistoryThemeGreenHovered() {
@@ -27,7 +26,7 @@ static wxColour CaliHistoryThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return CaliHistoryThemeGreenHovered();
+    return wxColour(61, 203, 115);
 }
 
 static wxColour CaliHistoryThemeGreenPressed() {
@@ -35,9 +34,8 @@ static wxColour CaliHistoryThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return CaliHistoryThemeGreenPressed();
+    return wxColour(27, 136, 68);
 }
-namespace GUI {
 
 
 #define HISTORY_WINDOW_SIZE                wxSize(FromDIP(740), FromDIP(600))

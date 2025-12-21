@@ -9,8 +9,6 @@
 
 #include <GL/glew.h>
 
-namespace Slic3r {
-namespace GUI {
 
     void GLSelectionRectangle::start_dragging(const Vec2d& mouse_position, EState state)
     {

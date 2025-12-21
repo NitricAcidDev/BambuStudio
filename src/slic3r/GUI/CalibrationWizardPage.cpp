@@ -7,6 +7,30 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour CalibrationWizardThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return CalibrationWizardThemeGreen();
+}
+
+static wxColour CalibrationWizardThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour CalibrationWizardThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 wxDEFINE_EVENT(EVT_CALI_ACTION, wxCommandEvent);
 wxDEFINE_EVENT(EVT_CALI_TRAY_CHANGED, wxCommandEvent);
 
@@ -154,7 +178,7 @@ CaliPageButton::CaliPageButton(wxWindow* parent, CaliPageActionType type, wxStri
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Disabled),
         std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
         std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+        std::pair<wxColour, int>(CalibrationWizardThemeGreen(), StateColor::Normal));
 
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Disabled),
         std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Pressed),
@@ -162,7 +186,7 @@ CaliPageButton::CaliPageButton(wxWindow* parent, CaliPageActionType type, wxStri
         std::pair<wxColour, int>(wxColour(255, 255, 255), StateColor::Normal));
 
     StateColor btn_bd_green(std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Disabled),
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Enabled));
+        std::pair<wxColour, int>(CalibrationWizardThemeGreen(), StateColor::Enabled));
 
     StateColor btn_bd_white(std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Disabled),
         std::pair<wxColour, int>(wxColour(38, 46, 48), StateColor::Enabled));

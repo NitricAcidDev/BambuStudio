@@ -13,6 +13,30 @@
 #include <chrono>
 
 using namespace Slic3r;
+
+static wxColour StepMeshThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return StepMeshThemeGreen();
+}
+
+static wxColour StepMeshThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour StepMeshThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
 using namespace Slic3r::GUI;
 
 static int _scale(const int val) { return val * Slic3r::GUI::wxGetApp().em_unit() / 10; }
@@ -123,7 +147,7 @@ StepMeshDialog::StepMeshDialog(wxWindow* parent, Slic3r::Step& file, double line
     wxStaticText *tips = new wxStaticText(this, wxID_ANY, _L("View Wiki for more information"));
     wxFont font(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
     font.SetUnderlined(true);
-    tips->SetForegroundColour(StateColor::darkModeColorFor(wxColour(0, 174, 66)));
+    tips->SetForegroundColour(StateColor::darkModeColorFor(StepMeshThemeGreen()));
     tips->SetFont(font);
     tips->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent& e) {
         wxLaunchDefaultBrowser("https://wiki.bambulab.com/en/software/bambu-studio/step");

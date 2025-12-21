@@ -15,6 +15,30 @@
 #include <boost/log/trivial.hpp>
 
 namespace Slic3r {
+
+static wxColour NetworkTestThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return NetworkTestThemeGreen();
+}
+
+static wxColour NetworkTestThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour NetworkTestThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
 namespace GUI {
 
 #ifdef __WINDOWS__

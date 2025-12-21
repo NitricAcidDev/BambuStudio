@@ -27,6 +27,30 @@
 #include "DeviceCore/DevStorage.h"
 
 using namespace Slic3r;
+
+static wxColour SyncAmsInfoThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return SyncAmsInfoThemeGreen();
+}
+
+static wxColour SyncAmsInfoThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour SyncAmsInfoThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
 using namespace Slic3r::GUI;
 
 #define OK_BUTTON_SIZE wxSize(FromDIP(90), FromDIP(24))

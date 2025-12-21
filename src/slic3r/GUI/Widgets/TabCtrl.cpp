@@ -1,5 +1,6 @@
 #include <wx/dc.h>
 #include "TabCtrl.hpp"
+#include "slic3r/GUI/GUI_App.hpp" // for wxGetApp() theme colors
 
 wxDEFINE_EVENT( wxEVT_TAB_SEL_CHANGING, wxCommandEvent );
 wxDEFINE_EVENT( wxEVT_TAB_SEL_CHANGED, wxCommandEvent );

@@ -42,39 +42,39 @@ void init_defaults()
     };
 
     // Target hue: red for accent (0 degrees)
-    constexpr float H_RED = 0.f;
+    constexpr float H_TARGET = 0.f;
 
     // Accent light tint: properly saturated light color that can be hue-shifted for any theme color
     // Uses a light tint with good saturation so hue shift produces visible colored backgrounds
     // Original: 0xC8E6C9 (Material Design light green, properly saturated but very light for overlay effect)
-    g_theme_colors["accent.tint.light"] = shift_to_hue(0xC8E6C9, H_RED);
+    g_theme_colors["accent.tint.light"] = shift_to_hue(0xC8E6C9, H_TARGET);
 
     // SwitchButton - keep neutrals; shift original green accents to red
     g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);
     g_theme_colors["switch.text.normal"]    = from_hex_rgb(0x6B6B6B);
     g_theme_colors["switch.track"]          = from_hex_rgb(0xD9D9D9);
-    g_theme_colors["switch.thumb.checked"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["switch.thumb.checked"]  = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["switch.thumb.normal"]   = from_hex_rgb(0xD9D9D9);
 
     // SwitchBoard
     g_theme_colors["switch_board.bg.enabled"]      = from_hex_rgb(0xEEEEEE);
     g_theme_colors["switch_board.bg.disabled"]     = from_hex_rgb(0xCECECE);
-    g_theme_colors["switch_board.segment.enabled"] = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["switch_board.segment.enabled"] = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["switch_board.text.selected"]   = from_hex_rgb(0xFFFFFF);
     g_theme_colors["switch_board.text.unselected"] = from_hex_rgb(0x333333);
 
     // MultiSwitchButton
     g_theme_colors["multi_switch.bg.not_checked"]         = from_hex_rgb(0xE8E8E8);
-    g_theme_colors["multi_switch.bg.normal"]              = shift_to_hue(0x00AE42, H_RED);
-    g_theme_colors["multi_switch.bg_grayed.normal"]       = shift_to_hue(0x6DC48D, H_RED);
+    g_theme_colors["multi_switch.bg.normal"]              = shift_to_hue(0x00AE42, H_TARGET);
+    g_theme_colors["multi_switch.bg_grayed.normal"]       = shift_to_hue(0x6DC48D, H_TARGET);
     g_theme_colors["multi_switch.text.not_checked"]       = from_hex_rgb(0x6B6B6B);
     g_theme_colors["multi_switch.text.normal"]            = from_hex_rgb(0xFFFFFE);
     g_theme_colors["multi_switch.text_grayed.not_checked"] = from_hex_rgb(0x999999);
-    g_theme_colors["multi_switch.text_grayed.normal"]      = shift_to_hue(0x99DFB2, H_RED);
+    g_theme_colors["multi_switch.text_grayed.normal"]      = shift_to_hue(0x99DFB2, H_TARGET);
 
     // ComboBox
     g_theme_colors["combobox.border.disabled"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["combobox.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["combobox.border.hovered"]  = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["combobox.border.normal"]   = from_hex_rgb(0xDBDBDB);
 
     g_theme_colors["combobox.bg.disabled"] = from_hex_rgb(0xF0F0F1);
@@ -86,15 +86,15 @@ void init_defaults()
 
     // Button
     g_theme_colors["button.bg.disabled"]        = from_hex_rgb(0xF0F0F1);
-    g_theme_colors["button.bg.hovered_checked"] = shift_to_hue(0x37EE7C, H_RED);
-    g_theme_colors["button.bg.checked"]         = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["button.bg.hovered_checked"] = shift_to_hue(0x37EE7C, H_TARGET);
+    g_theme_colors["button.bg.checked"]         = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["button.bg.hovered"]         = from_hex_rgb(0xD3D3D3);
     g_theme_colors["button.bg.normal"]          = from_hex_rgb(0xFFFFFF);
     g_theme_colors["button.text.disabled"]      = from_hex_rgb(0xD3D3D3);
     g_theme_colors["button.text.normal"]        = from_hex_rgb(0x000000);
 
     // AxisCtrlButton
-    g_theme_colors["axis_ctrl.border.hovered"] = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["axis_ctrl.border.hovered"] = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["axis_ctrl.bg.disabled"]   = from_hex_rgb(0xEEEEEE);
     g_theme_colors["axis_ctrl.bg.pressed"]    = from_hex_rgb(0xACACAC);
     g_theme_colors["axis_ctrl.bg.hovered"]    = from_hex_rgb(0xEEEEEE);
@@ -103,18 +103,18 @@ void init_defaults()
     g_theme_colors["axis_ctrl.text.normal"]   = from_hex_rgb(0x000000);
 
     // SideButton
-    g_theme_colors["side_button.border.pressed"] = shift_to_hue(0x17813F, H_RED);
-    g_theme_colors["side_button.border.hovered"] = shift_to_hue(0x30DD70, H_RED);
-    g_theme_colors["side_button.border.normal"]  = shift_to_hue(0x00AE42, H_RED);
-    g_theme_colors["side_button.bg.pressed"]     = shift_to_hue(0x17813F, H_RED);
-    g_theme_colors["side_button.bg.hovered"]     = shift_to_hue(0x30DD70, H_RED);
-    g_theme_colors["side_button.bg.normal"]      = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["side_button.border.pressed"] = shift_to_hue(0x17813F, H_TARGET);
+    g_theme_colors["side_button.border.hovered"] = shift_to_hue(0x30DD70, H_TARGET);
+    g_theme_colors["side_button.border.normal"]  = shift_to_hue(0x00AE42, H_TARGET);
+    g_theme_colors["side_button.bg.pressed"]     = shift_to_hue(0x17813F, H_TARGET);
+    g_theme_colors["side_button.bg.hovered"]     = shift_to_hue(0x30DD70, H_TARGET);
+    g_theme_colors["side_button.bg.normal"]      = shift_to_hue(0x00AE42, H_TARGET);
 
     // ProgressBar & MultiNozzleSync
     g_theme_colors["progress.button.disabled"] = from_hex_rgb(0x909090);
-    g_theme_colors["progress.button.pressed"]  = shift_to_hue(0x1B8844, H_RED);
-    g_theme_colors["progress.button.hovered"]  = shift_to_hue(0x3DCB73, H_RED);
-    g_theme_colors["progress.button.normal"]   = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["progress.button.pressed"]  = shift_to_hue(0x1B8844, H_TARGET);
+    g_theme_colors["progress.button.hovered"]  = shift_to_hue(0x3DCB73, H_TARGET);
+    g_theme_colors["progress.button.normal"]   = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["progress.text.normal"]     = from_hex_rgb(0xFFFFFE);
 
     // TextInput
@@ -123,7 +123,7 @@ void init_defaults()
     g_theme_colors["textinput.text.disabled"]  = from_hex_rgb(0x909090);
     g_theme_colors["textinput.text.normal"]    = from_hex_rgb(0x262E30);
     g_theme_colors["textinput.border.disabled"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["textinput.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["textinput.border.hovered"]  = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["textinput.border.normal"]   = from_hex_rgb(0xDBDBDB);
     g_theme_colors["textinput.bg.disabled"]     = from_hex_rgb(0xF0F0F1);
     g_theme_colors["textinput.bg.normal"]       = from_hex_rgb(0xFFFFFF);
@@ -134,7 +134,7 @@ void init_defaults()
     g_theme_colors["spininput.text.disabled"]  = from_hex_rgb(0x909090);
     g_theme_colors["spininput.text.normal"]    = from_hex_rgb(0x262E30);
     g_theme_colors["spininput.border.disabled"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["spininput.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["spininput.border.hovered"]  = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["spininput.border.normal"]   = from_hex_rgb(0xDBDBDB);
     g_theme_colors["spininput.bg.disabled"]     = from_hex_rgb(0xF0F0F1);
     g_theme_colors["spininput.bg.normal"]       = from_hex_rgb(0xFFFFFF);
@@ -145,42 +145,42 @@ void init_defaults()
     g_theme_colors["tempinput.text.disabled"]  = from_hex_rgb(0xACACAC);
     g_theme_colors["tempinput.text.normal"]    = from_hex_rgb(0x6B6B6B);
     g_theme_colors["tempinput.border.disabled"] = from_hex_rgb(0xFFFFFF);
-    g_theme_colors["tempinput.border.focused"]  = shift_to_hue(0x00AE42, H_RED);
-    g_theme_colors["tempinput.border.hovered"]  = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["tempinput.border.focused"]  = shift_to_hue(0x00AE42, H_TARGET);
+    g_theme_colors["tempinput.border.hovered"]  = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["tempinput.border.normal"]   = from_hex_rgb(0xFFFFFF);
     g_theme_colors["tempinput.bg.disabled"]     = from_hex_rgb(0xFFFFFF);
     g_theme_colors["tempinput.bg.normal"]       = from_hex_rgb(0xFFFFFF);
 
     // AMSMaterialsSetting
     g_theme_colors["ams_material.border.focused"] = from_hex_rgb(0xDBDBDB);
-    g_theme_colors["ams_material.border.hovered"] = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["ams_material.border.hovered"] = shift_to_hue(0x00AE42, H_TARGET);
 
     // DropDown menu items
-    g_theme_colors["dropdown.selector_border.hovered"] = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["dropdown.selector_border.hovered"] = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["dropdown.selector_border.normal"]  = from_hex_rgb(0xFFFFFF);
     g_theme_colors["dropdown.selector_bg.checked"]     = g_theme_colors["accent.tint.light"];
-    g_theme_colors["dropdown.selector_bg.checked.dark"]   = shift_to_hue(0x283232, H_RED);
+    g_theme_colors["dropdown.selector_bg.checked.dark"]   = shift_to_hue(0x283232, H_TARGET);
     g_theme_colors["dropdown.selector_bg.normal"]      = from_hex_rgb(0xFFFFFF);
     // Tick icon recolor target
-    g_theme_colors["dropdown.check.color"]             = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["dropdown.check.color"]             = shift_to_hue(0x00AE42, H_TARGET);
 
     // TabCtrl
-    g_theme_colors["tab.underline.active"] = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["tab.underline.active"] = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["tab.text.checked"]     = from_hex_rgb(0xFFFFFF);
     g_theme_colors["tab.text.normal"]      = from_hex_rgb(0x6B6B6C);
 
     // Dropdown pressed item color
-    g_theme_colors["dropdown.item_bg.pressed"] = shift_to_hue(0xEDFAF2, H_RED);
+    g_theme_colors["dropdown.item_bg.pressed"] = shift_to_hue(0xEDFAF2, H_TARGET);
 
     // Bitmap generation and similar features
-    g_theme_colors["feature.text.hovered"]        = shift_to_hue(0x00AE42, H_RED);
-    g_theme_colors["feature.underline.hovered"]   = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["feature.text.hovered"]        = shift_to_hue(0x00AE42, H_TARGET);
+    g_theme_colors["feature.underline.hovered"]   = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["feature.text.normal"]         = from_hex_rgb(0x0084C6);
 
     // Additional keys for sidebar/panel selection and info text
-    g_theme_colors["panel.selection.border"]      = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["panel.selection.border"]      = shift_to_hue(0x00AE42, H_TARGET);
     g_theme_colors["panel.selection.bg"]          = g_theme_colors["accent.tint.light"];
-    g_theme_colors["info.text.accent"]            = shift_to_hue(0x00AE42, H_RED);
+    g_theme_colors["info.text.accent"]            = shift_to_hue(0x00AE42, H_TARGET);
 }
 
 inline void ensure_init()

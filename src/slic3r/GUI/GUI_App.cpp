@@ -3532,15 +3532,10 @@ ThemeColors GUI_App::get_theme_colors()
     // compatibility with the earlier key (theme).
     std::string theme_id = "bambu_green";
     if (app_config) {
-        try {
-            if (app_config->has("theme_color")) {
-                theme_id = app_config->get("theme_color");
-            } else if (app_config->has("theme")) {
-                theme_id = app_config->get("theme");
-            }
-        } catch (...) {
-            // If app_config access fails, use default
-            theme_id = "bambu_green";
+        if (app_config->has("theme_color")) {
+            theme_id = app_config->get("theme_color");
+        } else if (app_config->has("theme")) {
+            theme_id = app_config->get("theme");
         }
     }
     return Theme::get_theme_colors(theme_id);

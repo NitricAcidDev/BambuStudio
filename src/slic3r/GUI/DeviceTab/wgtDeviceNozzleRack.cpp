@@ -35,13 +35,8 @@
 
 static wxColour s_gray_clr("#B0B0B0");
 static wxColour GetThemeGreenColor() { 
-    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
-    if (app) {
-        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
-    }
-    return wxColour("#00AE42"); // Default fallback
-}
-static wxColour s_red_clr("#D01B1B");
+    // Use default color - theme will be applied through app refresh
+    return wxColour("#00AE42");
 
 static std::vector<int> a_nozzle_seq = { 0, 2, 4, 1, 3, 5 };
 static std::vector<int> b_nozzle_seq = { 1, 3, 5, 0, 2, 4 };

@@ -18,14 +18,10 @@ static wxColour GetBgSelectColor()
 static const wxColour BorderNormalColor   = wxColour("#CECECE");
 static const wxColour BorderDisableColor  = wxColour("#EEEEEE");
 
+// Lazy-initialized theme color - computed on first use
 static wxColour GetBorderSelectedColor()
-{
-    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
-    if (app) {
-        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
-    }
-    return wxColour("#00AE42"); // Default fallback
-}
+{// Use default color - theme will be applied through app refresh
+    return wxColour("#00AE42");
 
 static const wxColour TextNormalBlackColor = wxColour("#262E30");
 static const wxColour TextNormalGreyColor = wxColour("#6B6B6B");

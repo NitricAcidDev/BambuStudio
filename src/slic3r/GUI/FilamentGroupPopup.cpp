@@ -12,14 +12,10 @@ static const wxColour LabelDisableColor = wxColour("#ACACAC");
 static const wxColour GreyColor = wxColour("#6B6B6B");
 static const wxColour BackGroundColor = wxColour("#FFFFFF");
 
+// Use default color - theme will be applied through app refresh
 static wxColour GetThemeGreenColor()
 {
-    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
-    if (app) {
-        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
-    }
-    return wxColour("#00AE42"); // Default fallback
-}
+    return wxColour("#00AE42");
 
 
 static bool should_pop_up()

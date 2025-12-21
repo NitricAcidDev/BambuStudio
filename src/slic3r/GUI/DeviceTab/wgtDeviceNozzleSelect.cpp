@@ -9,9 +9,11 @@
 #include "wgtDeviceNozzleRack.h"
 
 #include "slic3r/GUI/I18N.hpp"
+#include "slic3r/GUI/Theme.hpp"
 
 static wxColour s_gray_clr("#B0B0B0");
-static wxColour s_hgreen_clr("#00AE42");
+// Theme color used for highlights - retrieved dynamically where needed
+// static wxColour s_hgreen_clr = Slic3r::GUI::Theme::getThemeColor("button.bg.checked");
 static wxColour s_red_clr("#D01B1B");
 
 static std::vector<int> a_nozzle_seq = {0, 2, 4, 1, 3, 5};

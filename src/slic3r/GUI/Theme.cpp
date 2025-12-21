@@ -1,16 +1,22 @@
 #include "Theme.hpp"
+#include "GUI_App.hpp"
 
 #include <unordered_map>
 #include <mutex>
 #include <cmath>
+#include <algorithm>
+
 #include <wx/log.h>
+#include <wx/image.h>
 
-namespace Slic3r { namespace GUI { namespace Theme {
+namespace Slic3r { namespace GUI {
 
-static std::unordered_map<std::string, wxColour> g_theme_colors;
-static std::once_flag g_init_flag;
+namespace {
 
-static inline wxColour from_hex_rgb(int hex)
+std::unordered_map<std::string, wxColour> g_theme_colors;
+std::once_flag g_init_flag;
+
+inline wxColour from_hex_rgb(int hex)
 {
     unsigned r = (hex >> 16) & 0xFFu;
     unsigned g = (hex >> 8) & 0xFFu;
@@ -18,7 +24,7 @@ static inline wxColour from_hex_rgb(int hex)
     return wxColour(r, g, b);
 }
 
-static void init_defaults()
+void init_defaults()
 {
     // SwitchButton
     g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);
@@ -28,18 +34,18 @@ static void init_defaults()
     g_theme_colors["switch.thumb.normal"]   = from_hex_rgb(0xD9D9D9);
 
     // SwitchBoard
-    g_theme_colors["switch_board.bg.enabled"]     = from_hex_rgb(0xEEEEEE);
-    g_theme_colors["switch_board.bg.disabled"]    = from_hex_rgb(0xCECECE);
+    g_theme_colors["switch_board.bg.enabled"]      = from_hex_rgb(0xEEEEEE);
+    g_theme_colors["switch_board.bg.disabled"]     = from_hex_rgb(0xCECECE);
     g_theme_colors["switch_board.segment.enabled"] = from_hex_rgb(0x00AE42);
-    g_theme_colors["switch_board.text.selected"]  = from_hex_rgb(0xFFFFFF);
+    g_theme_colors["switch_board.text.selected"]   = from_hex_rgb(0xFFFFFF);
     g_theme_colors["switch_board.text.unselected"] = from_hex_rgb(0x333333);
 
     // MultiSwitchButton
-    g_theme_colors["multi_switch.bg.not_checked"]    = from_hex_rgb(0xE8E8E8);
-    g_theme_colors["multi_switch.bg.normal"]         = from_hex_rgb(0x00AE42);
-    g_theme_colors["multi_switch.bg_grayed.normal"]  = from_hex_rgb(0x6DC48D);
-    g_theme_colors["multi_switch.text.not_checked"]  = from_hex_rgb(0x6B6B6B);
-    g_theme_colors["multi_switch.text.normal"]       = from_hex_rgb(0xFFFFFE);
+    g_theme_colors["multi_switch.bg.not_checked"]         = from_hex_rgb(0xE8E8E8);
+    g_theme_colors["multi_switch.bg.normal"]              = from_hex_rgb(0x00AE42);
+    g_theme_colors["multi_switch.bg_grayed.normal"]       = from_hex_rgb(0x6DC48D);
+    g_theme_colors["multi_switch.text.not_checked"]       = from_hex_rgb(0x6B6B6B);
+    g_theme_colors["multi_switch.text.normal"]            = from_hex_rgb(0xFFFFFE);
     g_theme_colors["multi_switch.text_grayed.not_checked"] = from_hex_rgb(0x999999);
     g_theme_colors["multi_switch.text_grayed.normal"]      = from_hex_rgb(0x99DFB2);
 
@@ -56,38 +62,13 @@ static void init_defaults()
     g_theme_colors["combobox.label.normal"]   = from_hex_rgb(0x262E30);
 }
 
-static inline void ensure_init()
+inline void ensure_init()
 {
     std::call_once(g_init_flag, [](){ init_defaults(); });
 }
 
-void setThemeColor(const std::string &key, const wxColour &value)
-{
-    ensure_init();
-    g_theme_colors[key] = value;
-}
-
-bool hasThemeColor(const std::string &key)
-{
-    ensure_init();
-    return g_theme_colors.find(key) != g_theme_colors.end();
-}
-
-wxColour getThemeColor(const std::string &key)
-{
-    ensure_init();
-    auto it = g_theme_colors.find(key);
-    if (it == g_theme_colors.end()) {
-        wxLogError("Theme color key not found: %s", key.c_str());
-        // No fallbacks: return an explicitly invalid color to catch misuse.
-        // wxColour has IsOk() check; but we use a conspicuous magenta to surface issues.
-        return wxColour(255, 0, 255);
-    }
-    return it->second;
-}
-
-// HSV conversion helpers
-static void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, float &v)
+// HSV conversion helpers for registry hue shifts (float variant).
+void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, float &v)
 {
     float rf = r / 255.0f, gf = g / 255.0f, bf = b / 255.0f;
     float maxc = std::fmax(std::fmax(rf, gf), bf);
@@ -105,7 +86,7 @@ static void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, f
     }
 }
 
-static void hsv_to_rgb(float h, float s, float v, unsigned &r, unsigned &g, unsigned &b)
+void hsv_to_rgb(float h, float s, float v, unsigned &r, unsigned &g, unsigned &b)
 {
     float c = v * s;
     float x = c * (1.f - std::fabs(std::fmod(h / 60.f, 2.f) - 1.f));
@@ -122,7 +103,33 @@ static void hsv_to_rgb(float h, float s, float v, unsigned &r, unsigned &g, unsi
     b = static_cast<unsigned>(std::round((bf + m) * 255.f));
 }
 
-wxColour getThemeColorShifted(const std::string &key, float degrees)
+} // namespace
+
+void Theme::setThemeColor(const std::string &key, const wxColour &value)
+{
+    ensure_init();
+    g_theme_colors[key] = value;
+}
+
+bool Theme::hasThemeColor(const std::string &key)
+{
+    ensure_init();
+    return g_theme_colors.find(key) != g_theme_colors.end();
+}
+
+wxColour Theme::getThemeColor(const std::string &key)
+{
+    ensure_init();
+    auto it = g_theme_colors.find(key);
+    if (it == g_theme_colors.end()) {
+        wxLogError("Theme color key not found: %s", key.c_str());
+        // No fallbacks: return an explicitly invalid color to catch misuse.
+        return wxColour(255, 0, 255);
+    }
+    return it->second;
+}
+
+wxColour Theme::getThemeColorShifted(const std::string &key, float degrees)
 {
     wxColour base = getThemeColor(key);
     unsigned r = base.Red(), g = base.Green(), b = base.Blue();
@@ -133,15 +140,9 @@ wxColour getThemeColorShifted(const std::string &key, float degrees)
     return wxColour(rr, gg, bb);
 }
 
-}}} // namespace Slic3r::GUI::Theme
-#include "Theme.hpp"
-#include <wx/colour.h>
-#include <wx/image.h>
-#include <cmath>
-#include <algorithm>
-
-
-static wxColour ThemeThemeGreen() {
+// Helpers for themed button palette generation (existing behavior preserved).
+static wxColour ThemeThemeGreen()
+{
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
@@ -149,7 +150,8 @@ static wxColour ThemeThemeGreen() {
     return wxColour(0, 174, 66);
 }
 
-static wxColour ThemeThemeGreenHovered() {
+static wxColour ThemeThemeGreenHovered()
+{
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
@@ -157,7 +159,8 @@ static wxColour ThemeThemeGreenHovered() {
     return wxColour(61, 203, 115);
 }
 
-static wxColour ThemeThemeGreenPressed() {
+static wxColour ThemeThemeGreenPressed()
+{
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
@@ -165,24 +168,25 @@ static wxColour ThemeThemeGreenPressed() {
     return wxColour(27, 136, 68);
 }
 
-// Manual RGB to HSV conversion
-void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double& h, double& s, double& v) {
+// Manual RGB to HSV conversion (double variant) for legacy hue adjustments.
+void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double &h, double &s, double &v)
+{
     double rd = r / 255.0;
     double gd = g / 255.0;
     double bd = b / 255.0;
-    
+
     double max_val = std::max({rd, gd, bd});
     double min_val = std::min({rd, gd, bd});
-    double delta = max_val - min_val;
-    
+    double delta   = max_val - min_val;
+
     v = max_val;
-    
+
     if (delta < 0.00001) {
         s = 0;
         h = 0;
         return;
     }
-    
+
     if (max_val > 0.0) {
         s = delta / max_val;
     } else {
@@ -190,36 +194,36 @@ void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double& h, do
         h = 0.0;
         return;
     }
-    
+
     if (rd >= max_val)
         h = (gd - bd) / delta;
     else if (gd >= max_val)
         h = 2.0 + (bd - rd) / delta;
     else
         h = 4.0 + (rd - gd) / delta;
-    
+
     h /= 6.0;
     if (h < 0.0)
         h += 1.0;
 }
 
-// Manual HSV to RGB conversion
-wxColour hsv_to_rgb(double h, double s, double v) {
+wxColour hsv_to_rgb(double h, double s, double v)
+{
     if (s <= 0.0) {
         unsigned char val = static_cast<unsigned char>(v * 255);
         return wxColour(val, val, val);
     }
-    
-    h = fmod(h, 1.0);
+
+    h = std::fmod(h, 1.0);
     if (h < 0) h += 1.0;
     h *= 6.0;
-    
-    int i = static_cast<int>(floor(h));
+
+    int i = static_cast<int>(std::floor(h));
     double f = h - i;
     double p = v * (1.0 - s);
     double q = v * (1.0 - s * f);
     double t = v * (1.0 - s * (1.0 - f));
-    
+
     double r, g, b;
     switch (i) {
         case 0: r = v; g = t; b = p; break;
@@ -229,7 +233,7 @@ wxColour hsv_to_rgb(double h, double s, double v) {
         case 4: r = t; g = p; b = v; break;
         default: r = v; g = p; b = q; break;
     }
-    
+
     return wxColour(
         static_cast<unsigned char>(r * 255),
         static_cast<unsigned char>(g * 255),
@@ -237,18 +241,19 @@ wxColour hsv_to_rgb(double h, double s, double v) {
     );
 }
 
-wxColour shift_hue(const wxColour& color, double hue_shift) {
+wxColour shift_hue(const wxColour &color, double hue_shift)
+{
     double h, s, v;
     rgb_to_hsv(color.Red(), color.Green(), color.Blue(), h, s, v);
-    h = fmod(h + hue_shift, 1.0);
+    h = std::fmod(h + hue_shift, 1.0);
     if (h < 0) h += 1.0;
     return hsv_to_rgb(h, s, v);
 }
 
-static StateColor make_button(const wxColour& normal,
-                              const wxColour& hovered,
-                              const wxColour& pressed,
-                              const wxColour& disabled = wxColour(169, 169, 169))
+static StateColor make_button(const wxColour &normal,
+                              const wxColour &hovered,
+                              const wxColour &pressed,
+                              const wxColour &disabled = wxColour(169, 169, 169))
 {
     StateColor sc;
     sc.append(disabled, StateColor::Disabled);
@@ -260,7 +265,8 @@ static StateColor make_button(const wxColour& normal,
     return sc;
 }
 
-ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
+ThemeColors Theme::get_theme_colors(const std::string &theme_name)
+{
     // Accept both user-facing names and stored ids (theme_color preference)
     std::string name = theme_name;
     if (name == "bambu_green") name = "Bambu Green";
@@ -275,33 +281,32 @@ ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
                                           wxColour(154, 127, 255), // hovered
                                           wxColour(90, 58, 207));  // pressed
         colors.button_purple = colors.button_green;
-        colors.button_blue = colors.button_green;
-        colors.button_red = colors.button_green;
+        colors.button_blue   = colors.button_green;
+        colors.button_red    = colors.button_green;
     } else if (name == "Ocean Blue") {
         colors.button_green = make_button(wxColour(31, 142, 234),   // normal
                                           wxColour(74, 167, 240),   // hovered
                                           wxColour(27, 111, 184));  // pressed
-        colors.button_blue = colors.button_green;
+        colors.button_blue   = colors.button_green;
         colors.button_purple = colors.button_green;
-        colors.button_red = colors.button_green;
+        colors.button_red    = colors.button_green;
     } else if (name == "Candy Red") {
         colors.button_green = make_button(wxColour(208, 27, 27),    // normal
                                           wxColour(226, 85, 85),    // hovered
                                           wxColour(160, 19, 19));   // pressed
-        colors.button_red = colors.button_green;
-        colors.button_blue = colors.button_green;
+        colors.button_red    = colors.button_green;
+        colors.button_blue   = colors.button_green;
         colors.button_purple = colors.button_green;
     } else { // Bambu Green default
-        colors.button_green = make_button(ThemeThemeGreen(),     // normal
-                                          wxColour(55, 238, 124),   // hovered
-                                          ThemeThemeGreenPressed());   // pressed
-        colors.button_red = colors.button_green;
-        colors.button_blue = colors.button_green;
+        colors.button_green = make_button(ThemeThemeGreen(),       // normal
+                                          wxColour(55, 238, 124),  // hovered
+                                          ThemeThemeGreenPressed()); // pressed
+        colors.button_red    = colors.button_green;
+        colors.button_blue   = colors.button_green;
         colors.button_purple = colors.button_green;
     }
 
     return colors;
 }
 
-} // namespace GUI
-} // namespace Slic3r
+} } // namespace Slic3r::GUI

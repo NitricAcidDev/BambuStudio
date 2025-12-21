@@ -740,7 +740,7 @@ void Sidebar::priv::flush_printer_sync(bool restart)
         *counter_sync_printer = 6;
         timer_sync_printer->Start(500);
     }
-    btn_sync_printer->SetBackgroundColorNormal((*counter_sync_printer & 1) ? "#F8F8F8" :"#00AE42");
+    btn_sync_printer->SetBackgroundColorNormal((*counter_sync_printer & 1) ? "#F8F8F8" : Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled).GetAsString(wxC2S_HTML_SYNTAX));
     if (--*counter_sync_printer <= 0)
         timer_sync_printer->Stop();
 }
@@ -1626,7 +1626,7 @@ bool Sidebar::priv::sync_extruder_list(bool &only_external_material)
 
 void Sidebar::priv::update_sync_status(const MachineObject *obj)
 {
-    StateColor not_synced_colour(std::pair<wxColour, int>(wxColour("#00AE42"), StateColor::Normal));
+    StateColor not_synced_colour(std::pair<wxColour, int>(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled), StateColor::Normal));
     auto clear_all_sync_status = [this, &not_synced_colour]() {
         panel_printer_preset->ShowBadge(false);
         panel_printer_bed->ShowBadge(false);

@@ -7,12 +7,21 @@
 namespace Slic3r { namespace GUI {
 
 static const wxColour BgNormalColor  = wxColour("#FFFFFF");
-static const wxColour BgSelectColor  = wxColour("#EBF9F0");
 static const wxColour BgDisableColor = wxColour("#CECECE");
 
+static wxColour GetBgSelectColor()
+{
+    // Use a light tint of the theme color for selected backgrounds
+    return wxColour("#EBF9F0");  // Light green - keep as constant for now, could be theme-adapted
+}
+
 static const wxColour BorderNormalColor   = wxColour("#CECECE");
-static const wxColour BorderSelectedColor = wxColour("#00AE42");
 static const wxColour BorderDisableColor  = wxColour("#EEEEEE");
+
+static wxColour GetBorderSelectedColor()
+{
+    return Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+}
 
 static const wxColour TextNormalBlackColor = wxColour("#262E30");
 static const wxColour TextNormalGreyColor = wxColour("#6B6B6B");
@@ -506,9 +515,9 @@ void FilamentMapBtnPanel::OnPaint(wxPaintEvent &event)
         wxRect rect = GetClientRect();
         gc->SetBrush(wxTransparentColour);
         gc->DrawRoundedRectangle(0, 0, rect.width, rect.height, 0);
-        wxColour bg_color = m_selected ? BgSelectColor : BgNormalColor;
+        wxColour bg_color = m_selected ? GetBgSelectColor() : BgNormalColor;
 
-        wxColour border_color = m_hover || m_selected ? BorderSelectedColor : BorderNormalColor;
+        wxColour border_color = m_hover || m_selected ? GetBorderSelectedColor() : BorderNormalColor;
 
         bg_color     = StateColor::darkModeColorFor(bg_color);
         border_color = StateColor::darkModeColorFor(border_color);
@@ -522,10 +531,10 @@ void FilamentMapBtnPanel::OnPaint(wxPaintEvent &event)
 void FilamentMapBtnPanel::UpdateStatus()
 {
     if (m_selected) {
-        m_btn->SetBackgroundColour(BgSelectColor);
-        m_label->SetBackgroundColour(BgSelectColor);
-        m_detail->SetBackgroundColour(BgSelectColor);
-        m_disable_tip->SetBackgroundColour(BgSelectColor);
+        m_btn->SetBackgroundColour(GetBgSelectColor());
+        m_label->SetBackgroundColour(GetBgSelectColor());
+        m_detail->SetBackgroundColour(GetBgSelectColor());
+        m_disable_tip->SetBackgroundColour(GetBgSelectColor());
     }
     else {
         m_btn->SetBackgroundColour(BgNormalColor);

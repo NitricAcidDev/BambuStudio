@@ -1264,7 +1264,7 @@ PrinterPartsDialog::PrinterPartsDialog(wxWindow* parent)
 
     m_wiki_link = new Label(single_panel, _L("View wiki"));
     m_wiki_link->SetFont(Label::Body_13);
-    m_wiki_link->SetForegroundColour(wxColour("#00AE42"));
+    m_wiki_link->SetForegroundColour(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
     m_wiki_link->Bind(wxEVT_ENTER_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_HAND); });
     m_wiki_link->Bind(wxEVT_LEAVE_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_ARROW); });
     m_wiki_link->Bind(wxEVT_LEFT_DOWN, &PrinterPartsDialog::OnWikiClicked, this);
@@ -1379,7 +1379,7 @@ PrinterPartsDialog::PrinterPartsDialog(wxWindow* parent)
 
     multiple_wiki_link = new Label(multiple_panel, _L("View wiki"));
     multiple_wiki_link->SetFont(Label::Body_13);
-    multiple_wiki_link->SetForegroundColour(wxColour("#00AE42"));
+    multiple_wiki_link->SetForegroundColour(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
     multiple_wiki_link->Bind(wxEVT_ENTER_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_HAND); });
     multiple_wiki_link->Bind(wxEVT_LEAVE_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_ARROW); });
     multiple_wiki_link->Bind(wxEVT_LEFT_DOWN, &PrinterPartsDialog::OnWikiClicked, this);

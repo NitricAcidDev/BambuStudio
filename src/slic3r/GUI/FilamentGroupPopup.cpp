@@ -10,8 +10,12 @@ namespace Slic3r { namespace GUI {
 static const wxColour LabelEnableColor = wxColour("#262E30");
 static const wxColour LabelDisableColor = wxColour("#ACACAC");
 static const wxColour GreyColor = wxColour("#6B6B6B");
-static const wxColour GreenColor = wxColour("#00AE42");
 static const wxColour BackGroundColor = wxColour("#FFFFFF");
+
+static wxColour GetThemeGreenColor()
+{
+    return Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+}
 
 
 static bool should_pop_up()
@@ -182,7 +186,7 @@ FilamentGroupPopup::FilamentGroupPopup(wxWindow *parent) : PopupWindow(parent, w
         auto* video_sizer = new wxBoxSizer(wxHORIZONTAL);
         video_link = new wxStaticText(this, wxID_ANY, _L("Video tutorial"));
         video_link->SetBackgroundColour(BackGroundColor);
-        video_link->SetForegroundColour(GreenColor);
+        video_link->SetForegroundColour(GetThemeGreenColor());
         video_link->SetFont(Label::Body_12.Underlined());
         video_link->SetCursor(wxCursor(wxCURSOR_HAND));
         video_link->Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent&)
@@ -198,7 +202,7 @@ FilamentGroupPopup::FilamentGroupPopup(wxWindow *parent) : PopupWindow(parent, w
         auto* wiki_sizer = new wxBoxSizer(wxHORIZONTAL);
         wiki_link = new wxStaticText(this, wxID_ANY, _L("Learn more"));
         wiki_link->SetBackgroundColour(BackGroundColor);
-        wiki_link->SetForegroundColour(GreenColor);
+        wiki_link->SetForegroundColour(GetThemeGreenColor());
         wiki_link->SetFont(Label::Body_12.Underlined());
         wiki_link->SetCursor(wxCursor(wxCURSOR_HAND));
         wiki_link->Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent&) { open_filament_group_wiki(); });

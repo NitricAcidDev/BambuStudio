@@ -34,7 +34,9 @@
 #define L_RAW_B_STR _L("Row B")
 
 static wxColour s_gray_clr("#B0B0B0");
-static wxColour s_hgreen_clr("#00AE42");
+static wxColour GetThemeGreenColor() { 
+    return Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled); 
+}
 static wxColour s_red_clr("#D01B1B");
 
 static std::vector<int> a_nozzle_seq = { 0, 2, 4, 1, 3, 5 };
@@ -634,7 +636,7 @@ void wgtDeviceNozzleRackPos::UpdateRackPos(DevNozzleRack::RackPos new_pos,
         {
             if (new_pos == DevNozzleRack::RACK_POS_A_TOP)
             {
-                s_show_label(m_label_rowup, L_RAW_A_STR, s_hgreen_clr);
+                s_show_label(m_label_rowup, L_RAW_A_STR, GetThemeGreenColor());
                 s_show_label(m_label_rowup_status, _L("Raised"));
 
                 m_rowbottom_panel->SetBorderColor(*wxWHITE);
@@ -647,7 +649,7 @@ void wgtDeviceNozzleRackPos::UpdateRackPos(DevNozzleRack::RackPos new_pos,
             }
             else if (new_pos == DevNozzleRack::RACK_POS_B_TOP)
             {
-                s_show_label(m_label_rowup, L_RAW_B_STR, s_hgreen_clr);
+                s_show_label(m_label_rowup, L_RAW_B_STR, GetThemeGreenColor());
                 s_show_label(m_label_rowup_status, _L("Raised"));
                 s_show_label(m_label_rowbottom, L_RAW_A_STR, *wxBLACK);
                 m_label_rowbottom_status->Show(false);
@@ -811,7 +813,7 @@ void wgtDeviceNozzleRackNozzleItem::SetSelected(bool selected)
             }
 
             m_nozzle_selected_bitmap->SetBitmap(m_nozzle_selected_image->bmp());
-            SetBorderColor(StateColor::darkModeColorFor(s_hgreen_clr));
+            SetBorderColor(StateColor::darkModeColorFor(GetThemeGreenColor()));
         } else {
             m_nozzle_selected_bitmap->SetBitmap(wxNullBitmap);
             SetBorderColor(StateColor::darkModeColorFor(s_gray_clr));

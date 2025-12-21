@@ -398,8 +398,8 @@ void HotEndTable::MarkRelatedItems(const NozzleOption& option)
         std::pair<wxColour, int>(wxColour("#DBFDE7"), StateColor::Normal)
     );
 
-    const static StateColor bd_green(
-        std::pair<wxColour, int>(wxColour("#00AE42"), StateColor::Normal)
+    StateColor bd_green(
+        std::pair<wxColour, int>(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled), StateColor::Normal)
     );
     auto filtered_nozzles = FilterHotEnds(option);
     for (auto nozzle_id : filtered_nozzles) {

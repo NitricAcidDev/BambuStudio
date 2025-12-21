@@ -376,13 +376,7 @@ SelectMachineDialog::SelectMachineDialog(Plater *plater)
     m_sizer_autorefill = new wxBoxSizer(wxHORIZONTAL);
     m_ams_backup_tip = new Label(m_scroll_area, _L("Auto Refill"));
     m_ams_backup_tip->SetFont(::Label::Head_13);
-    m_ams_backup_tip->SetForegroundColour(wxColour("#00AE42"));
-    m_ams_backup_tip->SetBackgroundColour(*wxWHITE);
-    img_ams_backup = new wxStaticBitmap(m_scroll_area, wxID_ANY, create_scaled_bitmap("automatic_material_renewal", this, 16), wxDefaultPosition, wxSize(FromDIP(16), FromDIP(16)), 0);
-    img_ams_backup->SetBackgroundColour(*wxWHITE);
-
-    m_sizer_autorefill->Add(0, 0, 1, wxEXPAND, 0);
-    m_sizer_autorefill->Add(img_ams_backup, 0, wxALL, FromDIP(3));
+    m_ams_backup_tip->SetForegroundColour(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
     m_sizer_autorefill->Add(m_ams_backup_tip, 0, wxTOP, FromDIP(5));
 
     m_ams_backup_tip->Hide();
@@ -2331,7 +2325,7 @@ void SelectMachineDialog::save_option_vals(MachineObject *obj) {
 void SelectMachineDialog::Enable_Auto_Refill(bool enable)
 {
     if (enable) {
-        m_ams_backup_tip->SetForegroundColour(wxColour("#00AE42"));
+        m_ams_backup_tip->SetForegroundColour(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
     }
     else {
         m_ams_backup_tip->SetForegroundColour(wxColour(0x90, 0x90, 0x90));
@@ -5468,7 +5462,7 @@ void PrintOptionItem::doRender(wxDC& dc)
 
         if (text_key == selected_key)
         {
-            const wxColour& clr = m_enable ? StateColor::darkModeColorFor("#00AE42") : StateColor::darkModeColorFor(wxColour(144, 144, 144));
+            const wxColour& clr = m_enable ? StateColor::darkModeColorFor(Slic3r::GUI::wxGetApp().get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled)) : StateColor::darkModeColorFor(wxColour(144, 144, 144));
             dc.SetPen(wxPen(clr));
             dc.SetTextForeground(clr);
 

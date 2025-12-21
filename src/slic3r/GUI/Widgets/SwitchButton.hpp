@@ -111,7 +111,7 @@ private:
     wxString m_label;
     wxBitmap m_selected_icon;
     wxBitmap m_unselected_icon;
-    wxColour m_primary_colour{wxColour("#00AE42")};
+    wxColour m_primary_colour;  // Set from theme via get_theme_colors() in constructor
     wxColour m_secondary_colour{wxColour("#DEF5E7")};
 
     bool m_isSelected;

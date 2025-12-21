@@ -7,8 +7,10 @@
 #include <wx/dcgraph.h>
 
 StateColor blank_bg(StateColor(std::make_pair(wxColour("#FFFFFF"), (int)StateColor::Normal)));
+static const wxColour BUTTON_BG_COL = wxColour("#EEEEEE");
 static const wxColour BUTTON_IN_BG_COL = wxColour("#CECECE");
 static const wxColour text_num_color   = wxColour("#898989");
+static const wxColour BUTTON_PRESS_COL = wxColour(172, 172, 172);
 static const double sqrt2 = std::sqrt(2);
 
 BEGIN_EVENT_TABLE(AxisCtrlButton, wxPanel)
@@ -34,7 +36,7 @@ AxisCtrlButton::AxisCtrlButton(wxWindow *parent, ScalableBitmap &icon, long stly
     , last_pos(UNDEFINED)
     , current_pos(UNDEFINED) // don't change init value
     , text_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.text.disabled"), (int) StateColor::Disabled), std::make_pair(Slic3r::GUI::Theme::getThemeColor("axis_ctrl.text.normal"), (int) StateColor::Normal))
-	state_handler(this)
+	, state_handler(this)
 {
     m_icon = icon;
 	wxWindow::SetBackgroundColour(parent->GetBackgroundColour());

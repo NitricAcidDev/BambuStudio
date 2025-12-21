@@ -2236,13 +2236,13 @@ Sidebar::Sidebar(Plater *parent)
                                                  wxBU_EXACTFIT | wxNO_BORDER, false, 18);
     ams_btn->SetToolTip(_L("Synchronize filament list from AMS"));
     // Add hover effect with themed red accent
-    ams_btn->Bind(wxEVT_ENTER_WINDOW, [ams_btn](wxMouseEvent&) {
-        ams_btn->SetBackgroundColour(GUI::Theme::accentColor().ChangeLightness(95));
-        ams_btn->Refresh();
+    ams_btn->Bind(wxEVT_ENTER_WINDOW, [btn = ams_btn](wxMouseEvent&) {
+        btn->SetBackgroundColour(GUI::Theme::accentColor().ChangeLightness(95));
+        btn->Refresh();
     });
-    ams_btn->Bind(wxEVT_LEAVE_WINDOW, [ams_btn](wxMouseEvent&) {
-        ams_btn->SetBackgroundColour(*wxWHITE);
-        ams_btn->Refresh();
+    ams_btn->Bind(wxEVT_LEAVE_WINDOW, [btn = ams_btn](wxMouseEvent&) {
+        btn->SetBackgroundColour(*wxWHITE);
+        btn->Refresh();
     });
     ams_btn->Bind(wxEVT_BUTTON, [this, scrolled_sizer](wxCommandEvent &e) {
         sync_ams_list();

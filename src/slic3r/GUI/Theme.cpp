@@ -44,6 +44,11 @@ void init_defaults()
     // Target hue: red for accent (0 degrees)
     constexpr float H_RED = 0.f;
 
+    // Accent light tint: properly saturated light color that can be hue-shifted for any theme color
+    // Uses a light tint with good saturation so hue shift produces visible colored backgrounds
+    // Original: 0xB5E6B0 (light green, properly saturated)
+    g_theme_colors["accent.tint.light"] = shift_to_hue(0xB5E6B0, H_RED);
+
     // SwitchButton - keep neutrals; shift original green accents to red
     g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);
     g_theme_colors["switch.text.normal"]    = from_hex_rgb(0x6B6B6B);
@@ -73,7 +78,7 @@ void init_defaults()
     g_theme_colors["combobox.border.normal"]   = from_hex_rgb(0xDBDBDB);
 
     g_theme_colors["combobox.bg.disabled"] = from_hex_rgb(0xF0F0F1);
-    g_theme_colors["combobox.bg.focused"]  = from_hex_rgb(0xFFE5E5); // light red tint for focused state
+    g_theme_colors["combobox.bg.focused"]  = g_theme_colors["accent.tint.light"];
     g_theme_colors["combobox.bg.normal"]   = from_hex_rgb(0xFFFFFF);
 
     g_theme_colors["combobox.label.disabled"] = from_hex_rgb(0x909090);
@@ -153,7 +158,7 @@ void init_defaults()
     // DropDown menu items
     g_theme_colors["dropdown.selector_border.hovered"] = shift_to_hue(0x00AE42, H_RED);
     g_theme_colors["dropdown.selector_border.normal"]  = from_hex_rgb(0xFFFFFF);
-    g_theme_colors["dropdown.selector_bg.checked"]     = from_hex_rgb(0xFFE5E5); // light red tint for selected item
+    g_theme_colors["dropdown.selector_bg.checked"]     = g_theme_colors["accent.tint.light"];
     g_theme_colors["dropdown.selector_bg.normal"]      = from_hex_rgb(0xFFFFFF);
     // Tick icon recolor target
     g_theme_colors["dropdown.check.color"]             = shift_to_hue(0x00AE42, H_RED);
@@ -164,7 +169,7 @@ void init_defaults()
     g_theme_colors["tab.text.normal"]      = from_hex_rgb(0x6B6B6C);
 
     // Dropdown pressed item color
-    g_theme_colors["dropdown.item_bg.pressed"] = from_hex_rgb(0xFFE5E5); // light red background for pressed item
+    g_theme_colors["dropdown.item_bg.pressed"] = g_theme_colors["accent.tint.light"];
 
     // Bitmap generation and similar features
     g_theme_colors["feature.text.hovered"]        = shift_to_hue(0x00AE42, H_RED);
@@ -173,7 +178,7 @@ void init_defaults()
 
     // Additional keys for sidebar/panel selection and info text
     g_theme_colors["panel.selection.border"]      = shift_to_hue(0x00AE42, H_RED);
-    g_theme_colors["panel.selection.bg"]          = shift_to_hue(0xEDFAF2, H_RED);
+    g_theme_colors["panel.selection.bg"]          = g_theme_colors["accent.tint.light"];
     g_theme_colors["info.text.accent"]            = shift_to_hue(0x00AE42, H_RED);
 }
 

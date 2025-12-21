@@ -1,5 +1,6 @@
 #include "GUI_App.hpp"
 #include "CapsuleButton.hpp"
+#include "Theme.hpp"
 #include <wx/dcbuffer.h>
 #include "wx/graphics.h"
 #include "Widgets/Label.hpp"
@@ -10,10 +11,12 @@ static const wxColour BgNormalColor  = wxColour("#FFFFFF");
 static const wxColour BgSelectColor  = wxColour("#EBF9F0");
 
 static const wxColour TextNormalColor = wxColour("#000000");
-static const wxColour TextSelectColor = wxColour("#00AE42");
+// TextSelectColor uses theme - will be retrieved dynamically
+// static const wxColour TextSelectColor = Slic3r::GUI::Theme::getThemeColor("button.bg.checked");
 
 static const wxColour BorderNormalColor   = wxColour("#CECECE");
-static const wxColour BorderSelectColor = wxColour("#00AE42");
+// BorderSelectColor uses theme - will be retrieved dynamically
+// static const wxColour BorderSelectColor = Slic3r::GUI::Theme::getThemeColor("button.bg.checked");
 
 CapsuleButton::CapsuleButton(wxWindow *parent, wxWindowID id, const wxString &label, bool selected) : wxPanel(parent, id)
 {
@@ -70,7 +73,7 @@ void CapsuleButton::OnPaint(wxPaintEvent &event)
         gc->SetBrush(wxTransparentColour);
         gc->DrawRoundedRectangle(0, 0, rect.width, rect.height, 0);
         wxColour bg_color     = m_selected ? BgSelectColor : BgNormalColor;
-        wxColour border_color = m_hovered || m_selected ? BorderSelectColor : BorderNormalColor;
+        wxColour border_color = m_hovered || m_selected ? Slic3r::GUI::Theme::getThemeColor("button.bg.checked") : BorderNormalColor;
         bg_color = StateColor::darkModeColorFor(bg_color);
         border_color = StateColor::darkModeColorFor(border_color);
         gc->SetBrush(wxBrush(bg_color));
@@ -112,7 +115,7 @@ void CapsuleButton::UpdateStatus()
 {
     if (m_selected) {
         m_btn->SetBitmap(tag_on_bmp);
-        m_label->SetForegroundColour(TextSelectColor);
+        m_label->SetForegroundColour(Slic3r::GUI::Theme::getThemeColor("button.bg.checked"));
         m_label->SetBackgroundColour(BgSelectColor);
         m_btn->SetBackgroundColour(BgSelectColor);
     } else {

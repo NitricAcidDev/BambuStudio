@@ -296,7 +296,7 @@ void DropDown::render(wxDC &dc)
         rcContent.y += rowSize.y * selected_item;
         if (rcContent.GetBottom() > 0 && rcContent.y < size.y) {
             dc.SetBrush(wxBrush(selector_background_color.colorForStates(states | StateColor::Checked)));
-            dc.SetPen(wxPen(selector_background_color.colorForStates(states)));
+            dc.SetPen(wxPen(selector_border_color.colorForStates(states | StateColor::Hovered)));
             rcContent.Deflate(4, 1);
             dc.DrawRectangle(rcContent);
             rcContent.Inflate(4, 1);

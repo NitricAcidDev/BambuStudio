@@ -735,10 +735,10 @@ Slic3r::GUI::MultiNozzleSyncDialog::MultiNozzleSyncDialog(wxWindow* parent,std::
     main_sizer->Add(m_caution, 0, wxLEFT | wxRIGHT, FromDIP(25));
 
     StateColor btn_bg_green(
-        std::pair<wxColour, int>(wxColour(144, 144, 144), StateColor::Disabled),
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal)
+        std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.disabled"), StateColor::Disabled),
+        std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.pressed"), StateColor::Pressed),
+        std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.hovered"), StateColor::Hovered),
+        std::pair<wxColour, int>(Slic3r::GUI::Theme::getThemeColor("progress.button.normal"), StateColor::Normal)
     );
 
     StateColor btn_text_green(

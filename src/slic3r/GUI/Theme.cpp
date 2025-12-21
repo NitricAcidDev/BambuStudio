@@ -137,6 +137,19 @@ void init_defaults()
     g_theme_colors["dropdown.selector_border.normal"]  = from_hex_rgb(0xFFFFFF);
     g_theme_colors["dropdown.selector_bg.checked"]     = from_hex_rgb(0xEDFAF2);
     g_theme_colors["dropdown.selector_bg.normal"]      = from_hex_rgb(0xFFFFFF);
+
+    // TabCtrl - tab underline and button text colors
+    g_theme_colors["tab.underline.active"] = from_hex_rgb(0x00AEAE); // was 0x00AE42 green, now cyan
+    g_theme_colors["tab.text.checked"]     = from_hex_rgb(0xFFFFFF); // active/selected tab text
+    g_theme_colors["tab.text.normal"]      = from_hex_rgb(0x6B6B6C); // inactive tab text
+
+    // Dropdown pressed item color (for normal dropdowns, not just selector)
+    g_theme_colors["dropdown.item_bg.pressed"] = from_hex_rgb(0xEDFAF2); // light cyan background for pressed item
+
+    // Bitmap generation and similar features
+    g_theme_colors["feature.text.hovered"]        = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["feature.underline.hovered"]   = from_hex_rgb(0x00AEAE); // was 0x00AE42
+    g_theme_colors["feature.text.normal"]         = from_hex_rgb(0x0084C6); // blue feature text
 }
 
 inline void ensure_init()

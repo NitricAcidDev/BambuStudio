@@ -1,5 +1,6 @@
 #include <wx/dc.h>
 #include "TabCtrl.hpp"
+#include "../Theme.hpp"
 
 wxDEFINE_EVENT( wxEVT_TAB_SEL_CHANGING, wxCommandEvent );
 wxDEFINE_EVENT( wxEVT_TAB_SEL_CHANGED, wxCommandEvent );
@@ -102,8 +103,8 @@ int TabCtrl::AppendItem(const wxString &item,
     btn->Create(this, item, "", wxBORDER_NONE);
     btn->SetFont(GetFont());
     btn->SetTextColor(StateColor(
-        std::make_pair(0x6B6B6C, (int) StateColor::NotChecked),
-        std::make_pair(*wxLIGHT_GREY, (int) StateColor::Normal)));
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("tab.text.normal"), (int) StateColor::NotChecked),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("tab.text.checked"), (int) StateColor::Normal)));
     btn->SetBackgroundColor(StateColor());
     btn->SetCornerRadius(0);
     btn->SetPaddingSize({TAB_BUTTON_PADDING});
@@ -311,7 +312,7 @@ void TabCtrl::doRender(wxDC& dc)
 #else
     dc.SetPen(wxPen(border_color.colorForStates(states), border_width));
     dc.DrawLine(0, size.y - BS2, size.x, size.y - BS2);
-    wxColour c("#00AE42");
+    wxColour c = Slic3r::GUI::Theme::getThemeColor("tab.underline.active");
     dc.SetPen(wxPen(c, 1));
     dc.SetBrush(c);
     dc.DrawRoundedRectangle(x1 - radius, size.y - BS2 - border_width * 3, x2 + radius * 2 - x1, border_width * 3, radius);

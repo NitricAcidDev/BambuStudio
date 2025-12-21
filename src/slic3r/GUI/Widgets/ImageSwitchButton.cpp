@@ -2,6 +2,7 @@
 #include "Label.hpp"
 #include "StaticBox.hpp"
 #include "../wxExtensions.hpp"
+#include "../GUI_App.hpp"
 
 #include "slic3r/GUI/I18N.hpp"
 #include <wx/dcclient.h>
@@ -27,7 +28,14 @@ EVT_PAINT(FanSwitchButton::paintEvent)
 
 END_EVENT_TABLE()
 
-static const wxColour DEFAULT_HOVER_COL = wxColour(0, 174, 66);
+static wxColour DEFAULT_HOVER_COL_THEME()
+{
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning())
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    return wxColour(0, 174, 66);
+}
+
 static const wxColour DEFAULT_PRESS_COL = wxColour(238, 238, 238);
 
 ImageSwitchButton::ImageSwitchButton(wxWindow *parent, ScalableBitmap &img_on, ScalableBitmap &img_off, long style)
@@ -39,8 +47,9 @@ ImageSwitchButton::ImageSwitchButton(wxWindow *parent, ScalableBitmap &img_on, S
     m_off        = img_off;
     background_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(DEFAULT_PRESS_COL, (int) StateColor::Pressed),
                                   std::make_pair(*wxWHITE, (int) StateColor::Normal));
-    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(DEFAULT_HOVER_COL, (int) StateColor::Focused),
-                              std::make_pair(DEFAULT_HOVER_COL, (int) StateColor::Hovered), std::make_pair(*wxWHITE, (int) StateColor::Normal));
+    auto hover = DEFAULT_HOVER_COL_THEME();
+    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(hover, (int) StateColor::Focused),
+                              std::make_pair(hover, (int) StateColor::Hovered), std::make_pair(*wxWHITE, (int) StateColor::Normal));
 
     StaticBox::Create(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, style);
 

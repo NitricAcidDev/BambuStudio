@@ -1,6 +1,7 @@
 #include "TextInput.hpp"
 #include "Label.hpp"
 #include "TextCtrl.h"
+#include "../GUI_App.hpp"
 
 #include "slic3r/GUI/I18N.hpp"
 
@@ -20,6 +21,14 @@ END_EVENT_TABLE()
  * calling Refresh()/Update().
  */
 
+static wxColour ThemeGreen()
+{
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning())
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    return wxColour(0, 174, 66);
+}
+
 TextInput::TextInput()
     : label_color(std::make_pair(0x909090, (int) StateColor::Disabled),
                  std::make_pair(0x6B6B6B, (int) StateColor::Normal))
@@ -28,7 +37,7 @@ TextInput::TextInput()
 {
     radius = 0;
     border_width = 1;
-    border_color = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Hovered),
+    border_color = StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled), std::make_pair(ThemeGreen().GetRGB(), (int) StateColor::Hovered),
                               std::make_pair(0xDBDBDB, (int) StateColor::Normal));
     background_color = StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
     SetFont(Label::Body_12);

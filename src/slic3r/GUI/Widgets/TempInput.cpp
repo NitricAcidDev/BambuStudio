@@ -25,7 +25,10 @@ TempInput::TempInput()
 {
     hover  = false;
     radius = 0;
-    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(0x00AE42, (int) StateColor::Focused), std::make_pair(0x00AE42, (int) StateColor::Hovered),
+    auto green = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp()) ? 
+        dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp())->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled).GetRGB() :
+        0x00AE42;
+    border_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(green, (int) StateColor::Focused), std::make_pair(green, (int) StateColor::Hovered),
                  std::make_pair(*wxWHITE, (int) StateColor::Normal));
     background_color = StateColor(std::make_pair(*wxWHITE, (int) StateColor::Disabled), std::make_pair(*wxWHITE, (int) StateColor::Normal));
     SetFont(Label::Body_12);

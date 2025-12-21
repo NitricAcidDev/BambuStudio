@@ -1,5 +1,6 @@
 #include "ComboBox.hpp"
 #include "Label.hpp"
+#include "../GUI_App.hpp"
 
 #include <wx/dcgraph.h>
 
@@ -31,6 +32,14 @@ static wxWindow *GetScrollParent(wxWindow *pWindow)
     return nullptr;
 }
 
+static wxColour ThemeGreen()
+{
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning())
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    return wxColour(0, 174, 66);
+}
+
 ComboBox::ComboBox(wxWindow *parent,
                    wxWindowID      id,
                    const wxString &value,
@@ -52,7 +61,7 @@ ComboBox::ComboBox(wxWindow *parent,
         GetTextCtrl()->Hide();
         TextInput::SetFont(Label::Body_14);
         TextInput::SetBorderColor(StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled),
-            std::make_pair(0x00AE42, (int) StateColor::Hovered),
+            std::make_pair(ThemeGreen().GetRGB(), (int) StateColor::Hovered),
             std::make_pair(0xDBDBDB, (int) StateColor::Normal)));
         TextInput::SetBackgroundColor(StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled),
             std::make_pair(0xEDFAF2, (int) StateColor::Focused),

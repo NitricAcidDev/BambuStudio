@@ -26,6 +26,30 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour FilamentPickerThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return FilamentPickerThemeGreen();
+}
+
+static wxColour FilamentPickerThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour FilamentPickerThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 wxColour FilamentPickerDialog::GetSelectedColour() const
 {
     if (!m_color_demo) return wxNullColour;
@@ -553,10 +577,10 @@ wxBoxSizer* FilamentPickerDialog::CreateButtonPanel()
     StateColor btn_bg_green(
         std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
         std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal)
+        std::pair<wxColour, int>(FilamentPickerThemeGreen(), StateColor::Normal)
     );
     StateColor btn_bd_green(
-        std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal)
+        std::pair<wxColour, int>(FilamentPickerThemeGreen(), StateColor::Normal)
     );
     StateColor btn_text_green(
         std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Normal)

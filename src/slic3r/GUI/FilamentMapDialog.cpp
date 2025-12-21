@@ -7,6 +7,30 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour FilamentMapThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return FilamentMapThemeGreen();
+}
+
+static wxColour FilamentMapThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour FilamentMapThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 static bool get_pop_up_remind_flag()
 {
     auto &app_config = wxGetApp().app_config;
@@ -131,10 +155,10 @@ StateColor btn_bg_green(
     std::pair<wxColour, int>(wxColour(144, 144, 144), StateColor::Disabled),
     std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
     std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-    std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal)
+    std::pair<wxColour, int>(FilamentMapThemeGreen(), StateColor::Normal)
 );
 
-static const StateColor btn_bd_green(std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+static const StateColor btn_bd_green(std::pair<wxColour, int>(FilamentMapThemeGreen(), StateColor::Normal));
 
 static const StateColor btn_text_green(std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Normal));
 

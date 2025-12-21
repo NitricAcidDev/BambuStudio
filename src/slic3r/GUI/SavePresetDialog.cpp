@@ -23,6 +23,30 @@ using Slic3r::GUI::format_wxstr;
 
 namespace Slic3r { namespace GUI {
 
+static wxColour SavePresetThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return SavePresetThemeGreen();
+}
+
+static wxColour SavePresetThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour SavePresetThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
 #define BORDER_W 10
 
 //-----------------------------------------------
@@ -352,9 +376,9 @@ void SavePresetDialog::build(std::vector<Preset::Type> types, std::string suffix
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(144, 144, 144), StateColor::Disabled),
                             std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
                             std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
-                            std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+                            std::pair<wxColour, int>(SavePresetThemeGreen(), StateColor::Normal));
     StateColor btn_br_green(std::pair<wxColour, int>(wxColour(144, 144, 144), StateColor::Disabled),
-                            std::pair<wxColour, int>(wxColour(0, 174, 66), StateColor::Normal));
+                            std::pair<wxColour, int>(SavePresetThemeGreen(), StateColor::Normal));
     m_confirm->SetBackgroundColor(btn_bg_green);
     m_confirm->SetBorderColor(btn_br_green);
     m_confirm->SetTextColor(wxColour("#FFFFFE"));

@@ -1,4 +1,5 @@
 #include "StateColor.hpp"
+#include "slic3r/GUI/Theme.hpp"
 #include <wx/gdicmn.h>
 
 static bool gDarkMode = false;
@@ -28,7 +29,7 @@ static std::map<wxColour, wxColour> gDarkColors{
     {"#F4F4F4", "#36363D"},
     {"#F7F7F7", "#333337"},
     {"#DBDBDB", "#4A4A51"},
-    {"#EDFAF2", "#283232"},
+    // {"#EDFAF2", "#283232"}, // Now dynamically fetched from theme
     {"#323A3C", "#E5E5E6"},
     {"#6B6B6A", "#B3B3B5"},
     {"#303A3C", "#E5E5E5"},
@@ -56,6 +57,33 @@ inline wxColour darkModeColorFor2(wxColour const &color)
 {
     if (!gDarkMode)
         return color;
+    
+    // Check for dynamically themed colors from Theme registry
+    // For dropdown selector background, use the themed dark variant
+    static wxColour dropdown_light, dropdown_dark;
+    static bool theme_init = false;
+    
+    if (!theme_init) {
+        dropdown_light = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
+        dropdown_dark = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked.dark");
+        theme_init = true;
+    }
+    
+    // If the color matches the themed dropdown light color, return the dark variant
+    if (color == dropdown_light) {
+        return dropdown_dark;
+    }
+    
+    auto iter = gDarkColors.find(color);
+    if (iter != gDarkColors.end()) return iter->second;
+    return color;
+}
+    
+    // If the color matches the themed dropdown light color, return the dark variant
+    if (color == dropdown_light) {
+        return dropdown_dark;
+    }
+    
     auto iter = gDarkColors.find(color);
     if (iter != gDarkColors.end()) return iter->second;
     return color;

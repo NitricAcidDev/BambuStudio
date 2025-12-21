@@ -1,9 +1,9 @@
 #include "TextInput.hpp"
 #include "Label.hpp"
 #include "TextCtrl.h"
-#include "../Theme.hpp"
 
 #include "slic3r/GUI/I18N.hpp"
+#include "slic3r/GUI/Theme.hpp"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>

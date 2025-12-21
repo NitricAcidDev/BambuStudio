@@ -2,8 +2,8 @@
 #include "Label.hpp"
 #include "Button.hpp"
 #include "TextCtrl.h"
-#include "../Theme.hpp"
 
+#include "slic3r/GUI/Theme.hpp"
 #include <wx/dcgraph.h>
 
 BEGIN_EVENT_TABLE(SpinInput, wxPanel)

@@ -2,7 +2,7 @@
 #include "Label.hpp"
 #include "PopupWindow.hpp"
 #include "../I18N.hpp"
-#include "../Theme.hpp"
+#include "slic3r/GUI/Theme.hpp"
 #include <wx/dcgraph.h>
 #include "../GUI.hpp"
 #include "../GUI_App.hpp"

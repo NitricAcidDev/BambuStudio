@@ -11,8 +11,6 @@
 #endif
 
 #include <set>
-#include <vector>
-#include <cstdio>
 
 wxDEFINE_EVENT(EVT_DISMISS, wxCommandEvent);
 
@@ -41,10 +39,10 @@ DropDown::DropDown(std::vector<Item> &items)
     , border_color(0xDBDBDB)
     , text_color(std::make_pair(0x909090, (int) StateColor::Disabled),
         std::make_pair(0x363636, (int) StateColor::Normal))
-    , selector_border_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.hovered"), (int) StateColor::Hovered),
-        std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_border.normal"), (int) StateColor::Normal))
-    , selector_background_color(std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked"), (int) StateColor::Checked),
-        std::make_pair(Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.normal"), (int) StateColor::Normal))
+    , selector_border_color(std::make_pair(0x00AE42, (int) StateColor::Hovered),
+        std::make_pair(*wxWHITE, (int) StateColor::Normal))
+    , selector_background_color(std::make_pair(0xEDFAF2, (int) StateColor::Checked),
+        std::make_pair(*wxWHITE, (int) StateColor::Normal))
 {
 }
 
@@ -61,13 +59,8 @@ void DropDown::Create(wxWindow *parent, long style)
     SetBackgroundColour(*wxWHITE);
     state_handler.attach({&border_color, &text_color, &selector_border_color, &selector_background_color});
     state_handler.update_binds();
-    if ((style & DD_NO_CHECK_ICON) == 0) {
-        // Recolor the check icon to match themed accent (red) while preserving S/V
-        wxColour c = Slic3r::GUI::Theme::getThemeColor("dropdown.check.color");
-        char buf[8];
-        snprintf(buf, sizeof(buf), "#%02X%02X%02X", c.Red(), c.Green(), c.Blue());
-        check_bitmap = ScalableBitmap(this, "checked", 16, false, false, false, std::vector<std::string>{std::string(buf)});
-    }
+    if ((style & DD_NO_CHECK_ICON) == 0)
+        check_bitmap = ScalableBitmap(this, "checked", 16);
     arrow_bitmap = ScalableBitmap(this, "hms_arrow", 16);
     text_off = style & DD_NO_TEXT;
 
@@ -283,8 +276,10 @@ void DropDown::render(wxDC &dc)
     if (hover_item >= 0 && (states & StateColor::Hovered) && (hover_index < 0 || !(items[hover_index].style & DD_ITEM_STYLE_SPLIT_ITEM))) {
         rcContent.y += rowSize.y * hover_item;
         if (rcContent.GetBottom() > 0 && rcContent.y < size.y) {
-            if (selected_item == hover_item)
-                dc.SetBrush(wxBrush(selector_background_color.colorForStates(states | StateColor::Checked)));
+            if (selected_item == hover_item) {
+                wxColour overlay_color = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
+                dc.SetBrush(wxBrush(overlay_color));
+            }
             dc.SetPen(wxPen(selector_border_color.colorForStates(states)));
             rcContent.Deflate(4, 1);
             dc.DrawRectangle(rcContent);
@@ -296,8 +291,10 @@ void DropDown::render(wxDC &dc)
     if (selected_item >= 0 && (selected_item != hover_item || (states & StateColor::Hovered) == 0)) {
         rcContent.y += rowSize.y * selected_item;
         if (rcContent.GetBottom() > 0 && rcContent.y < size.y) {
-            dc.SetBrush(wxBrush(selector_background_color.colorForStates(states | StateColor::Checked)));
-            dc.SetPen(wxPen(selector_background_color.colorForStates(states)));
+            // Fetch overlay color dynamically from theme for proper paint-time updates
+            wxColour overlay_color = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
+            dc.SetBrush(wxBrush(overlay_color));
+            dc.SetPen(wxPen(overlay_color));
             rcContent.Deflate(4, 1);
             dc.DrawRectangle(rcContent);
             rcContent.Inflate(4, 1);

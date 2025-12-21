@@ -18,18 +18,30 @@ CheckBox::CheckBox(wxWindow *parent, int id)
     , m_half_focused(this, "check_half_focused", 18)
     , m_off_focused(this, "check_off_focused", 18)
 {
-	//SetBackgroundStyle(wxBG_STYLE_TRANSPARENT);
+	SetBackgroundStyle(wxBG_STYLE_PAINT);
 	if (parent)
 		SetBackgroundColour(parent->GetBackgroundColour());
 	Bind(wxEVT_TOGGLEBUTTON, [this](auto& e) { m_half_checked = false; update(); e.Skip(); });
+	Bind(wxEVT_PAINT, [this](wxPaintEvent& e) {
+		wxPaintDC dc(this);
+		dc.SetBackground(wxBrush(GetBackgroundColour()));
+		dc.Clear();
+		wxSize sz = GetSize();
+		auto bmp = GetBitmapLabel();
+		if (bmp.IsOk()) {
+			wxSize bmpSz = bmp.GetSize();
+			dc.DrawBitmap(bmp, (sz.x - bmpSz.x) / 2, (sz.y - bmpSz.y) / 2, true);
+		}
+	});
 #ifdef __WXOSX__ // State not fully implement on MacOS
     Bind(wxEVT_SET_FOCUS, &CheckBox::updateBitmap, this);
     Bind(wxEVT_KILL_FOCUS, &CheckBox::updateBitmap, this);
     Bind(wxEVT_ENTER_WINDOW, &CheckBox::updateBitmap, this);
     Bind(wxEVT_LEAVE_WINDOW, &CheckBox::updateBitmap, this);
 #endif
-	SetSize(m_on.GetBmpSize());
-	SetMinSize(m_on.GetBmpSize());
+	auto bmpSize = m_on.GetBmpSize();
+	SetSize(wxSize(bmpSize.x + FromDIP(8), bmpSize.y + FromDIP(8)));
+	SetMinSize(wxSize(bmpSize.x + FromDIP(8), bmpSize.y + FromDIP(8)));
 	update();
 }
 

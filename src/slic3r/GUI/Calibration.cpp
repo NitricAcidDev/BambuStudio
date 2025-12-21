@@ -33,7 +33,7 @@ static wxColour CalibrationThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return CalibrationThemeGreenHovered();
 }
 
 static wxColour CalibrationThemeGreenPressed() {
@@ -41,7 +41,7 @@ static wxColour CalibrationThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return CalibrationThemeGreenPressed();
 }
 
 CalibrationDialog::CalibrationDialog(Plater *plater)
@@ -167,8 +167,8 @@ CalibrationDialog::CalibrationDialog(Plater *plater)
     m_calibration_flow->SetMinSize(wxSize(CALI_FLOW_CONTENT_WIDTH, FromDIP(160)));
     m_calibration_flow->SetSize(wxSize(CALI_FLOW_CONTENT_WIDTH, FromDIP(160)));
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(AMS_CONTROL_DISABLE_COLOUR, StateColor::Disabled), std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                            std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered), std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
+    StateColor btn_bg_green(std::pair<wxColour, int>(AMS_CONTROL_DISABLE_COLOUR, StateColor::Disabled), std::pair<wxColour, int>(CalibrationThemeGreenPressed(), StateColor::Pressed),
+                            std::pair<wxColour, int>(CalibrationThemeGreenHovered(), StateColor::Hovered), std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
     StateColor btn_bd_green(std::pair<wxColour, int>(AMS_CONTROL_WHITE_COLOUR, StateColor::Disabled), std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Enabled));
 
     m_calibration_btn = new Button(cali_right_panel, _L("Start Calibration"));

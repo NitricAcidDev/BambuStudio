@@ -42,7 +42,7 @@ static wxColour SendToPrinterThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return SendToPrinterThemeGreenHovered();
 }
 
 static wxColour SendToPrinterThemeGreenPressed() {
@@ -50,7 +50,7 @@ static wxColour SendToPrinterThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return SendToPrinterThemeGreenPressed();
 }
 namespace GUI {
 
@@ -312,7 +312,7 @@ SendToPrinterDialog::SendToPrinterDialog(Plater *plater)
     m_comboBox_printer->Bind(wxEVT_COMBOBOX, &SendToPrinterDialog::on_selection_changed, this);
 
     m_sizer_printer->Add(m_comboBox_printer, 1, wxEXPAND | wxRIGHT, FromDIP(5));
-    btn_bg_enable = StateColor(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    btn_bg_enable = StateColor(std::pair<wxColour, int>(SendToPrinterThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(SendToPrinterThemeGreenHovered(), StateColor::Hovered),
                                std::pair<wxColour, int>(SendToPrinterThemeGreen(), StateColor::Normal));
 
     m_button_refresh = new Button(this, _L("Refresh"));

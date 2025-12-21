@@ -21,7 +21,7 @@ static wxColour ConnectPrinterThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return ConnectPrinterThemeGreenHovered();
 }
 
 static wxColour ConnectPrinterThemeGreenPressed() {
@@ -29,7 +29,7 @@ static wxColour ConnectPrinterThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return ConnectPrinterThemeGreenPressed();
 }
 ConnectPrinterDialog::ConnectPrinterDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos, const wxSize &size, long style)
     : DPIDialog(parent, id, _L("ConnectPrinter(LAN)"), pos, size, style)
@@ -79,8 +79,8 @@ ConnectPrinterDialog::ConnectPrinterDialog(wxWindow *parent, wxWindowID id, cons
     m_button_confirm->SetTextColor(wxColour("#FFFFFE"));
 
     StateColor btn_bg(
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(ConnectPrinterThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(ConnectPrinterThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(ConnectPrinterThemeGreen(), StateColor::Normal)
     );
 

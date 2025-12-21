@@ -20,7 +20,7 @@ static wxColour PrivacyUpdateThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return PrivacyUpdateThemeGreenHovered();
 }
 
 static wxColour PrivacyUpdateThemeGreenPressed() {
@@ -28,7 +28,7 @@ static wxColour PrivacyUpdateThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return PrivacyUpdateThemeGreenPressed();
 }
 
 wxDEFINE_EVENT(EVT_PRIVACY_UPDATE_CONFIRM, wxCommandEvent);
@@ -90,7 +90,7 @@ PrivacyUpdateDialog::PrivacyUpdateDialog(wxWindow* parent, wxWindowID id, const 
     m_sizer_right->Add(m_vebview_release_note, 0, wxEXPAND | wxRIGHT | wxLEFT, FromDIP(15));
 
     auto sizer_button = new wxBoxSizer(wxHORIZONTAL);
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(PrivacyUpdateThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(PrivacyUpdateThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(PrivacyUpdateThemeGreen(), StateColor::Normal));
 
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Pressed), std::pair<wxColour, int>(wxColour(220, 220, 220), StateColor::Hovered),

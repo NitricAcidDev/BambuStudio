@@ -34,6 +34,30 @@
 #include "MsgDialog.hpp"
 
 namespace Slic3r {
+
+static wxColour PhysicalPrinterThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return PhysicalPrinterThemeGreen();
+}
+
+static wxColour PhysicalPrinterThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return PhysicalPrinterThemeGreenHovered();
+}
+
+static wxColour PhysicalPrinterThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return PhysicalPrinterThemeGreenPressed();
+}
 namespace GUI {
 
 #define BORDER_W FromDIP(10)
@@ -92,7 +116,7 @@ PhysicalPrinterDialog::PhysicalPrinterDialog(wxWindow* parent) :
 
     auto button_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(PhysicalPrinterThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(PhysicalPrinterThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
 
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Pressed), std::pair<wxColour, int>(wxColour(238, 238, 238), StateColor::Hovered),

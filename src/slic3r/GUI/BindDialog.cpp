@@ -20,6 +20,30 @@
 
 namespace Slic3r {
 
+static wxColour BindThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return BindThemeGreen();
+}
+
+static wxColour BindThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return BindThemeGreenHovered();
+}
+
+static wxColour BindThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return BindThemeGreenPressed();
+}
+
 static wxColour BindDialogThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
@@ -33,7 +57,7 @@ static wxColour BindDialogThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return BindThemeGreenHovered();
 }
 
 static wxColour BindDialogThemeGreenPressed() {
@@ -41,7 +65,7 @@ static wxColour BindDialogThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return BindThemeGreenPressed();
 }
 namespace GUI {
 
@@ -163,8 +187,8 @@ PingCodeBindDialog::PingCodeBindDialog(Plater* plater /*= nullptr*/)
     m_button_bind = new Button(request_bind_panel, _L("Confirm"));
 
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Disabled),
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(BindThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(BindThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(BindDialogThemeGreen(), StateColor::Normal));
     m_button_bind->SetBackgroundColor(btn_bg_green);
     m_button_bind->SetBorderColor(*wxWHITE);
@@ -702,8 +726,8 @@ PingCodeBindDialog::~PingCodeBindDialog() {
      m_button_bind = new Button(button_panel, _L("Confirm"));
 
      StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Disabled),
-         std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-         std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+         std::pair<wxColour, int>(BindThemeGreenPressed(), StateColor::Pressed),
+         std::pair<wxColour, int>(BindThemeGreenHovered(), StateColor::Hovered),
          std::pair<wxColour, int>(BindDialogThemeGreen(), StateColor::Normal));
      m_button_bind->SetBackgroundColor(btn_bg_green);
      m_button_bind->SetBorderColor(*wxWHITE);
@@ -1061,7 +1085,7 @@ UnBindMachineDialog::UnBindMachineDialog(Plater *plater /*= nullptr*/)
 
      m_sizer_button->Add(0, 0, 1, wxEXPAND, 5);
      m_button_unbind = new Button(this, _L("Confirm"));
-     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+     StateColor btn_bg_green(std::pair<wxColour, int>(BindThemeGreenHovered(), StateColor::Hovered),
                              std::pair<wxColour, int>(BindDialogThemeGreen(), StateColor::Normal));
      m_button_unbind->SetBackgroundColor(btn_bg_green);
      m_button_unbind->SetBorderColor(BindDialogThemeGreen());

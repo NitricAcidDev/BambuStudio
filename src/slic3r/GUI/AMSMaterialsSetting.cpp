@@ -22,6 +22,30 @@
 
 namespace Slic3r { namespace GUI {
 
+static wxColour AMSMaterialsSettingThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return AMSMaterialsSettingThemeGreen();
+}
+
+static wxColour AMSMaterialsSettingThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return AMSMaterialsSettingThemeGreenHovered();
+}
+
+static wxColour AMSMaterialsSettingThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return AMSMaterialsSettingThemeGreenPressed();
+}
+
 static wxColour AMSMaterialsThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
@@ -35,7 +59,7 @@ static wxColour AMSMaterialsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return AMSMaterialsSettingThemeGreenHovered();
 }
 
 static wxColour AMSMaterialsThemeGreenPressed() {
@@ -43,7 +67,7 @@ static wxColour AMSMaterialsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return AMSMaterialsSettingThemeGreenPressed();
 }
 
 wxDEFINE_EVENT(EVT_SELECTED_COLOR, wxCommandEvent);
@@ -81,7 +105,7 @@ void AMSMaterialsSetting::create()
     m_sizer_button->Add(0, 0, 1, wxEXPAND, 0);
 
     m_button_confirm = new Button(this, _L("Confirm"));
-    m_btn_bg_green   = StateColor(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    m_btn_bg_green   = StateColor(std::pair<wxColour, int>(AMSMaterialsSettingThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(AMSMaterialsSettingThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(AMSMaterialsThemeGreen(), StateColor::Normal));
     m_button_confirm->SetBackgroundColor(m_btn_bg_green);
     m_button_confirm->SetBorderColor(AMSMaterialsThemeGreen());

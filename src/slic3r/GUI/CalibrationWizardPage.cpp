@@ -20,7 +20,7 @@ static wxColour CalibrationWizardThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return CalibrationWizardThemeGreenHovered();
 }
 
 static wxColour CalibrationWizardThemeGreenPressed() {
@@ -28,7 +28,7 @@ static wxColour CalibrationWizardThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return CalibrationWizardThemeGreenPressed();
 }
 
 wxDEFINE_EVENT(EVT_CALI_ACTION, wxCommandEvent);
@@ -176,8 +176,8 @@ CaliPageButton::CaliPageButton(wxWindow* parent, CaliPageActionType type, wxStri
     Button(parent, text)
 {
     StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Disabled),
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(CalibrationWizardThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(CalibrationWizardThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(CalibrationWizardThemeGreen(), StateColor::Normal));
 
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Disabled),

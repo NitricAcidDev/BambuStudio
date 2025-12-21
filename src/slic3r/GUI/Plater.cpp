@@ -186,7 +186,7 @@ static wxColour PlaterThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return PlaterThemeGreenHovered();
 }
 
 static wxColour PlaterThemeGreenPressed() {
@@ -194,7 +194,7 @@ static wxColour PlaterThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return PlaterThemeGreenPressed();
 }
 namespace GUI {
 
@@ -14006,7 +14006,7 @@ ProjectDropDialog::ProjectDropDialog(const std::string &filename)
     wxBoxSizer *m_sizer_right  = new wxBoxSizer(wxHORIZONTAL);
 
     m_confirm = new Button(this, _L("OK"));
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(PlaterThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(PlaterThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(PlaterThemeGreen(), StateColor::Normal));
 
     m_confirm->SetBackgroundColor(btn_bg_green);

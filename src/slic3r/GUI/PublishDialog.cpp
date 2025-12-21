@@ -16,6 +16,30 @@ static const wxColour TEXT_LIGHT_GRAY = wxColour(107, 107, 107);
 
 namespace Slic3r {
 
+static wxColour PublishThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return PublishThemeGreen();
+}
+
+static wxColour PublishThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return PublishThemeGreenHovered();
+}
+
+static wxColour PublishThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return PublishThemeGreenPressed();
+}
+
 static wxColour PublishDialogThemeGreen() {
     auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
     if (app && app->IsMainLoopRunning()) {
@@ -29,7 +53,7 @@ static wxColour PublishDialogThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return PublishThemeGreenHovered();
 }
 
 static wxColour PublishDialogThemeGreenPressed() {
@@ -37,7 +61,7 @@ static wxColour PublishDialogThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return PublishThemeGreenPressed();
 }
 namespace GUI {
 
@@ -111,8 +135,8 @@ PublishDialog::PublishDialog(Plater *plater)
 
     m_btn_cancel = new Button(this, _L("Cancel"));
     m_progress_sizer->Add(m_btn_cancel, 0, wxALIGN_CENTER_VERTICAL | wxALL, FromDIP(5));
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                            std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(PublishThemeGreenPressed(), StateColor::Pressed),
+                            std::pair<wxColour, int>(PublishThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(wxColour(255, 255, 255), StateColor::Normal));
     StateColor text_color(std::pair<wxColour, int>(wxColour(255, 255, 255), StateColor::Pressed),
                           std::pair<wxColour, int>(wxColour(255, 255, 255), StateColor::Hovered),

@@ -41,7 +41,7 @@ static wxColour SyncAmsInfoThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return SyncAmsInfoThemeGreenHovered();
 }
 
 static wxColour SyncAmsInfoThemeGreenPressed() {
@@ -49,7 +49,7 @@ static wxColour SyncAmsInfoThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return SyncAmsInfoThemeGreenPressed();
 }
 using namespace Slic3r::GUI;
 
@@ -1019,7 +1019,7 @@ SyncAmsInfoDialog::SyncAmsInfoDialog(wxWindow *parent, SyncInfo &info) :
         /* m_checkbox = new wxCheckBox(this, wxID_ANY, _L("Don't show again"), wxDefaultPosition, wxDefaultSize, 0);
          bSizer_button->Add(m_checkbox, 0, wxALIGN_LEFT);*/
         bSizer_button->AddStretchSpacer(1);
-        StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        StateColor btn_bg_green(std::pair<wxColour, int>(SyncAmsInfoThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(SyncAmsInfoThemeGreenHovered(), StateColor::Hovered),
                                 std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
         m_button_ok = new Button(m_show_page,  _L("Synchronize now"));
         m_button_ok->SetBackgroundColor(btn_bg_green);

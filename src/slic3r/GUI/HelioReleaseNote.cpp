@@ -43,7 +43,7 @@ static wxColour HelioReleaseNoteThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return HelioReleaseNoteThemeGreenHovered();
 }
 
 static wxColour HelioReleaseNoteThemeGreenPressed() {
@@ -51,7 +51,7 @@ static wxColour HelioReleaseNoteThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return HelioReleaseNoteThemeGreenPressed();
 }
  HelioStatementDialog::HelioStatementDialog(wxWindow *parent /*= nullptr*/)
     : DPIDialog(static_cast<wxWindow *>(wxGetApp().mainframe), wxID_ANY, _L("Third-Party Extension"), wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX)
@@ -281,7 +281,7 @@ static wxColour HelioReleaseNoteThemeGreenPressed() {
      helio_links_sizer->Add(helio_tou_link, 0, wxLEFT, FromDIP(40));
 
 
-     StateColor btn_bg_green = StateColor(std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered), std::pair<wxColour, int>(HelioReleaseNoteThemeGreen(), StateColor::Normal));
+     StateColor btn_bg_green = StateColor(std::pair<wxColour, int>(HelioReleaseNoteThemeGreenHovered(), StateColor::Hovered), std::pair<wxColour, int>(HelioReleaseNoteThemeGreen(), StateColor::Normal));
 
      page3_content_sizer->Add(enable_pat_title, 0, wxTOP, FromDIP(2));
      page3_content_sizer->Add(0, 0, 0, wxTOP, FromDIP(14));
@@ -1457,7 +1457,7 @@ HelioPatNotEnoughDialog::HelioPatNotEnoughDialog(wxWindow* parent /*= nullptr*/)
     helio_wiki_link->Bind(wxEVT_ENTER_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_HAND); });
     helio_wiki_link->Bind(wxEVT_LEAVE_WINDOW, [this](auto& e) { SetCursor(wxCURSOR_ARROW); });
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(HelioReleaseNoteThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(HelioReleaseNoteThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
 
 

@@ -18,6 +18,30 @@
 #include "Widgets/CheckBox.hpp"
 #include "CapsuleButton.hpp"
 using namespace Slic3r;
+
+static wxColour BaseTransparentDPIFrThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return BaseTransparentDPIFrThemeGreen();
+}
+
+static wxColour BaseTransparentDPIFrThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return BaseTransparentDPIFrThemeGreenHovered();
+}
+
+static wxColour BaseTransparentDPIFrThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return BaseTransparentDPIFrThemeGreenPressed();
+}
 using namespace Slic3r::GUI;
 
 namespace Slic3r { namespace GUI {
@@ -65,7 +89,7 @@ BaseTransparentDPIFrame::BaseTransparentDPIFrame(
     /* m_checkbox = new wxCheckBox(this, wxID_ANY, _L("Don't show again"), wxDefaultPosition, wxDefaultSize, 0);
      bSizer_button->Add(m_checkbox, 0, wxALIGN_LEFT);*/
     bSizer_button->AddStretchSpacer(1);
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(BaseTransparentDPIFrThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(BaseTransparentDPIFrThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(AMS_CONTROL_BRAND_COLOUR, StateColor::Normal));
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(23, 25, 22), StateColor::Pressed), std::pair<wxColour, int>(wxColour(43, 45, 42), StateColor::Hovered),
                             std::pair<wxColour, int>(wxColour(23, 25, 22), StateColor::Normal));

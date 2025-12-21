@@ -16,9 +16,33 @@ static const wxColour STATIC_TEXT_EXPLAIN_COL = wxColour(100, 100, 100);
 
 namespace Slic3r { namespace GUI {
 
+static wxColour SafetyOptionsThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return SafetyOptionsThemeGreen();
+}
+
+static wxColour SafetyOptionsThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return SafetyOptionsThemeGreenHovered();
+}
+
+static wxColour SafetyOptionsThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return SafetyOptionsThemeGreenPressed();
+}
+
 static StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Disabled),
-                               std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                               std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+                               std::pair<wxColour, int>(SafetyOptionsThemeGreenPressed(), StateColor::Pressed),
+                               std::pair<wxColour, int>(SafetyOptionsThemeGreenHovered(), StateColor::Hovered),
                                std::pair<wxColour, int>(wxColour(0, 177, 66), StateColor::Normal));
 
 SafetyOptionsDialog::SafetyOptionsDialog(wxWindow* parent)

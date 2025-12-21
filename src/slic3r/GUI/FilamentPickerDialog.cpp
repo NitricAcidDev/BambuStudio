@@ -39,7 +39,7 @@ static wxColour FilamentPickerThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return FilamentPickerThemeGreenHovered();
 }
 
 static wxColour FilamentPickerThemeGreenPressed() {
@@ -47,7 +47,7 @@ static wxColour FilamentPickerThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return FilamentPickerThemeGreenPressed();
 }
 
 wxColour FilamentPickerDialog::GetSelectedColour() const
@@ -575,8 +575,8 @@ wxBoxSizer* FilamentPickerDialog::CreateButtonPanel()
 
     // standard button color style
     StateColor btn_bg_green(
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(FilamentPickerThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(FilamentPickerThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(FilamentPickerThemeGreen(), StateColor::Normal)
     );
     StateColor btn_bd_green(

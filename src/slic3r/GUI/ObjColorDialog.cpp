@@ -31,7 +31,7 @@ static wxColour ObjColorThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return ObjColorThemeGreenHovered();
 }
 
 static wxColour ObjColorThemeGreenPressed() {
@@ -39,7 +39,7 @@ static wxColour ObjColorThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return ObjColorThemeGreenPressed();
 }
 using namespace Slic3r::GUI;
 
@@ -64,8 +64,8 @@ static void update_ui(wxWindow* window)
 
 static const char g_min_cluster_color = 1;
 static const char g_max_color = (int) EnforcerBlockerType::ExtruderMax;
-const  StateColor ok_btn_bg(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                     std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+const  StateColor ok_btn_bg(std::pair<wxColour, int>(ObjColorThemeGreenPressed(), StateColor::Pressed),
+                     std::pair<wxColour, int>(ObjColorThemeGreenHovered(), StateColor::Hovered),
                      std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
 const StateColor  ok_btn_disable_bg(std::pair<wxColour, int>(wxColour(205, 201, 201), StateColor::Pressed),
                                    std::pair<wxColour, int>(wxColour(205, 201, 201), StateColor::Hovered),
@@ -113,8 +113,8 @@ wxBoxSizer* ObjColorDialog::create_btn_sizer(long flags,bool exist_error)
         std::pair<wxColour, int>(wxColour(38, 46, 48), StateColor::Normal)
     );
     StateColor calc_btn_bg(
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(ObjColorThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(ObjColorThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal)
     );
     StateColor calc_btn_bd(
@@ -583,7 +583,7 @@ void ObjColorPanel::do_layout_callback() {
 wxBoxSizer *ObjColorPanel::create_approximate_match_btn_sizer(wxWindow *parent)
 {
     auto       btn_sizer = new wxBoxSizer(wxHORIZONTAL);
-    StateColor calc_btn_bg(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor calc_btn_bg(std::pair<wxColour, int>(ObjColorThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(ObjColorThemeGreenHovered(), StateColor::Hovered),
                            std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
     StateColor calc_btn_bd(std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
     StateColor calc_btn_text(std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Normal));
@@ -609,7 +609,7 @@ wxBoxSizer *ObjColorPanel::create_approximate_match_btn_sizer(wxWindow *parent)
 wxBoxSizer *ObjColorPanel::create_add_btn_sizer(wxWindow *parent)
 {
     auto       btn_sizer = new wxBoxSizer(wxHORIZONTAL);
-    StateColor calc_btn_bg(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor calc_btn_bg(std::pair<wxColour, int>(ObjColorThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(ObjColorThemeGreenHovered(), StateColor::Hovered),
                            std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
     StateColor calc_btn_bd(std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
     StateColor calc_btn_text(std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Normal));
@@ -635,7 +635,7 @@ wxBoxSizer *ObjColorPanel::create_add_btn_sizer(wxWindow *parent)
 wxBoxSizer *ObjColorPanel::create_reset_btn_sizer(wxWindow *parent)
 {
     auto       btn_sizer = new wxBoxSizer(wxHORIZONTAL);
-    StateColor calc_btn_bg(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor calc_btn_bg(std::pair<wxColour, int>(ObjColorThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(ObjColorThemeGreenHovered(), StateColor::Hovered),
                            std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
     StateColor calc_btn_bd(std::pair<wxColour, int>(ObjColorThemeGreen(), StateColor::Normal));
     StateColor calc_btn_text(std::pair<wxColour, int>(wxColour(255, 255, 254), StateColor::Normal));

@@ -5,6 +5,30 @@
 #include <algorithm>
 
 namespace Slic3r {
+
+static wxColour ThemeThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return ThemeThemeGreen();
+}
+
+static wxColour ThemeThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return ThemeThemeGreenHovered();
+}
+
+static wxColour ThemeThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return ThemeThemeGreenPressed();
+}
 namespace GUI {
 
 // Manual RGB to HSV conversion
@@ -134,9 +158,9 @@ ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
         colors.button_blue = colors.button_green;
         colors.button_purple = colors.button_green;
     } else { // Bambu Green default
-        colors.button_green = make_button(wxColour(0, 174, 66),     // normal
+        colors.button_green = make_button(ThemeThemeGreen(),     // normal
                                           wxColour(55, 238, 124),   // hovered
-                                          wxColour(27, 136, 68));   // pressed
+                                          ThemeThemeGreenPressed());   // pressed
         colors.button_red = colors.button_green;
         colors.button_blue = colors.button_green;
         colors.button_purple = colors.button_green;

@@ -52,7 +52,7 @@ static wxColour UnsavedChangesThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return UnsavedChangesThemeGreenHovered();
 }
 
 static wxColour UnsavedChangesThemeGreenPressed() {
@@ -60,7 +60,7 @@ static wxColour UnsavedChangesThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return UnsavedChangesThemeGreenPressed();
 }
 
 namespace GUI {
@@ -1024,7 +1024,7 @@ void UnsavedChangesDialog::build(Preset::Type type, PresetCollection *dependent_
 
      // Add Buttons
     wxFont      btn_font = this->GetFont().Scaled(1.4f);
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(UnsavedChangesThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(UnsavedChangesThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(UnsavedChangesThemeGreen(), StateColor::Normal));
 
     auto add_btn = [this, m_sizer_button, btn_font, dependent_presets, btn_bg_green](Button **btn, int &btn_id, Action close_act, const wxString &label,

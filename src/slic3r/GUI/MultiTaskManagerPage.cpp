@@ -25,7 +25,7 @@ static wxColour MultiTaskManagerThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return MultiTaskManagerThemeGreenHovered();
 }
 
 static wxColour MultiTaskManagerThemeGreenPressed() {
@@ -33,7 +33,7 @@ static wxColour MultiTaskManagerThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return MultiTaskManagerThemeGreenPressed();
 }
 namespace GUI {
 
@@ -61,8 +61,8 @@ MultiTaskItem::MultiTaskItem(wxWindow* parent, MachineObject* obj, int type)
 
 
     auto m_btn_bg_enable = StateColor(
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(MultiTaskManagerThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(MultiTaskManagerThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(MultiTaskManagerThemeGreen(), StateColor::Normal)
     );
 

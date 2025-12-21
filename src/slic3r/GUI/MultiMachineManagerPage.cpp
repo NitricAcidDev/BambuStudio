@@ -19,7 +19,7 @@ static wxColour MultiMachineManagerThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return MultiMachineManagerThemeGreenHovered();
 }
 
 static wxColour MultiMachineManagerThemeGreenPressed() {
@@ -27,7 +27,7 @@ static wxColour MultiMachineManagerThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return MultiMachineManagerThemeGreenPressed();
 }
 namespace GUI {
 
@@ -307,8 +307,8 @@ MultiMachineManagerPage::MultiMachineManagerPage(wxWindow* parent)
 
     //edit prints
     auto m_btn_bg_enable = StateColor(
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(MultiMachineManagerThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(MultiMachineManagerThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(MultiMachineManagerThemeGreen(), StateColor::Normal)
     );
 

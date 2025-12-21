@@ -20,7 +20,7 @@ static wxColour FilamentMapThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return FilamentMapThemeGreenHovered();
 }
 
 static wxColour FilamentMapThemeGreenPressed() {
@@ -28,7 +28,7 @@ static wxColour FilamentMapThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return FilamentMapThemeGreenPressed();
 }
 
 static bool get_pop_up_remind_flag()
@@ -153,8 +153,8 @@ bool try_pop_up_before_slice(bool is_slice_all, Plater* plater_ref, PartPlate* p
 
 StateColor btn_bg_green(
     std::pair<wxColour, int>(wxColour(144, 144, 144), StateColor::Disabled),
-    std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-    std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    std::pair<wxColour, int>(FilamentMapThemeGreenPressed(), StateColor::Pressed),
+    std::pair<wxColour, int>(FilamentMapThemeGreenHovered(), StateColor::Hovered),
     std::pair<wxColour, int>(FilamentMapThemeGreen(), StateColor::Normal)
 );
 

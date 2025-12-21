@@ -28,7 +28,7 @@ static wxColour PrintOptionsThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return PrintOptionsThemeGreenHovered();
 }
 
 static wxColour PrintOptionsThemeGreenPressed() {
@@ -36,12 +36,12 @@ static wxColour PrintOptionsThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return PrintOptionsThemeGreenPressed();
 }
 
 static StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Disabled),
-                               std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                               std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+                               std::pair<wxColour, int>(PrintOptionsThemeGreenPressed(), StateColor::Pressed),
+                               std::pair<wxColour, int>(PrintOptionsThemeGreenHovered(), StateColor::Hovered),
                                std::pair<wxColour, int>(wxColour(0, 177, 66), StateColor::Normal));
 
 PrintOptionsDialog::PrintOptionsDialog(wxWindow* parent)

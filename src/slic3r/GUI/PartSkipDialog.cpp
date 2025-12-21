@@ -34,7 +34,7 @@ static wxColour PartSkipThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return PartSkipThemeGreenHovered();
 }
 
 static wxColour PartSkipThemeGreenPressed() {
@@ -42,7 +42,7 @@ static wxColour PartSkipThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return PartSkipThemeGreenPressed();
 }
 
 #include "Widgets/CheckBox.hpp"
@@ -84,8 +84,8 @@ static StateColor btn_bg_gray(std::pair<wxColour, int>(wxColour(194, 194, 194), 
                               std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Hovered),
                               std::pair<wxColour, int>(wxColour(194, 194, 194), StateColor::Normal));
 
-static StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-                               std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+static StateColor btn_bg_green(std::pair<wxColour, int>(PartSkipThemeGreenPressed(), StateColor::Pressed),
+                               std::pair<wxColour, int>(PartSkipThemeGreenHovered(), StateColor::Hovered),
                                std::pair<wxColour, int>(wxColour(0, 177, 66), StateColor::Normal));
 
 PartSkipDialog::PartSkipDialog(wxWindow *parent) : DPIDialog(parent, wxID_ANY, _L("Skip Objects"), wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX)
@@ -1018,7 +1018,7 @@ PartSkipConfirmDialog::PartSkipConfirmDialog(wxWindow *parent) : DPIDialog(paren
     StateColor btn_bg_white(std::pair<wxColour, int>(wxColour(206, 206, 206), StateColor::Pressed), std::pair<wxColour, int>(wxColour(238, 238, 238), StateColor::Hovered),
                             std::pair<wxColour, int>(*wxWHITE, StateColor::Normal));
 
-    StateColor btn_bg_green(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    StateColor btn_bg_green(std::pair<wxColour, int>(PartSkipThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(PartSkipThemeGreenHovered(), StateColor::Hovered),
                             std::pair<wxColour, int>(wxColour(0, 177, 66), StateColor::Normal));
 
     m_apply_button = new Button(this, _L("Continue"));

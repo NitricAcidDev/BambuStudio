@@ -29,7 +29,7 @@ static wxColour NetworkTestThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return NetworkTestThemeGreenHovered();
 }
 
 static wxColour NetworkTestThemeGreenPressed() {
@@ -37,7 +37,7 @@ static wxColour NetworkTestThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return NetworkTestThemeGreenPressed();
 }
 namespace GUI {
 
@@ -266,7 +266,7 @@ NetworkTestDialog::NetworkTestDialog(wxWindow* parent, wxWindowID id, const wxSt
 
 wxBoxSizer* NetworkTestDialog::create_top_sizer(wxWindow* parent)
 {
-    StateColor btn_bg(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered), std::pair<wxColour, int>(wxColour(255, 255, 255), StateColor::Enabled));
+    StateColor btn_bg(std::pair<wxColour, int>(NetworkTestThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(NetworkTestThemeGreenHovered(), StateColor::Hovered), std::pair<wxColour, int>(wxColour(255, 255, 255), StateColor::Enabled));
 	auto sizer = new wxBoxSizer(wxVERTICAL);
 
 	auto line_sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -348,7 +348,7 @@ wxBoxSizer* NetworkTestDialog::create_content_sizer(wxWindow* parent)
 	grid_sizer->SetFlexibleDirection(wxBOTH);
 	grid_sizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    StateColor btn_bg(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered), std::pair<wxColour, int>(wxColour(255,255,255), StateColor::Enabled));
+    StateColor btn_bg(std::pair<wxColour, int>(NetworkTestThemeGreenPressed(), StateColor::Pressed),std::pair<wxColour, int>(NetworkTestThemeGreenHovered(), StateColor::Hovered), std::pair<wxColour, int>(wxColour(255,255,255), StateColor::Enabled));
 	btn_link = new Button(this, _L("Test BambuLab"));
     btn_link->SetBackgroundColor(btn_bg);
 	grid_sizer->Add(btn_link, 0, wxEXPAND | wxALL, 5);

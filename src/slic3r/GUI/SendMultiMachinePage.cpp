@@ -25,7 +25,7 @@ static wxColour SendMultiMachineThemeGreenHovered() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
     }
-    return wxColour(61, 203, 115);
+    return SendMultiMachineThemeGreenHovered();
 }
 
 static wxColour SendMultiMachineThemeGreenPressed() {
@@ -33,7 +33,7 @@ static wxColour SendMultiMachineThemeGreenPressed() {
     if (app && app->IsMainLoopRunning()) {
         return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
     }
-    return wxColour(27, 136, 68);
+    return SendMultiMachineThemeGreenPressed();
 }
 namespace GUI {
 
@@ -1379,8 +1379,8 @@ wxPanel* SendMultiMachinePage::create_page()
     m_tip_text->Wrap(-1);
 
     auto m_btn_bg_enable = StateColor(
-        std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed),
-        std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+        std::pair<wxColour, int>(SendMultiMachineThemeGreenPressed(), StateColor::Pressed),
+        std::pair<wxColour, int>(SendMultiMachineThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(SendMultiMachineThemeGreen(), StateColor::Normal)
     );
 
@@ -1441,7 +1441,7 @@ wxPanel* SendMultiMachinePage::create_page()
     sizer->AddSpacer(FromDIP(10));
 
     // add send button
-    btn_bg_enable = StateColor(std::pair<wxColour, int>(wxColour(27, 136, 68), StateColor::Pressed), std::pair<wxColour, int>(wxColour(61, 203, 115), StateColor::Hovered),
+    btn_bg_enable = StateColor(std::pair<wxColour, int>(SendMultiMachineThemeGreenPressed(), StateColor::Pressed), std::pair<wxColour, int>(SendMultiMachineThemeGreenHovered(), StateColor::Hovered),
         std::pair<wxColour, int>(SendMultiMachineThemeGreen(), StateColor::Normal));
 
     m_button_send = new Button(main_page, _L("Send"));

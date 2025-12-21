@@ -87,13 +87,21 @@ wxColour shift_hue(const wxColour& color, double hue_shift) {
     return hsv_to_rgb(h, s, v);
 }
 
-ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
-    // Base colors for Bambu Green
-    wxColour base_green(0, 174, 66); // 0x00AE42
-    wxColour light_green(55, 238, 124); // 0x37EE7C
-    wxColour darker_green(0, 100, 0);
-    wxColour disabled_green(169, 169, 169);
+static StateColor make_button(const wxColour& normal,
+                              const wxColour& hovered,
+                              const wxColour& pressed,
+                              const wxColour& disabled = wxColour(169, 169, 169))
+{
+    StateColor sc;
+    sc.append(disabled, StateColor::Disabled);
+    sc.append(hovered, StateColor::Hovered | StateColor::Checked);
+    sc.append(normal, StateColor::Checked | StateColor::Enabled);
+    sc.append(pressed, StateColor::Pressed | StateColor::Enabled);
+    sc.append(wxColour(255, 255, 255), StateColor::Normal | StateColor::Enabled);
+    return sc;
+}
 
+ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
     // Accept both user-facing names and stored ids (theme_color preference)
     std::string name = theme_name;
     if (name == "bambu_green") name = "Bambu Green";
@@ -101,31 +109,37 @@ ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
     else if (name == "ocean_blue") name = "Ocean Blue";
     else if (name == "candy_red") name = "Candy Red";
 
-    double hue_shift = 0.0;
-    if (name == "Space Purple") {
-        hue_shift = 0.75; // Purple
-    } else if (name == "Ocean Blue") {
-        hue_shift = 0.58; // Blue
-    } else if (name == "Candy Red") {
-        hue_shift = 0.0; // Red
-    } // Bambu Green: 0
-
-    wxColour normal = shift_hue(base_green, hue_shift);
-    wxColour hovered = shift_hue(light_green, hue_shift);
-    wxColour pressed = shift_hue(darker_green, hue_shift);
-    wxColour disabled = disabled_green;
-
     ThemeColors colors;
-    colors.button_green.append(disabled, StateColor::Disabled);
-    colors.button_green.append(hovered, StateColor::Hovered | StateColor::Checked);
-    colors.button_green.append(normal, StateColor::Checked);
-    colors.button_green.append(pressed, StateColor::Pressed);
-    colors.button_green.append(wxColour(255, 255, 255), StateColor::Normal);
 
-    // For simplicity, use same for others
-    colors.button_red = colors.button_green;
-    colors.button_blue = colors.button_green;
-    colors.button_purple = colors.button_green;
+    if (name == "Space Purple") {
+        colors.button_green = make_button(wxColour(123, 92, 255),  // normal
+                                          wxColour(154, 127, 255), // hovered
+                                          wxColour(90, 58, 207));  // pressed
+        colors.button_purple = colors.button_green;
+        colors.button_blue = colors.button_green;
+        colors.button_red = colors.button_green;
+    } else if (name == "Ocean Blue") {
+        colors.button_green = make_button(wxColour(31, 142, 234),   // normal
+                                          wxColour(74, 167, 240),   // hovered
+                                          wxColour(27, 111, 184));  // pressed
+        colors.button_blue = colors.button_green;
+        colors.button_purple = colors.button_green;
+        colors.button_red = colors.button_green;
+    } else if (name == "Candy Red") {
+        colors.button_green = make_button(wxColour(208, 27, 27),    // normal
+                                          wxColour(226, 85, 85),    // hovered
+                                          wxColour(160, 19, 19));   // pressed
+        colors.button_red = colors.button_green;
+        colors.button_blue = colors.button_green;
+        colors.button_purple = colors.button_green;
+    } else { // Bambu Green default
+        colors.button_green = make_button(wxColour(0, 174, 66),     // normal
+                                          wxColour(55, 238, 124),   // hovered
+                                          wxColour(27, 136, 68));   // pressed
+        colors.button_red = colors.button_green;
+        colors.button_blue = colors.button_green;
+        colors.button_purple = colors.button_green;
+    }
 
     return colors;
 }

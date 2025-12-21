@@ -733,6 +733,14 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
         app_config->set(param, theme_values[e.GetSelection()]);
         app_config->save();
         update_color(e.GetSelection());
+
+        // Refresh theme without restart
+        wxGetApp().force_colors_update();
+        if (wxGetApp().mainframe) {
+            wxGetApp().mainframe->update_side_button_style();
+            wxGetApp().mainframe->Refresh();
+            wxGetApp().mainframe->Update();
+        }
         e.Skip();
     });
 

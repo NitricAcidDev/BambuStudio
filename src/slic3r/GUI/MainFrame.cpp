@@ -2267,20 +2267,6 @@ void MainFrame::update_side_button_style()
     // BBS
     int em = em_unit();
 
-    // Apply current theme colors to the slice/print buttons and dropdowns.
-    auto theme_colors = Slic3r::GUI::wxGetApp().get_theme_colors();
-    StateColor themed_border = theme_colors.button_green;
-    StateColor themed_bg     = theme_colors.button_green;
-
-    m_slice_btn->SetBorderColor(themed_border);
-    m_slice_btn->SetBackgroundColor(themed_bg);
-    m_slice_option_btn->SetBorderColor(themed_border);
-    m_slice_option_btn->SetBackgroundColor(themed_bg);
-    m_print_btn->SetBorderColor(themed_border);
-    m_print_btn->SetBackgroundColor(themed_bg);
-    m_print_option_btn->SetBorderColor(themed_border);
-    m_print_option_btn->SetBackgroundColor(themed_bg);
-
     m_slice_btn->SetTextLayout(SideButton::EHorizontalOrientation::HO_Left, FromDIP(15));
     m_slice_btn->SetCornerRadius(FromDIP(12));
     m_slice_btn->SetExtraSize(wxSize(FromDIP(38), FromDIP(10)));

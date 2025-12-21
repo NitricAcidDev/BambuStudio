@@ -31,7 +31,7 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     border_color.append(0x6B6B6B, StateColor::Disabled);
     border_color.append(Slic3r::GUI::Theme::getThemeColor("side_button.border.pressed"), StateColor::Pressed);
     border_color.append(Slic3r::GUI::Theme::getThemeColor("side_button.border.hovered"), StateColor::Hovered);
-    border_color.append(0x00AE42, StateColor::Normal);
+    border_color.append(Slic3r::GUI::Theme::getThemeColor("side_button.border.normal"), StateColor::Normal);
     border_color.setTakeFocusedAsHovered(false);
 
     text_color.append(0xACACAC, StateColor::Disabled);
@@ -42,7 +42,7 @@ SideButton::SideButton(wxWindow* parent, wxString text, wxString icon, long stly
     background_color.append(0x6B6B6B, StateColor::Disabled);
     background_color.append(Slic3r::GUI::Theme::getThemeColor("side_button.bg.pressed"), StateColor::Pressed);
     background_color.append(Slic3r::GUI::Theme::getThemeColor("side_button.bg.hovered"), StateColor::Hovered);
-    background_color.append(0x00AE42, StateColor::Normal);
+    background_color.append(Slic3r::GUI::Theme::getThemeColor("side_button.bg.normal"), StateColor::Normal);
     background_color.setTakeFocusedAsHovered(false);
 
     SetBottomColour(wxColour("#3B4446"));

@@ -82,8 +82,10 @@ void init_defaults()
     // SideButton - original colors except green -> bright cyan
     g_theme_colors["side_button.border.pressed"] = from_hex_rgb(0x17813F);
     g_theme_colors["side_button.border.hovered"] = from_hex_rgb(0x00FFFF); // CHANGED: was 0x30DD70, now cyan
+    g_theme_colors["side_button.border.normal"]  = from_hex_rgb(0x00FFFF); // CHANGED: was 0x00AE42, now cyan
     g_theme_colors["side_button.bg.pressed"]    = from_hex_rgb(0x17813F);
     g_theme_colors["side_button.bg.hovered"]    = from_hex_rgb(0x00FFFF); // CHANGED: was 0x30DD70, now cyan
+    g_theme_colors["side_button.bg.normal"]     = from_hex_rgb(0x00FFFF); // CHANGED: was 0x00AE42, now cyan
 
     // ProgressBar & MultiNozzleSync - original colors except green -> bright cyan
     g_theme_colors["progress.button.disabled"] = from_hex_rgb(0x909090);

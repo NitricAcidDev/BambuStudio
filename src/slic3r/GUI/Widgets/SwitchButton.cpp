@@ -424,7 +424,7 @@ void CustomToggleButton::render(wxDC& dc)
     memdc.SelectObject(wxNullBitmap);
     dc.DrawBitmap(bmp, 0, 0);
 #else
-                  dc.SetBrush(wxBrush(Slic3r::GUI::Theme::getThemeColor("switch_board.bg.enabled")));
+    doRender(dc);
 #endif
 }
 
@@ -448,7 +448,7 @@ void CustomToggleButton::doRender(wxDC& dc)
     }
     else {
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
-                  if (is_enable) {dc.SetBrush(wxBrush(Slic3r::GUI::Theme::getThemeColor("switch_board.segment.enabled")));
+        dc.SetPen(wxPen(wxColour("#EEEEEE")));
     }
     
     dc.DrawRoundedRectangle(rect, 5);

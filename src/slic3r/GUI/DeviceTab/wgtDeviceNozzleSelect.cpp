@@ -9,6 +9,7 @@
 #include "wgtDeviceNozzleRack.h"
 
 #include "slic3r/GUI/I18N.hpp"
+#include "slic3r/GUI/GUI_App.hpp" // for wxGetApp() theme colors
 
 static wxColour s_gray_clr("#B0B0B0");
 static wxColour GetThemeGreenColor() { 

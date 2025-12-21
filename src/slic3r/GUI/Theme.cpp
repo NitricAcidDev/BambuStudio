@@ -169,7 +169,7 @@ void init_defaults()
     g_theme_colors["tab.text.normal"]      = from_hex_rgb(0x6B6B6C);
 
     // Dropdown pressed item color
-    g_theme_colors["dropdown.item_bg.pressed"] = g_theme_colors["accent.tint.light"];
+    g_theme_colors["dropdown.item_bg.pressed"] = from_hex_rgb(0xEDFAF2);
 
     // Bitmap generation and similar features
     g_theme_colors["feature.text.hovered"]        = shift_to_hue(0x00AE42, H_RED);

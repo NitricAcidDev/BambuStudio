@@ -32,6 +32,8 @@ public:
 
 	void Rescale();
 
+	void UpdateThemeColors(); // Apply theme colors from current selection
+
 private:
 	void update();
 

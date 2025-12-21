@@ -55,6 +55,8 @@ public:
 
     void SetIconOffset(const int offset);
 
+    void UpdateThemeColors(); // Apply theme colors from current selection
+
 private:
     wxSize textSize;
     wxSize minSize;

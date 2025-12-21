@@ -342,3 +342,17 @@ void SideButton::sendButtonEvent()
     event.SetEventObject(this);
     GetEventHandler()->ProcessEvent(event);
 }
+
+void SideButton::UpdateThemeColors()
+{
+    // Apply theme colors to side button
+    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        auto theme_colors = app->get_theme_colors();
+        // Use green theme for button background
+        background_color = theme_colors.button_green;
+        border_color = theme_colors.button_green;
+        Refresh();
+    }
+}
+

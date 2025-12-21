@@ -532,3 +532,16 @@ void Button::OnParentLeave(wxMouseEvent& event)
 
     event.Skip();
 }
+
+void Button::UpdateThemeColors()
+{
+    // Apply theme colors to button background based on current selection
+    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        auto theme_colors = app->get_theme_colors();
+        // Use green theme for button background in all states
+        background_color = theme_colors.button_green;
+        Refresh();
+    }
+}
+

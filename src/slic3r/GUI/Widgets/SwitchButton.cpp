@@ -951,3 +951,24 @@ bool MultiSwitchButton::send_selection_event()
     GetEventHandler()->ProcessEvent(evt);
     return true;
 }
+
+void SwitchButton::UpdateThemeColors()
+{
+    // Apply theme colors to switch button
+    auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        auto theme_colors = app->get_theme_colors();
+        // Use green theme for switch button in enabled state
+        track_color = StateColor(
+            std::make_pair(theme_colors.button_green.colorForStates(StateColor::Normal | StateColor::Enabled), 
+                          (int)(StateColor::Normal | StateColor::Enabled))
+        );
+        thumb_color = StateColor(
+            std::make_pair(*wxWHITE, 
+                          (int)(StateColor::Normal | StateColor::Enabled))
+        );
+        update();
+    }
+}
+
+}

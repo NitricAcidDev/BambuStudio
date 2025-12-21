@@ -127,7 +127,13 @@ void CapsuleButton::UpdateStatus()
     if (m_selected) {
         m_btn->SetBitmap(tag_on_bmp);
         auto sel = s_theme_bg.colorForStates(StateColor::Checked | StateColor::Enabled);
-        m_label->SetForegroundColour(wxColour("#00AE42")); // Theme will be applied later
+        // Use theme color for selected text
+        auto* app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+        if (app && app->IsMainLoopRunning()) {
+            m_label->SetForegroundColour(app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled));
+        } else {
+            m_label->SetForegroundColour(wxColour("#00AE42"));
+        }
         m_label->SetBackgroundColour(sel);
         m_btn->SetBackgroundColour(sel);
     } else {

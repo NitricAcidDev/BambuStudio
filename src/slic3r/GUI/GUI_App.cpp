@@ -4175,9 +4175,22 @@ void GUI_App::force_colors_update()
 
 // Called after the Preferences dialog is closed and the program settings are saved.
 // Update the UI based on the current preferences.
+void GUI_App::update_theme_colors()
+{
+    // This method is called during UI refresh to apply theme colors to all widgets
+    // It notifies the main frame and all children to update their theme colors
+    if (mainframe) {
+        mainframe->Refresh();
+        mainframe->Update();
+    }
+}
+
 void GUI_App::update_ui_from_settings()
 {
     update_label_colours();
+    // Update theme colors for dynamic widgets
+    update_theme_colors();
+    
     // Upadte UI colors before Update UI from settings
     if (m_force_colors_update) {
         m_force_colors_update = false;

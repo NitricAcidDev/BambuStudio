@@ -405,6 +405,7 @@ public:
     void            update_publish_status();
     bool            has_model_mall();
     void            update_label_colours();
+    void            update_theme_colors(); // Update theme colors in dynamic widgets
     // update color mode for window
     void            UpdateDarkUI(wxWindow *window, bool highlited = false, bool just_font = false);
     void            UpdateDarkUIWin(wxWindow* win);

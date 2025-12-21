@@ -77,6 +77,8 @@ public:
     bool IsGrayed() { return grayed; }
     void SetGrayed(bool gray) { grayed = gray; }
 
+    void UpdateThemeColors(); // Apply theme colors from current selection
+
     wxRect GetTextRect() const { return textSize; }
 
 protected:

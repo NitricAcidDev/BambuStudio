@@ -48,6 +48,8 @@ set(SLIC3R_GUI_SOURCES
     GUI/Widgets/ImageSwitchButton.hpp
     GUI/Widgets/SwitchButton.cpp
     GUI/Widgets/SwitchButton.hpp
+    GUI/Theme.cpp
+    GUI/Theme.hpp
     GUI/Widgets/SpinInput.cpp
     GUI/Widgets/SpinInput.hpp
     GUI/Widgets/StaticLine.cpp

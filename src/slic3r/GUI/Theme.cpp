@@ -1,0 +1,307 @@
+#include "Theme.hpp"
+
+#include <unordered_map>
+#include <mutex>
+#include <cmath>
+#include <wx/log.h>
+
+namespace Slic3r { namespace GUI { namespace Theme {
+
+static std::unordered_map<std::string, wxColour> g_theme_colors;
+static std::once_flag g_init_flag;
+
+static inline wxColour from_hex_rgb(int hex)
+{
+    unsigned r = (hex >> 16) & 0xFFu;
+    unsigned g = (hex >> 8) & 0xFFu;
+    unsigned b = (hex) & 0xFFu;
+    return wxColour(r, g, b);
+}
+
+static void init_defaults()
+{
+    // SwitchButton
+    g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);
+    g_theme_colors["switch.text.normal"]    = from_hex_rgb(0x6B6B6B);
+    g_theme_colors["switch.track"]          = from_hex_rgb(0xD9D9D9);
+    g_theme_colors["switch.thumb.checked"]  = from_hex_rgb(0x00AE42);
+    g_theme_colors["switch.thumb.normal"]   = from_hex_rgb(0xD9D9D9);
+
+    // SwitchBoard
+    g_theme_colors["switch_board.bg.enabled"]     = from_hex_rgb(0xEEEEEE);
+    g_theme_colors["switch_board.bg.disabled"]    = from_hex_rgb(0xCECECE);
+    g_theme_colors["switch_board.segment.enabled"] = from_hex_rgb(0x00AE42);
+    g_theme_colors["switch_board.text.selected"]  = from_hex_rgb(0xFFFFFF);
+    g_theme_colors["switch_board.text.unselected"] = from_hex_rgb(0x333333);
+
+    // MultiSwitchButton
+    g_theme_colors["multi_switch.bg.not_checked"]    = from_hex_rgb(0xE8E8E8);
+    g_theme_colors["multi_switch.bg.normal"]         = from_hex_rgb(0x00AE42);
+    g_theme_colors["multi_switch.bg_grayed.normal"]  = from_hex_rgb(0x6DC48D);
+    g_theme_colors["multi_switch.text.not_checked"]  = from_hex_rgb(0x6B6B6B);
+    g_theme_colors["multi_switch.text.normal"]       = from_hex_rgb(0xFFFFFE);
+    g_theme_colors["multi_switch.text_grayed.not_checked"] = from_hex_rgb(0x999999);
+    g_theme_colors["multi_switch.text_grayed.normal"]      = from_hex_rgb(0x99DFB2);
+
+    // ComboBox (read-only style)
+    g_theme_colors["combobox.border.disabled"] = from_hex_rgb(0xDBDBDB);
+    g_theme_colors["combobox.border.hovered"]  = from_hex_rgb(0x00AE42);
+    g_theme_colors["combobox.border.normal"]   = from_hex_rgb(0xDBDBDB);
+
+    g_theme_colors["combobox.bg.disabled"] = from_hex_rgb(0xF0F0F1);
+    g_theme_colors["combobox.bg.focused"]  = from_hex_rgb(0xEDFAF2);
+    g_theme_colors["combobox.bg.normal"]   = from_hex_rgb(0xFFFFFF);
+
+    g_theme_colors["combobox.label.disabled"] = from_hex_rgb(0x909090);
+    g_theme_colors["combobox.label.normal"]   = from_hex_rgb(0x262E30);
+}
+
+static inline void ensure_init()
+{
+    std::call_once(g_init_flag, [](){ init_defaults(); });
+}
+
+void setThemeColor(const std::string &key, const wxColour &value)
+{
+    ensure_init();
+    g_theme_colors[key] = value;
+}
+
+bool hasThemeColor(const std::string &key)
+{
+    ensure_init();
+    return g_theme_colors.find(key) != g_theme_colors.end();
+}
+
+wxColour getThemeColor(const std::string &key)
+{
+    ensure_init();
+    auto it = g_theme_colors.find(key);
+    if (it == g_theme_colors.end()) {
+        wxLogError("Theme color key not found: %s", key.c_str());
+        // No fallbacks: return an explicitly invalid color to catch misuse.
+        // wxColour has IsOk() check; but we use a conspicuous magenta to surface issues.
+        return wxColour(255, 0, 255);
+    }
+    return it->second;
+}
+
+// HSV conversion helpers
+static void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, float &v)
+{
+    float rf = r / 255.0f, gf = g / 255.0f, bf = b / 255.0f;
+    float maxc = std::fmax(std::fmax(rf, gf), bf);
+    float minc = std::fmin(std::fmin(rf, gf), bf);
+    v = maxc;
+    float delta = maxc - minc;
+    s = (maxc == 0.f) ? 0.f : delta / maxc;
+    if (delta == 0.f) {
+        h = 0.f;
+    } else {
+        if (maxc == rf)      h = 60.f * std::fmod(((gf - bf) / delta), 6.f);
+        else if (maxc == gf) h = 60.f * (((bf - rf) / delta) + 2.f);
+        else                 h = 60.f * (((rf - gf) / delta) + 4.f);
+        if (h < 0.f) h += 360.f;
+    }
+}
+
+static void hsv_to_rgb(float h, float s, float v, unsigned &r, unsigned &g, unsigned &b)
+{
+    float c = v * s;
+    float x = c * (1.f - std::fabs(std::fmod(h / 60.f, 2.f) - 1.f));
+    float m = v - c;
+    float rf = 0.f, gf = 0.f, bf = 0.f;
+    if (h < 60.f)       { rf = c; gf = x; bf = 0; }
+    else if (h < 120.f) { rf = x; gf = c; bf = 0; }
+    else if (h < 180.f) { rf = 0; gf = c; bf = x; }
+    else if (h < 240.f) { rf = 0; gf = x; bf = c; }
+    else if (h < 300.f) { rf = x; gf = 0; bf = c; }
+    else                { rf = c; gf = 0; bf = x; }
+    r = static_cast<unsigned>(std::round((rf + m) * 255.f));
+    g = static_cast<unsigned>(std::round((gf + m) * 255.f));
+    b = static_cast<unsigned>(std::round((bf + m) * 255.f));
+}
+
+wxColour getThemeColorShifted(const std::string &key, float degrees)
+{
+    wxColour base = getThemeColor(key);
+    unsigned r = base.Red(), g = base.Green(), b = base.Blue();
+    float h, s, v; rgb_to_hsv(r, g, b, h, s, v);
+    h = std::fmod(h + degrees, 360.f);
+    if (h < 0.f) h += 360.f;
+    unsigned rr, gg, bb; hsv_to_rgb(h, s, v, rr, gg, bb);
+    return wxColour(rr, gg, bb);
+}
+
+}}} // namespace Slic3r::GUI::Theme
+#include "Theme.hpp"
+#include <wx/colour.h>
+#include <wx/image.h>
+#include <cmath>
+#include <algorithm>
+
+
+static wxColour ThemeThemeGreen() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    }
+    return wxColour(0, 174, 66);
+}
+
+static wxColour ThemeThemeGreenHovered() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Hovered | StateColor::Enabled);
+    }
+    return wxColour(61, 203, 115);
+}
+
+static wxColour ThemeThemeGreenPressed() {
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning()) {
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Pressed | StateColor::Enabled);
+    }
+    return wxColour(27, 136, 68);
+}
+
+// Manual RGB to HSV conversion
+void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double& h, double& s, double& v) {
+    double rd = r / 255.0;
+    double gd = g / 255.0;
+    double bd = b / 255.0;
+    
+    double max_val = std::max({rd, gd, bd});
+    double min_val = std::min({rd, gd, bd});
+    double delta = max_val - min_val;
+    
+    v = max_val;
+    
+    if (delta < 0.00001) {
+        s = 0;
+        h = 0;
+        return;
+    }
+    
+    if (max_val > 0.0) {
+        s = delta / max_val;
+    } else {
+        s = 0.0;
+        h = 0.0;
+        return;
+    }
+    
+    if (rd >= max_val)
+        h = (gd - bd) / delta;
+    else if (gd >= max_val)
+        h = 2.0 + (bd - rd) / delta;
+    else
+        h = 4.0 + (rd - gd) / delta;
+    
+    h /= 6.0;
+    if (h < 0.0)
+        h += 1.0;
+}
+
+// Manual HSV to RGB conversion
+wxColour hsv_to_rgb(double h, double s, double v) {
+    if (s <= 0.0) {
+        unsigned char val = static_cast<unsigned char>(v * 255);
+        return wxColour(val, val, val);
+    }
+    
+    h = fmod(h, 1.0);
+    if (h < 0) h += 1.0;
+    h *= 6.0;
+    
+    int i = static_cast<int>(floor(h));
+    double f = h - i;
+    double p = v * (1.0 - s);
+    double q = v * (1.0 - s * f);
+    double t = v * (1.0 - s * (1.0 - f));
+    
+    double r, g, b;
+    switch (i) {
+        case 0: r = v; g = t; b = p; break;
+        case 1: r = q; g = v; b = p; break;
+        case 2: r = p; g = v; b = t; break;
+        case 3: r = p; g = q; b = v; break;
+        case 4: r = t; g = p; b = v; break;
+        default: r = v; g = p; b = q; break;
+    }
+    
+    return wxColour(
+        static_cast<unsigned char>(r * 255),
+        static_cast<unsigned char>(g * 255),
+        static_cast<unsigned char>(b * 255)
+    );
+}
+
+wxColour shift_hue(const wxColour& color, double hue_shift) {
+    double h, s, v;
+    rgb_to_hsv(color.Red(), color.Green(), color.Blue(), h, s, v);
+    h = fmod(h + hue_shift, 1.0);
+    if (h < 0) h += 1.0;
+    return hsv_to_rgb(h, s, v);
+}
+
+static StateColor make_button(const wxColour& normal,
+                              const wxColour& hovered,
+                              const wxColour& pressed,
+                              const wxColour& disabled = wxColour(169, 169, 169))
+{
+    StateColor sc;
+    sc.append(disabled, StateColor::Disabled);
+    sc.append(normal, StateColor::Normal | StateColor::Enabled);
+    sc.append(hovered, StateColor::Hovered | StateColor::Enabled);
+    sc.append(pressed, StateColor::Pressed | StateColor::Enabled);
+    // Checked state follows normal to avoid gray unpressed arrows.
+    sc.append(normal, StateColor::Checked | StateColor::Enabled);
+    return sc;
+}
+
+ThemeColors Theme::get_theme_colors(const std::string& theme_name) {
+    // Accept both user-facing names and stored ids (theme_color preference)
+    std::string name = theme_name;
+    if (name == "bambu_green") name = "Bambu Green";
+    else if (name == "space_purple") name = "Space Purple";
+    else if (name == "ocean_blue") name = "Ocean Blue";
+    else if (name == "candy_red") name = "Candy Red";
+
+    ThemeColors colors;
+
+    if (name == "Space Purple") {
+        colors.button_green = make_button(wxColour(123, 92, 255),  // normal
+                                          wxColour(154, 127, 255), // hovered
+                                          wxColour(90, 58, 207));  // pressed
+        colors.button_purple = colors.button_green;
+        colors.button_blue = colors.button_green;
+        colors.button_red = colors.button_green;
+    } else if (name == "Ocean Blue") {
+        colors.button_green = make_button(wxColour(31, 142, 234),   // normal
+                                          wxColour(74, 167, 240),   // hovered
+                                          wxColour(27, 111, 184));  // pressed
+        colors.button_blue = colors.button_green;
+        colors.button_purple = colors.button_green;
+        colors.button_red = colors.button_green;
+    } else if (name == "Candy Red") {
+        colors.button_green = make_button(wxColour(208, 27, 27),    // normal
+                                          wxColour(226, 85, 85),    // hovered
+                                          wxColour(160, 19, 19));   // pressed
+        colors.button_red = colors.button_green;
+        colors.button_blue = colors.button_green;
+        colors.button_purple = colors.button_green;
+    } else { // Bambu Green default
+        colors.button_green = make_button(ThemeThemeGreen(),     // normal
+                                          wxColour(55, 238, 124),   // hovered
+                                          ThemeThemeGreenPressed());   // pressed
+        colors.button_red = colors.button_green;
+        colors.button_blue = colors.button_green;
+        colors.button_purple = colors.button_green;
+    }
+
+    return colors;
+}
+
+} // namespace GUI
+} // namespace Slic3r

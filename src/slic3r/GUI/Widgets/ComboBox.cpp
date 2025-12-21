@@ -1,5 +1,6 @@
 #include "ComboBox.hpp"
 #include "Label.hpp"
+#include "../Theme.hpp"
 
 #include <wx/dcgraph.h>
 
@@ -51,14 +52,17 @@ ComboBox::ComboBox(wxWindow *parent,
     if (style & wxCB_READONLY) {
         GetTextCtrl()->Hide();
         TextInput::SetFont(Label::Body_14);
-        TextInput::SetBorderColor(StateColor(std::make_pair(0xDBDBDB, (int) StateColor::Disabled),
-            std::make_pair(0x00AE42, (int) StateColor::Hovered),
-            std::make_pair(0xDBDBDB, (int) StateColor::Normal)));
-        TextInput::SetBackgroundColor(StateColor(std::make_pair(0xF0F0F1, (int) StateColor::Disabled),
-            std::make_pair(0xEDFAF2, (int) StateColor::Focused),
-            std::make_pair(*wxWHITE, (int) StateColor::Normal)));
-        TextInput::SetLabelColor(StateColor(std::make_pair(0x909090, (int) StateColor::Disabled),
-            std::make_pair(0x262E30, (int) StateColor::Normal)));
+        TextInput::SetBorderColor(StateColor(
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.border.disabled"), (int) StateColor::Disabled),
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.border.hovered"), (int) StateColor::Hovered),
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.border.normal"), (int) StateColor::Normal)));
+        TextInput::SetBackgroundColor(StateColor(
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.bg.disabled"), (int) StateColor::Disabled),
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.bg.focused"), (int) StateColor::Focused),
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.bg.normal"), (int) StateColor::Normal)));
+        TextInput::SetLabelColor(StateColor(
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.label.disabled"), (int) StateColor::Disabled),
+            std::make_pair(Slic3r::GUI::Theme::getThemeColor("combobox.label.normal"), (int) StateColor::Normal)));
     }
     if (auto scroll = GetScrollParent(this))
         scroll->Bind(wxEVT_MOVE, &ComboBox::onMove, this);

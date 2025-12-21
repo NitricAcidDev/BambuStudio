@@ -38,6 +38,9 @@ public:
 
     void SetBGColor(StateColor const &color);
 
+    // Apply current theme colors to this tab button
+    void UpdateThemeColors();
+
     void SetBitmap(ScalableBitmap &bitmap);
 
     bool Enable(bool enable = true);

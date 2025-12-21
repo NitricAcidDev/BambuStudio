@@ -1,5 +1,6 @@
 #include "TabButton.hpp"
 #include "Widgets/Label.hpp"
+#include "GUI_App.hpp"
 
 #include <wx/dcclient.h>
 #include <wx/dcgraph.h>
@@ -14,30 +15,60 @@ EVT_PAINT(TabButton::paintEvent)
 
 END_EVENT_TABLE()
 
-static wxColour BORDER_HOVER_COL = wxColour(0, 174, 66);
+static wxColour DefaultThemeGreen()
+{
+    // Fallback to legacy green if theme is unavailable
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning())
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    return wxColour("#00AE42");
+}
 
-const static wxColour TAB_BUTTON_BG    = wxColour("#FEFFFF");
-const static wxColour TAB_BUTTON_SEL   = wxColour(219, 253, 213, 255);
+static wxColour DefaultTabBg()
+{
+    return wxColour("#FEFFFF");
+}
+
+static wxColour DefaultTabSelBg()
+{
+    return wxColour(219, 253, 213, 255);
+}
 
 TabButton::TabButton()
     : paddingSize(43, 16)
     , text_color(*wxBLACK)
 {
+    auto green = DefaultThemeGreen();
     background_color = StateColor(
-        std::make_pair(TAB_BUTTON_SEL, (int) StateColor::Checked),
-        std::make_pair(wxColour("#FEFFFF"), (int) StateColor::Hovered),
-        std::make_pair(wxColour("#FEFFFF"), (int) StateColor::Normal));
+        std::make_pair(DefaultTabSelBg(), (int) StateColor::Checked),
+        std::make_pair(DefaultTabBg(), (int) StateColor::Hovered),
+        std::make_pair(DefaultTabBg(), (int) StateColor::Normal));
 
     border_color = StateColor(
-        std::make_pair(wxColour("#FEFFFF"), (int) StateColor::Checked),
-        std::make_pair(BORDER_HOVER_COL, (int) StateColor::Hovered),
-        std::make_pair(wxColour("#FEFFFF"), (int)StateColor::Normal));
+        std::make_pair(DefaultTabBg(), (int) StateColor::Checked),
+        std::make_pair(green, (int) StateColor::Hovered),
+        std::make_pair(DefaultTabBg(), (int)StateColor::Normal));
 }
 
 TabButton::TabButton(wxWindow *parent, wxString text, ScalableBitmap &bmp, long style, int iconSize)
     : TabButton()
 {
     Create(parent, text, bmp, style, iconSize);
+}
+
+void TabButton::UpdateThemeColors()
+{
+    auto green = DefaultThemeGreen();
+    background_color = StateColor(
+        std::make_pair(DefaultTabSelBg(), (int) StateColor::Checked),
+        std::make_pair(DefaultTabBg(), (int) StateColor::Hovered),
+        std::make_pair(DefaultTabBg(), (int) StateColor::Normal));
+
+    border_color = StateColor(
+        std::make_pair(DefaultTabBg(), (int) StateColor::Checked),
+        std::make_pair(green, (int) StateColor::Hovered),
+        std::make_pair(DefaultTabBg(), (int)StateColor::Normal));
+    Refresh();
 }
 
 bool TabButton::Create(wxWindow *parent, wxString text, ScalableBitmap &bmp, long style, int iconSize)

@@ -3,6 +3,7 @@
 
 #include "StepCtrl.hpp"
 #include "Label.hpp"
+#include "../GUI_App.hpp"
 
 wxDEFINE_EVENT( EVT_STEP_CHANGING, wxCommandEvent );
 wxDEFINE_EVENT( EVT_STEP_CHANGED, wxCommandEvent );
@@ -14,6 +15,14 @@ EVT_LEFT_UP(StepCtrl::mouseUp)
 EVT_MOUSE_CAPTURE_LOST(StepCtrl::mouseCaptureLost)
 END_EVENT_TABLE()
 
+static wxColour ThemeGreen()
+{
+    auto *app = dynamic_cast<Slic3r::GUI::GUI_App*>(&Slic3r::GUI::wxGetApp());
+    if (app && app->IsMainLoopRunning())
+        return app->get_theme_colors().button_green.colorForStates(StateColor::Normal | StateColor::Enabled);
+    return wxColour(0, 174, 66);
+}
+
 StepCtrlBase::StepCtrlBase(wxWindow *      parent,
                    wxWindowID      id,
                    const wxPoint & pos,
@@ -23,7 +32,7 @@ StepCtrlBase::StepCtrlBase(wxWindow *      parent,
     , font_tip(Label::Body_14)
     , clr_bar(0xACACAC)
     , clr_step(0xACACAC)
-    , clr_text(std::make_pair(0x00AE42, (int) StateColor::Checked),
+    , clr_text(std::make_pair(ThemeGreen().GetRGB(), (int) StateColor::Checked),
             std::make_pair(0x6B6B6B, (int) StateColor::Normal))
     , clr_tip(0x828280)
 {
@@ -258,7 +267,7 @@ StepIndicator::StepIndicator(wxWindow *parent, wxWindowID id, const wxPoint &pos
     clr_bar = 0xE1E1E1;
     clr_step = StateColor(
             std::make_pair(0xACACAC, (int) StateColor::Disabled),
-            std::make_pair(0x00AE42, 0));
+            std::make_pair(ThemeGreen().GetRGB(), 0));
     clr_text = StateColor(
             std::make_pair(0xACACAC, (int) StateColor::Disabled),
             std::make_pair(0x323A3D, (int) StateColor::Checked),
@@ -368,7 +377,7 @@ FilamentStepIndicator::FilamentStepIndicator(wxWindow* parent, wxWindowID id, co
     clr_bar = 0xE1E1E1;
     clr_step = StateColor(
         std::make_pair(0xACACAC, (int)StateColor::Disabled),
-        std::make_pair(0x00AE42, 0));
+        std::make_pair(ThemeGreen().GetRGB(), 0));
     clr_text = StateColor(
         std::make_pair(0xACACAC, (int)StateColor::Disabled),
         std::make_pair(0x323A3D, (int)StateColor::Checked),
@@ -406,7 +415,7 @@ void FilamentStepIndicator::doRender(wxDC& dc)
     }
 
     dc.SetFont(::Label::Head_16);
-    dc.SetTextForeground(wxColour(0, 174, 66));
+    dc.SetTextForeground(ThemeGreen());
     int circleX = 20;
     int circleY = 20;
     wxSize sz = dc.GetTextExtent(L"Loading");

@@ -59,8 +59,9 @@ void DropDown::Create(wxWindow *parent, long style)
     SetBackgroundColour(*wxWHITE);
     state_handler.attach({&border_color, &text_color, &selector_border_color, &selector_background_color});
     state_handler.update_binds();
-    if ((style & DD_NO_CHECK_ICON) == 0) {
-        // Recolor the check icon to match themed accent (red) while preserving S/V
+    if ((style & DD_NO_CHECK_ICON) == 0)
+    {
+        // Recolor the check icon to match themed accent (red)
         wxColour c = Slic3r::GUI::Theme::getThemeColor("dropdown.check.color");
         char buf[8];
         snprintf(buf, sizeof(buf), "#%02X%02X%02X", c.Red(), c.Green(), c.Blue());
@@ -281,12 +282,8 @@ void DropDown::render(wxDC &dc)
     if (hover_item >= 0 && (states & StateColor::Hovered) && (hover_index < 0 || !(items[hover_index].style & DD_ITEM_STYLE_SPLIT_ITEM))) {
         rcContent.y += rowSize.y * hover_item;
         if (rcContent.GetBottom() > 0 && rcContent.y < size.y) {
-            if (selected_item == hover_item) {
-                wxColour overlay_bg = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
-                dc.SetBrush(wxBrush(overlay_bg));
-            }
-                dc.SetBrush(wxBrush(overlay_bg));
-            }
+            if (selected_item == hover_item)
+                dc.SetBrush(wxBrush(selector_background_color.colorForStates(states | StateColor::Checked)));
             dc.SetPen(wxPen(selector_border_color.colorForStates(states)));
             rcContent.Deflate(4, 1);
             dc.DrawRectangle(rcContent);
@@ -294,25 +291,12 @@ void DropDown::render(wxDC &dc)
         }
         rcContent.y = offset.y;
     }
-    // draw wxColour overlay_bg = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
-            dc.SetBrush(wxBrush(overlay_bg));
-            dc.SetPen(wxPen(overlay_bgeColor::Hovered) == 0)) {
-        rcContent.y += rowSize.y * selected_item;
-        if (rcContent.GetBottom() > 0 && rcContent.y < size.y) {
-            wxColour overlay_bg = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
-            dc.SetBrush(wxBrush(overlay_bg));
-            dc.SetPen(wxPen(overlay_bg
-        }
-        rcCo// Fetch overlay color dynamically from theme for live updates
-            wxColour overlay_bg = Slic3r::GUI::Theme::getThemeColor("dropdown.selector_bg.checked");
-            dc.SetBrush(wxBrush(overlay_bg));
-            dc.SetPen(wxPen(overlay_bg
     // draw checked rectangle
     if (selected_item >= 0 && (selected_item != hover_item || (states & StateColor::Hovered) == 0)) {
         rcContent.y += rowSize.y * selected_item;
         if (rcContent.GetBottom() > 0 && rcContent.y < size.y) {
             dc.SetBrush(wxBrush(selector_background_color.colorForStates(states | StateColor::Checked)));
-            dc.SetPen(wxPen(selector_background_color.colorForStates(states)));
+            dc.SetPen(wxPen(selector_border_color.colorForStates(states | StateColor::Hovered)));
             rcContent.Deflate(4, 1);
             dc.DrawRectangle(rcContent);
             rcContent.Inflate(4, 1);

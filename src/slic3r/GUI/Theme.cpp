@@ -41,13 +41,25 @@ void init_defaults()
         return wxColour(rr, gg, bb);
     };
 
-    // Target hue: red for accent (0 degrees)
-    constexpr float H_TARGET = 0.f;
+    // Get target hue from app config or default to red (0 degrees)
+    float target_hue = 0.f; // Default: red
+    try {
+        auto app_config = Slic3r::GUI::get_app_config();
+        if (app_config) {
+            std::string theme_color = app_config->get("theme_color");
+            if (theme_color == "space_purple") target_hue = 270.f;
+            else if (theme_color == "ocean_blue") target_hue = 200.f;
+            else if (theme_color == "candy_red") target_hue = 0.f;
+            // "bambu_green" defaults to 0.f (red accent) by design
+        }
+    } catch(...) {}
+
+    float H_TARGET = target_hue;
 
     // Accent light tint: properly saturated light color that can be hue-shifted for any theme color
     // Uses a light tint with good saturation so hue shift produces visible colored backgrounds
     // Original: 0xC8E6C9 (Material Design light green, properly saturated but very light for overlay effect)
-    g_theme_colors["accent.tint.light"] = shift_to_hue(0xC8E6C9, H_TARGET);
+    g_theme_colors["accent.tint.light"] = shift_to_hue(0xC8E6C9, H_TARGETGET);
 
     // SwitchButton - keep neutrals; shift original green accents to red
     g_theme_colors["switch.text.checked"]   = from_hex_rgb(0xFFFFFE);
@@ -59,7 +71,7 @@ void init_defaults()
     // SwitchBoard
     g_theme_colors["switch_board.bg.enabled"]      = from_hex_rgb(0xEEEEEE);
     g_theme_colors["switch_board.bg.disabled"]     = from_hex_rgb(0xCECECE);
-    g_theme_colors["switch_board.segment.enabled"] = shift_to_hue(0x00AE42, H_TARGET);
+    g_theme_colors["switch_board.segment.enabled"] = shift_to_hue(0x00AE42, H_TARGETGET);
     g_theme_colors["switch_board.text.selected"]   = from_hex_rgb(0xFFFFFF);
     g_theme_colors["switch_board.text.unselected"] = from_hex_rgb(0x333333);
 

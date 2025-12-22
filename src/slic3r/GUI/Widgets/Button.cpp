@@ -197,6 +197,19 @@ void Button::paintEvent(wxPaintEvent& evt)
 void Button::render(wxDC& dc)
 {
     StaticBox::render(dc);
+
+    // Rebind state colors on each paint so theme reloads apply without recreating buttons
+    background_color = StateColor(
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.bg.disabled"), (int) StateColor::Disabled),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.bg.hovered_checked"), (int) StateColor::Hovered | StateColor::Checked),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.bg.checked"), (int) StateColor::Checked),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.bg.hovered"), (int) StateColor::Hovered),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.bg.normal"), (int) StateColor::Normal));
+
+    text_color = StateColor(
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.text.disabled"), (int) StateColor::Disabled),
+        std::make_pair(Slic3r::GUI::Theme::getThemeColor("button.text.normal"), (int) StateColor::Normal));
+
     if (m_left_corner_white || m_right_corner_white) {
         renderWhiteCorners(dc);
     }

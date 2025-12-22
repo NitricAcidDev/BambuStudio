@@ -38,6 +38,7 @@ protected:
     
 private:
 	void update();
+    void rebuild_bitmaps();
 
 private:
     ScalableBitmap m_on;
@@ -50,6 +51,7 @@ private:
     ScalableBitmap m_half_focused;
     ScalableBitmap m_off_focused;
     bool m_half_checked = false;
+    std::string m_color_hex;
 };
 
 #endif // !slic3r_GUI_CheckBox_hpp_

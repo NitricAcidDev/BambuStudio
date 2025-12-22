@@ -34,6 +34,7 @@
 #include "I18N.hpp"
 #include "Search.hpp"
 #include "BitmapCache.hpp"
+#include "Theme.hpp"
 
 #include "../Utils/MacDarkMode.hpp"
 #include "nanosvg/nanosvg.h"
@@ -2363,6 +2364,11 @@ std::vector<unsigned char> ImGuiWrapper::load_svg(const std::string& bitmap_name
 //BBS
 static bool m_is_dark_mode = false;
 
+static ImVec4 to_vec(const wxColour &c, float alpha = 1.0f)
+{
+    return ImVec4(c.Red() / 255.0f, c.Green() / 255.0f, c.Blue() / 255.0f, alpha);
+}
+
 void ImGuiWrapper::on_change_color_mode(bool is_dark)
 {
     m_is_dark_mode = is_dark;
@@ -2370,6 +2376,11 @@ void ImGuiWrapper::on_change_color_mode(bool is_dark)
 
 void ImGuiWrapper::push_toolbar_style(const float scale)
 {
+    const ImVec4 accent          = to_vec(Slic3r::GUI::Theme::getThemeColor("button.bg.checked"), 1.0f);
+    const ImVec4 accent_hovered  = to_vec(Slic3r::GUI::Theme::getThemeColor("button.bg.hovered_checked"), 1.0f);
+    const ImVec4 accent_active   = to_vec(Slic3r::GUI::Theme::accentPressed(), 1.0f);
+    const ImVec4 accent_selected = ImVec4(accent.x, accent.y, accent.z, 0.35f);
+
     if (m_is_dark_mode) {
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f * scale);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20.0f, 10.0f) * scale);
@@ -2383,13 +2394,13 @@ void ImGuiWrapper::push_toolbar_style(const float scale)
         ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImGuiWrapper::COL_TITLE_BG);                                    // 4
         ImGui::PushStyleColor(ImGuiCol_Separator, ImGuiWrapper::COL_SEPARATOR_DARK);                                  // 5
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(62 / 255.0f, 62 / 255.0f, 69 / 255.0f, 1.00f));                 // 6
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(73 / 255.0f, 73 / 255.0f, 78 / 255.0f, 1.00f));          // 7
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(73 / 255.0f, 73 / 255.0f, 78 / 255.0f, 1.00f));           // 8
-        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(84 / 255.0f, 84 / 255.0f, 90 / 255.0f, 1.00f));         // 9
-        ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(62 / 255.0f, 62 / 255.0f, 69 / 255.0f, 1.00f));          // 10
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, accent_hovered);                                               // 7
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, accent_active);                                                 // 8
+        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, accent_hovered);                                              // 9
+        ImGui::PushStyleColor(ImGuiCol_FrameBgActive, accent_active);                                                // 10
         ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(238 / 255.0f, 238 / 255.0f, 238 / 255.0f, 0.00f));             // 11
-        ImGui::PushStyleColor(ImGuiCol_TextSelectedBg, ImVec4(43 / 255.0f, 64 / 255.0f, 54 / 255.0f, 1.00f));         // 12
-        ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(1.00f, 1.00f, 1.00f, 1.00f));                                // 13
+        ImGui::PushStyleColor(ImGuiCol_TextSelectedBg, accent_selected);                                             // 12
+        ImGui::PushStyleColor(ImGuiCol_CheckMark, accent);                                                           // 13
         ImGui::PushStyleColor(ImGuiCol_ScrollbarGrab, ImVec4(0.42f, 0.42f, 0.42f, 1.00f));                            // 14
         ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabHovered, ImVec4(0.93f, 0.93f, 0.93f, 1.00f));                     // 15
         ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabActive, ImVec4(0.93f, 0.93f, 0.93f, 1.00f));                      // 16
@@ -2407,13 +2418,13 @@ void ImGuiWrapper::push_toolbar_style(const float scale)
         ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImGuiWrapper::COL_TITLE_BG);      // 4
         ImGui::PushStyleColor(ImGuiCol_Separator, ImGuiWrapper::COL_SEPARATOR);         // 5
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.00f, 1.00f, 1.00f, 1.00f));     // 6
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGuiWrapper::COL_HOVER);         // 7
-        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(238 / 255.0f, 238 / 255.0f, 238 / 255.0f, 1.00f)); // 8
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(172 / 255.0f, 172 / 255.0f, 172 / 255.0f, 1.00f));                        // 9
-        ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(238 / 255.0f, 238 / 255.0f, 238 / 255.0f, 1.00f));  // 10
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, accent_hovered);                  // 7
+        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, accent_hovered);                 // 8
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, accent_active);                    // 9
+        ImGui::PushStyleColor(ImGuiCol_FrameBgActive, accent_active);                   // 10
         ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(238 / 255.0f, 238 / 255.0f, 238 / 255.0f, 0.00f));        // 11
-        ImGui::PushStyleColor(ImGuiCol_TextSelectedBg, COL_GREEN_LIGHT);                                     // 12
-        ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(1.00f, 1.00f, 1.00f, 1.00f));//13
+        ImGui::PushStyleColor(ImGuiCol_TextSelectedBg, accent_selected);                // 12
+        ImGui::PushStyleColor(ImGuiCol_CheckMark, accent);                              // 13
         ImGui::PushStyleColor(ImGuiCol_ScrollbarGrab, ImVec4(0.42f, 0.42f, 0.42f, 1.00f));
         ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabHovered, ImVec4(0.93f, 0.93f, 0.93f, 1.00f));
         ImGui::PushStyleColor(ImGuiCol_ScrollbarGrabActive, ImVec4(0.93f, 0.93f, 0.93f, 1.00f));

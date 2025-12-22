@@ -14,11 +14,23 @@
 #include "Theme.hpp"
 
 #include <boost/log/trivial.hpp>
+#include <iomanip>
+#include <sstream>
 
 #define TOPBAR_ICON_SIZE  18
 #define TOPBAR_TITLE_WIDTH  300
 
 using namespace Slic3r;
+
+static std::string topbar_accent_hex()
+{
+    auto c = GUI::Theme::getThemeColor("button.bg.checked");
+    std::ostringstream oss;
+    oss << "#" << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << int(c.Red())
+        << std::setw(2) << std::setfill('0') << int(c.Green())
+        << std::setw(2) << std::setfill('0') << int(c.Blue());
+    return oss.str();
+}
 
 enum CUSTOM_ID
 {
@@ -210,6 +222,8 @@ void BBLTopbar::Init(wxFrame* parent)
 
     wxInitAllImageHandlers();
 
+    const std::string accent_hex = topbar_accent_hex();
+
     this->AddSpacer(5);
 
     /*wxBitmap logo_bitmap = create_scaled_bitmap("topbar_logo", nullptr, TOPBAR_ICON_SIZE);
@@ -217,14 +231,14 @@ void BBLTopbar::Init(wxFrame* parent)
     logo_item->SetHoverBitmap(logo_bitmap);
     logo_item->SetActive(false);*/
 
-    wxBitmap file_bitmap = create_scaled_bitmap("topbar_file", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap file_bitmap = create_scaled_bitmap("topbar_file", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_file_menu_item = this->AddTool(ID_TOP_FILE_MENU, _L("File"), file_bitmap, wxEmptyString, wxITEM_NORMAL);
 
     this->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
 
     this->AddSpacer(FromDIP(5));
 
-    wxBitmap dropdown_bitmap = create_scaled_bitmap("topbar_dropdown", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap dropdown_bitmap = create_scaled_bitmap("topbar_dropdown", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_dropdown_menu_item = this->AddTool(ID_TOP_DROPDOWN_MENU, "",
         dropdown_bitmap, wxEmptyString);
 
@@ -237,22 +251,22 @@ void BBLTopbar::Init(wxFrame* parent)
 
     this->AddSpacer(FromDIP(10));
 
-    wxBitmap save_bitmap = create_scaled_bitmap("topbar_save", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap save_bitmap = create_scaled_bitmap("topbar_save", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_save_item          = this->AddTool(wxID_SAVE, "", save_bitmap);
-    wxBitmap save_inactive_bitmap = create_scaled_bitmap("topbar_save_inactive", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap save_inactive_bitmap = create_scaled_bitmap("topbar_save_inactive", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_save_item->SetDisabledBitmap(save_inactive_bitmap);
     this->AddSpacer(FromDIP(10));
 
-    wxBitmap undo_bitmap = create_scaled_bitmap("topbar_undo", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap undo_bitmap = create_scaled_bitmap("topbar_undo", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_undo_item = this->AddTool(wxID_UNDO, "", undo_bitmap);
-    wxBitmap undo_inactive_bitmap = create_scaled_bitmap("topbar_undo_inactive", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap undo_inactive_bitmap = create_scaled_bitmap("topbar_undo_inactive", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_undo_item->SetDisabledBitmap(undo_inactive_bitmap);
 
     this->AddSpacer(FromDIP(10));
 
-    wxBitmap redo_bitmap = create_scaled_bitmap("topbar_redo", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap redo_bitmap = create_scaled_bitmap("topbar_redo", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_redo_item = this->AddTool(wxID_REDO, "", redo_bitmap);
-    wxBitmap redo_inactive_bitmap = create_scaled_bitmap("topbar_redo_inactive", nullptr, TOPBAR_ICON_SIZE);
+    wxBitmap redo_inactive_bitmap = create_scaled_bitmap("topbar_redo_inactive", nullptr, TOPBAR_ICON_SIZE, false, accent_hex);
     m_redo_item->SetDisabledBitmap(redo_inactive_bitmap);
 
     this->AddSpacer(FromDIP(10));

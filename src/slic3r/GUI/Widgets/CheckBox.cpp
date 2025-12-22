@@ -5,6 +5,20 @@
 #include "../wxExtensions.hpp"
 
 #include <wx/settings.h>
+#include <iomanip>
+#include <sstream>
+#include <vector>
+
+namespace {
+std::string to_hex(const wxColour &c)
+{
+    std::ostringstream oss;
+    oss << "#" << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << int(c.Red())
+        << std::setw(2) << std::setfill('0') << int(c.Green())
+        << std::setw(2) << std::setfill('0') << int(c.Blue());
+    return oss.str();
+}
+}
 
 CheckBox::CheckBox(wxWindow *parent, int id)
     : wxBitmapToggleButton(parent, id, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
@@ -42,6 +56,8 @@ CheckBox::CheckBox(wxWindow *parent, int id)
 	auto bmpSize = m_on.GetBmpSize();
 	SetSize(wxSize(bmpSize.x + FromDIP(8), bmpSize.y + FromDIP(8)));
 	SetMinSize(wxSize(bmpSize.x + FromDIP(8), bmpSize.y + FromDIP(8)));
+
+    rebuild_bitmaps();
 	update();
 }
 
@@ -76,6 +92,7 @@ void CheckBox::Rescale()
 
 void CheckBox::update()
 {
+	rebuild_bitmaps();
 	SetBitmapLabel((m_half_checked ? m_half : GetValue() ? m_on : m_off).bmp());
     SetBitmapDisabled((m_half_checked ? m_half_disabled : GetValue() ? m_on_disabled : m_off_disabled).bmp());
 #ifdef __WXMSW__
@@ -101,6 +118,33 @@ void CheckBox::update()
 CheckBox::State CheckBox::GetNormalState() const { return State_Normal; }
 
 #endif
+
+void CheckBox::rebuild_bitmaps()
+{
+    const std::string accent_hex = to_hex(Slic3r::GUI::Theme::getThemeColor("button.bg.checked"));
+    if (accent_hex == m_color_hex)
+        return;
+
+    m_color_hex = accent_hex;
+
+    auto make = [&](const char *name) {
+        return ScalableBitmap(this, name, 18, false, false, false, std::vector<std::string>{m_color_hex});
+    };
+
+    m_on            = make("check_on");
+    m_half          = make("check_half");
+    m_off           = make("check_off");
+    m_on_disabled   = make("check_on_disabled");
+    m_half_disabled = make("check_half_disabled");
+    m_off_disabled  = make("check_off_disabled");
+    m_on_focused    = make("check_on_focused");
+    m_half_focused  = make("check_half_focused");
+    m_off_focused   = make("check_off_focused");
+
+    auto bmpSize = m_on.GetBmpSize();
+    SetSize(wxSize(bmpSize.x + FromDIP(8), bmpSize.y + FromDIP(8)));
+    SetMinSize(wxSize(bmpSize.x + FromDIP(8), bmpSize.y + FromDIP(8)));
+}
 
 
 #ifdef __WXOSX__

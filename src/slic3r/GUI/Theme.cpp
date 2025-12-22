@@ -42,16 +42,17 @@ void init_defaults()
         return wxColour(rr, gg, bb);
     };
 
-    // Get target hue from app config or default to red (0 degrees)
-    float target_hue = 0.f; // Default: red
+    // Get target hue from app config or default to Bambu green (143 degrees)
+    // Original Bambu green 0x00AE42 = RGB(0, 174, 66) has hue ~143°
+    float target_hue = 143.f; // Default: Bambu green
     try {
         auto app_config = Slic3r::GUI::get_app_config();
         if (app_config) {
             std::string theme_color = app_config->get("theme_color");
-            if (theme_color == "space_purple") target_hue = 270.f;
+            if (theme_color == "bambu_green") target_hue = 143.f;
+            else if (theme_color == "space_purple") target_hue = 270.f;
             else if (theme_color == "ocean_blue") target_hue = 200.f;
             else if (theme_color == "candy_red") target_hue = 0.f;
-            // "bambu_green" defaults to 0.f (red accent) by design
         }
     } catch(...) {}
 

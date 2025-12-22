@@ -6,6 +6,7 @@
 #include "slic3r/GUI/UserManager.hpp"
 #include "slic3r/GUI/TaskManager.hpp"
 #include "slic3r/GUI/OpenGLManager.hpp"
+#include "Theme.hpp"
 #include "format.hpp"
 
 // Localization headers: include libslic3r version first so everything in this file
@@ -2477,6 +2478,8 @@ void GUI_App::init_app_config()
                 _u8L("BambuStudio configuration file read failed. Please manually backup and delete it, and then restart BambuStudio software.") +
                 "\n\n" + app_config->config_path() + "\n\n" + error);
         }
+        // Reload theme after config load so startup honors saved theme_color.
+        Theme::reload();
         // Save orig_version here, so its empty if no app_config existed before this run.
         m_last_config_version = app_config->orig_version();//parse_semver_from_ini(app_config->config_path());
     }

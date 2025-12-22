@@ -338,8 +338,9 @@ void rgb_to_hsv(unsigned char r, unsigned char g, unsigned char b, double &h, do
     }
 
     wxColour Theme::accentPressed() {
-        // Darker red for pressed state
-        unsigned r = 0xAE, g = 0x00, b = 0x00;
+        // Darken current accent instead of using debug red
+        auto accent = getThemeColor("button.bg.checked");
+        unsigned r = accent.Red(), g = accent.Green(), b = accent.Blue();
         float h, s, v;
         rgb_to_hsv(r, g, b, h, s, v);
         v *= 0.85f; // Darken
@@ -442,11 +443,11 @@ ThemeColors Theme::get_theme_colors(const std::string &theme_name)
         colors.button_blue   = colors.button_green;
         colors.button_purple = colors.button_green;
     } else { // Bambu Green default
-        // Use theme-driven red accent colors
-        auto normal = getThemeColor("button.bg.checked");
+        // Use theme-driven accent colors
+        auto normal  = getThemeColor("button.bg.checked");
         auto hovered = getThemeColor("button.bg.hovered_checked");
-        // Pressed: darker red
-        unsigned r = 0xAE, g = 0x00, b = 0x00;
+        // Pressed: darker accent
+        unsigned r = normal.Red(), g = normal.Green(), b = normal.Blue();
         float h, s, v;
         rgb_to_hsv(r, g, b, h, s, v);
         v *= 0.7f; // Darker for pressed

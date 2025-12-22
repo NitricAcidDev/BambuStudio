@@ -15,6 +15,7 @@ namespace {
 
 std::unordered_map<std::string, wxColour> g_theme_colors;
 std::once_flag g_init_flag;
+std::mutex g_theme_mutex;
 
 // Forward declarations for HSV helpers used by init_defaults
 void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, float &v);
@@ -200,6 +201,16 @@ inline void ensure_init()
     std::call_once(g_init_flag, [](){ init_defaults(); });
 }
 
+void force_reinit()
+{
+    std::lock_guard<std::mutex> lock(g_theme_mutex);
+    g_theme_colors.clear();
+    // Reset the once_flag by creating a new one
+    g_init_flag.~once_flag();
+    new (&g_init_flag) std::once_flag();
+    init_defaults();
+}
+
 // HSV conversion helpers for registry hue shifts (float variant).
 void rgb_to_hsv(unsigned r, unsigned g, unsigned b, float &h, float &s, float &v)
 {
@@ -237,6 +248,11 @@ void hsv_to_rgb(float h, float s, float v, unsigned &r, unsigned &g, unsigned &b
 }
 
 } // namespace
+
+void Theme::reload()
+{
+    force_reinit();
+}
 
 void Theme::setThemeColor(const std::string &key, const wxColour &value)
 {

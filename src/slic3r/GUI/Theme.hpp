@@ -26,6 +26,9 @@ public:
     static void     setThemeColor(const std::string &key, const wxColour &value);
     static bool     hasThemeColor(const std::string &key);
     
+    // Theme reloading - call after changing theme_color in app_config
+    static void     reload();
+    
     // Accent color helpers (for replacing hardcoded greens)
     static wxColour accentColor();           // Normal accent
     static wxColour accentHovered();         // Hovered/lighter accent

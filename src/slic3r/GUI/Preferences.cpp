@@ -5,6 +5,7 @@
 #include "Plater.hpp"
 #include "MsgDialog.hpp"
 #include "I18N.hpp"
+#include "Theme.hpp"
 #include "libslic3r/AppConfig.hpp"
 #include <wx/notebook.h>
 #include "Notebook.hpp"
@@ -733,6 +734,18 @@ wxBoxSizer *PreferencesDialog::create_item_theme_combobox(wxString title, wxWind
         app_config->set(param, theme_values[e.GetSelection()]);
         app_config->save();
         update_color(e.GetSelection());
+        
+        // Reload theme colors and refresh UI
+        Theme::reload();
+        if (auto mainframe = wxGetApp().mainframe) {
+            mainframe->Refresh();
+            mainframe->Update();
+        }
+        if (auto plater = wxGetApp().plater()) {
+            plater->Refresh();
+            plater->Update();
+        }
+        
         e.Skip();
     });
 
